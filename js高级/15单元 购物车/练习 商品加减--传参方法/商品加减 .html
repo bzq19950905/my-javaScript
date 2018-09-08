@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("list");
+	var aLi = oUl.getElementsByTagName("li");
+	
+	//循环调用函数
+	for( var i=0;i<aLi.length;i++ ){
+		fn1(aLi[i]);
+	};
+	
+	function fn1(oLi){
+		var aInput = oLi.getElementsByTagName("input");
+		var oStrong = oLi.getElementsByTagName("strong")[0];
+		var oEm = oLi.getElementsByTagName("em")[0];
+		var oSpan = oLi.getElementsByTagName("span")[0];
+		
+		var n1 = Number(oStrong.innerHTML);		//innerHTML得到的都是字符串，要用这种方式转换成数字。方便后面的运算
+		var n2 = parseFloat(oEm.innerHTML);
+		
+		//减
+		aInput[0].onclick = function(){
+			n1--;
+			if( n1<0 ){
+				n1 = 0;
+			}
+			oStrong.innerHTML = n1;
+			oSpan.innerHTML = n1*n2 + "元";
+		};
+		
+		//加
+		aInput[1].onclick = function(){
+			n1++;
+			oStrong.innerHTML = n1;
+			oSpan.innerHTML = n1*n2 + "元";
+		};
+				
+	};
+	
+	
+}
+</script>
+</head>
+
+<body>
+
+<ul id="list">
+	<li>
+		<input type="button" value="-" />
+		<strong>0</strong>
+		<input type="button" value="+" />
+		单价：<em>12.5元</em>
+		小计：<span>0元</span>
+	</li>
+	<li>
+		<input type="button" value="-" />
+		<strong>0</strong>
+		<input type="button" value="+" />
+		单价：<em>10.5元</em>
+		小计：<span>0元</span>
+	</li>
+	<li>
+		<input type="button" value="-" />
+		<strong>0</strong>
+		<input type="button" value="+" />
+		单价：<em>8.5元</em>
+		小计：<span>0元</span>
+	</li>
+	<li>
+		<input type="button" value="-" />
+		<strong>0</strong>
+		<input type="button" value="+" />
+		单价：<em>8元</em>
+		小计：<span>0元</span>
+	</li>
+	<li>
+		<input type="button" value="-" />
+		<strong>0</strong>
+		<input type="button" value="+" />
+		单价：<em>14.5元</em>
+		小计：<span>0元</span>
+	</li>
+</ul>
+
+<p>
+商品合计共：0件，共花费了：0元<br />
+其中最贵的商品单价是：0元
+</p>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圆</title>
+  <style>
+    .circleProgress_wrapper{
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      margin: 30px;
+      position: relative;
+      /*border:1px solid #ddd;*/
+    }
+    .wrapper{
+      width: 100px;
+      height: 200px;
+      position: absolute;
+      top:0;
+      overflow: hidden;
+    }
+    .right{
+      right:0;
+    }
+    .left{
+      left:0;
+    }
+    .circleProgress{
+      width: 160px;
+      height: 160px;
+      border:20px solid transparent;
+      border-radius: 50%;
+      position: absolute;
+      top:0;
+    }
+    .rightcircle{
+      border:20px solid #f0f0f0;
+      border-top:20px solid green;
+      border-right:20px solid green;
+      right:0;
+      transform: rotate(45deg);
+      text-align: center;
+    }
+    .leftcircle{
+      border:20px solid #f0f0f0;
+      border-top:20px solid green;
+      border-left:20px solid green;
+      left:0;
+      transform: rotate(-45deg);
+      text-align: center;
+    }
+    .spanel {
+      display:inline-block;
+      position:absolute;
+      width:100px;
+      height:100px;
+      top:50%;
+      margin-top: -50px;
+      line-height: 100px;
+      left:50%;
+      margin-left: -50px;
+      text-align: center;
+      font-size: 80px;
+      font-weight: 700;
+      color:green;
+    }
+  </style>
+</head>
+<body>
+  <div class="circleProgress_wrapper">
+    <div class="wrapper right">
+      <div id="righttian" class="circleProgress rightcircle"></div>
+    </div>
+    <div class="wrapper left">
+      <div id="lefttian" class="circleProgress leftcircle"></div>
+    </div>
+    <span id = "spantian" class = "spanel">65</span>
+  </div>
+  <div class="circleProgress_wrapper">
+    <div class="wrapper right">
+      <div id="rightshi" class="circleProgress rightcircle"></div>
+    </div>
+    <div class="wrapper left">
+      <div id="leftshi" class="circleProgress leftcircle"></div>
+    </div>
+    <span id = "spanshi" class = "spanel">12</span>
+  </div>
+  <div class="circleProgress_wrapper">
+    <div class="wrapper right">
+      <div id="rightfen" class="circleProgress rightcircle"></div>
+    </div>
+    <div class="wrapper left">
+      <div id="leftfen" class="circleProgress leftcircle"></div>
+    </div>
+    <span id = "spanfen" class = "spanel">60</span>
+  </div>
+  <div class="circleProgress_wrapper">
+    <div class="wrapper right">
+      <div id="rightmiao" class="circleProgress rightcircle"></div>
+    </div>
+    <div class="wrapper left">
+      <div id="leftmiao" class="circleProgress leftcircle"></div>
+    </div>
+    <span id = "spanmiao" class = "spanel">60</span>
+  </div>
+<script>
+  var righttian = document.getElementById("righttian");
+  var lefttian = document.getElementById("lefttian");
+  var spantian = document.getElementById("spantian");
+  var rightshi = document.getElementById("rightshi");
+  var leftshi = document.getElementById("leftshi");
+  var spanshi = document.getElementById("spanshi");
+  var rightfen = document.getElementById("rightfen");
+  var leftfen = document.getElementById("leftfen");
+  var spanfen = document.getElementById("spanfen");
+     var rightmiao = document.getElementById("rightmiao");
+     var leftmiao = document.getElementById("leftmiao");
+     var spanmiao = document.getElementById("spanmiao");
+     function rotates(right,left,spans,timenum,scale,color){
+       right.style.borderTop = '20px solid '+color;
+       right.style.borderRight = '20px solid '+color;
+       left.style.borderTop = '20px solid '+color;
+       left.style.borderLeft = '20px solid '+color;
+       spans.style.color = color;
+       spans.innerHTML = timenum;
+       if((scale-timenum)<=(scale/2)){
+         right.style.transform = "rotate("+(45+(scale-timenum)*(360/scale))+"deg)";
+         left.style.transform = "rotate(-45deg)";
+       }else{
+         right.style.transform = "rotate(225deg)"
+         left.style.transform = "rotate("+(-45+(scale/2-timenum)*(360/scale))+"deg)";
+       }
+     }
+  function addZero(num){
+
+    if(num<10){
+      num = "0"+num;
+    }
+    return num;
+  }
+  var targetDate = new Date(2017,9,1);
+
+  var day = 1000*60*60*24;
+  var hour = 1000*60*60;
+  var minute = 1000*60;
+  setInterval(function(){
+   // var timenum = 60-new Date().getSeconds();
+    var date = new Date();
+    var timeCha = targetDate-date;
+    var resultday = parseInt(timeCha / day);
+    var resulthour = parseInt((timeCha-resultday*day)/hour);
+    var resultminute =
+      parseInt((timeCha-resultday*day-resulthour*hour)/minute);
+    var resultseconde =
+      parseInt((timeCha-resultday*day-resulthour*hour-resultminute*minute)/1000);
+    var scalemiao = 60;
+    rotates(rightmiao,leftmiao,spanmiao,resultseconde,scalemiao,"red");
+    var scalefen = 60;
+    rotates(rightfen,leftfen,spanfen,resultminute,scalefen,"yellow");
+    var scaleshi = 24;
+    rotates(rightshi,leftshi,spanshi,resulthour,scaleshi,"orange");
+    var scaletian = 365;
+    rotates(righttian,lefttian,spantian,resultday,scaletian,"blue");
+  },1000);
+
+</script>
+</body>
+</html>

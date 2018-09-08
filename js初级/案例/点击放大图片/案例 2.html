@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #list {
+            width: 600px;
+            margin: 50px auto;
+        }
+        
+        #list li {
+            float: left;
+        }
+        
+        #list img {
+            width: 200px;
+            height: 100px;
+            display: block;
+        }
+        
+        .mark {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .imgP {
+            position: absolute;
+        }
+        
+        .imgP a {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #fff;
+            right: -15px;
+            top: -15px;
+            color: #f00;
+            text-align: center;
+            line-height: 30px;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oUl = document.getElementById('list');
+            var aImg = oUl.getElementsByTagName('img');
+
+            // 可视区宽高
+            var clientW = document.documentElement.clientWidth;
+            var clientH = document.documentElement.clientHeight;
+
+            for (var i = 0; i < aImg.length; i++) {
+                aImg[i].onclick = function() {
+
+                    // 获取这个图片上的属性
+                    var src = this.getAttribute('src');
+                    var W = this.getAttribute('data-width');
+                    var H = this.getAttribute('data-height');
+
+                    // 创建遮罩，添加到body
+                    var oDiv = document.createElement('div');
+                    oDiv.className = 'mark';
+                    document.body.appendChild(oDiv);
+
+                    // 创建图片容器
+                    var oDiv2 = document.createElement('div');
+                    oDiv2.style.width = W + 'px'; // 宽
+                    oDiv2.style.height = H + 'px'; // 高
+                    oDiv2.style.left = (clientW - W) / 2 + 'px'; // 定位的左边距
+                    oDiv2.style.top = (clientH - H) / 2 + 'px'; // 定位的上边距
+
+                    oDiv2.className = 'imgP';
+                    oDiv2.innerHTML = '<img src="' + src + '"><a href="javascript:;">X</a>';
+                    document.body.appendChild(oDiv2);
+
+                    // 获取a按钮，绑定关闭事件
+                    var oA = oDiv2.getElementsByTagName('a')[0];
+                    oA.onclick = function() {
+                        document.body.removeChild(oDiv);
+                        document.body.removeChild(oDiv2);
+                    }
+
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list">
+        <li><img src="img2/img1.jpg" data-width="300" data-height="345"></li>
+        <li><img src="img2/img2.jpg" data-width="250" data-height="206"></li>
+        <li><img src="img2/img3.jpg" data-width="180" data-height="150"></li>
+        <li><img src="img2/img6.jpg" data-width="640" data-height="352"></li>
+        <li><img src="img2/img14.jpg" data-width="550" data-height="544"></li>
+        <li><img src="img2/img12.jpg" data-width="259" data-height="388"></li>
+    </ul>
+
+    <!-- <div class="mark"></div>
+    <div class="imgP">
+        <img src="img2/img1.jpg">
+        <a href="javascript:;">X</a>
+    </div> -->
+
+
+</body>
+
+</html>

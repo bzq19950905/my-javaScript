@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <script>
+        window.onload = function() {
+
+            var oP = document.getElementById("p1");
+
+            countdownFn(); //因为倒计时是后执行，在打开页面的哪一秒，是没有的，所以在这里，让它一打开就执行。
+            setInterval(countdownFn, 1000);
+
+            //倒计时
+            function countdownFn() {
+                var iNow = new Date(); //现在时间点
+                var iNew = new Date(2017, 10, 21, 00, 00, 00); //末来时间点：年月日时分秒，这里要特别注意月，月是从0月开始的。如11月，即写成10。（数字形式的参数）
+                //末来时间点和现在时间点的距离。即末来还有多久。得出是一个毫秒数，再把它向下取整为秒。
+                var t = Math.floor((iNew - iNow) / 1000);
+
+                var str = Math.floor(t / 86400) + '天' + Math.floor(t % 86400 / 3600) + '时' + Math.floor(t % 86400 % 3600 / 60) + '分' + t % 60 + '秒';
+
+                oP.innerHTML = str;
+            }
+
+            /*
+            我们这里得到t是秒，要把它转换为天小时分钟等等。公式为：
+            	天：Math.floor(t/86400)
+            	时：Math.floor(t%86400/3600)
+            	分：Math.floor(t%86400%3600/60)
+            	秒：t%60
+            */
+
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <p id="p1"></p>
+
+</body>
+
+</html>

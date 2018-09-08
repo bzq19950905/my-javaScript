@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" id="minus" value="-">
+	<input type="text" id="count" value="1" >
+	<input type="button" id="plus" value="+" >
+	单价: <span id="price">10.1234</span>元
+	总价: <span id="total">10.12</span>元
+	<script>
+/*	var mins=document.getElementById("mins");
+	var	count=document.getElementById("count");
+	var	plus=document.getElementById("plus");
+	var	price=document.getElementById("price");
+	var	total=document.getElementById("total");
+		var priceVal =price.innerHTML;
+		minus.onclick =function(){
+			var val = Number(count.value);
+			val--;
+			if(val <= 0){
+				val=0;
+			}
+			count.value = val;
+			total.innerHTML =Number(priceVal*val).toFixed(2);
+		}
+		plus.onclick =function(){
+			var val = Number(count.value);
+				val++;
+				count.value = val;
+				total.innerHTML =Number(priceVal*val).toFixed(2);
+		}*/
+
+
+var minus =document.getElementById("minus")
+,	count =document.getElementById("count")
+,	plus  =document.getElementById("plus")
+,   price =document.getElementById("price")
+,	total =document.getElementById("total");
+var priceVal = price.innerHTML;
+
+minus.onclick =function(){
+	var val=Number(count.value);
+	val--;
+	if(val<=0){
+		val=0;
+	}
+	count.value=val;
+	total.innerHTML=Number(priceVal*val).toFixed(2);
+}
+plus.onclick =function(){
+	var val=Number(count.value);
+	val++;
+	if(val>=10){
+		val=10;
+	}
+	count.value=val;
+	total.innerHTML=Number(priceVal*val).toFixed(2);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 格式：字符串.indexOf(字符);
+        // 作用：返回这个字符在字符串中的位置，如果找不到，则返回-1
+        // 它还可以接收第二个参数，从哪个位置开始查找
+        // var str = '我有点热，我脱件衣服！';
+        // var n = str.indexOf('我有点热');
+        // console.log(n);
+
+        var str = '礼物明天礼物就要放假了，为了给礼物祖国母亲庆生，买了一些礼物，买了啥礼物统统交出礼物来。礼物';
+
+        var n = str.indexOf('礼物');
+        while (n !== -1) {
+            console.log(n);
+            n = str.indexOf('礼物', n + 2);
+        }
+
+        // 初始值
+        // while (控制条件) {
+        //     执行代码
+        //     步长
+        // }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

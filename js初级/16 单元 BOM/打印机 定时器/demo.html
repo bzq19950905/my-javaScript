@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>打印机</title>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		// 间歇调用
+		// setInterval()
+		
+		// console.log(window);
+		
+
+		// for(var property in window){
+		// 	if(property == "setInterval") 
+		// 		alert("该属性存在");
+		// }
+		// function demo(){
+		// 	console.log();
+		// }
+
+		// var id = setInterval(demo,1000);
+		// var id1 = setInterval("console.log()",1000);
+		// console.log(id);
+		// console.log(id1);
+		
+
+		var str = "人生就像一杯茶，会苦一阵子，但不会苦一辈子！";
+		var box = document.getElementById("box");
+		var count = 0;
+		setInterval(function(){
+			count++;
+			if(count > str.length) count = 0;
+			var subStr = str.substr(0,count);
+			box.innerHTML = subStr;
+		},100);
+	</script>
+</body>
+</html>

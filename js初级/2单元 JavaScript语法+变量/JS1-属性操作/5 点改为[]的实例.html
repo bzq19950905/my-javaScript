@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1{width:100px;height:100px;border:1px solid #ccc;}
+</style>
+<script>
+window.onload = function(){
+	var oArrt = document.getElementById("arrt");	//width height background	
+	var oVal = document.getElementById("val");		//200px 300px #f00
+	var oBtn = document.getElementById("btn");	
+	var oDiv = document.getElementById("div1");	
+	oBtn.onclick = function(){
+		var arrt = oArrt.value;		//width height background	
+		var val = oVal.value;		//200px 300px #f00
+		//oDiv.style.width = val;	//“.”改为[]的一个实例
+		oDiv.style[arrt] = val;
+	}
+	
+}
+</script>
+</head>
+
+<body>
+
+请输入属性名：<input type="text" id="arrt" /><br />
+请输入属性值：<input type="text" id="val" /><input type="button" id="btn" value="确定" />
+
+<div id="div1"></div>
+
+
+</body>
+</html>

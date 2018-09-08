@@ -1,0 +1,8 @@
+1、两种方式实现选项卡切换。
+2、封装addClass和removeClass方法
+3、封装bind方法
+4、封装getPos方法
+
+
+
+

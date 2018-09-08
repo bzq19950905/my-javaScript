@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function (){
+				var oInput = document.getElementById('inp1');
+				oInput.onclick = function (){
+					alert('我可以点击')
+				}
+				setTimeout(function (){
+					oInput.disabled = false;
+				}, 5000);
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		<input type="button" id="inp1" value="按钮" disabled=true />
+		
+	</body>
+
+</html>

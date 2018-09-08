@@ -1,0 +1,15 @@
+1、元素到文档的距离
+2、删除空白文本节点
+3、获取元素的样式
+4、firstChild lastChild prevSibling nextSibling
+5、getClass hasClass addClass removeClass
+6、bind
+7、阻止冒泡、阻止事件的默认行为
+8、去字符串左右空格
+9、找字符串中所有的数字
+10、找字符串中出现次数最多的字符及个数
+11、敏感词过滤
+12、转驼峰
+13、解析URL
+14、ajax封装
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			
+			var a = 20;
+			function fn() {
+				var a = 10;
+				function foo() {
+					var a = 5;
+					console.log(this.a);	// ?
+				}
+				foo();
+			}
+			fn();
+			
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

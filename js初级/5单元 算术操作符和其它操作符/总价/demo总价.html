@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>总价计算</title>
+</head>
+<body>
+	三里屯优衣库衬衫 <span>199</span> 元 <input type="checkbox" name="" id="1"><br>
+	CK内裤 <span>30</span> 元 <input type="checkbox" name="" id="2"><br>
+	LV包包 <span>9999</span> 元 <input type="checkbox" name="" id="3"><br>
+	玉溪 <span>23</span> 元 <input type="checkbox" name="" id="4"><br>
+	总价：<input type="text" name="" id="total" readonly>
+	<script>
+		// this是包含它的函数被调用时所属的对象，如果找不到，则是window对象。
+
+		// 获取元素节点对象
+		var sps = document.getElementsByTagName("span")
+		,	ipts = document.getElementsByTagName("input")
+		,	total = document.getElementById("total");
+		// 页面加载
+		var totalPrice = 0;
+		for(var i=0;i<ipts.length - 1;i++){
+			if(ipts[i].checked){
+				totalPrice = totalPrice + Number(sps[i].innerHTML);
+			}
+		}
+		// console.log(totalPrice);
+		total.value = totalPrice;
+
+		// 给每一个复选框添加点击事件
+
+		for(var i=0;i<ipts.length - 1;i++){
+			// 给每一个复选框添加一个下标属性
+			ipts[i].index = i;
+
+			ipts[i].onclick = function(){
+				// console.log(this.index);
+				// console.log(this.checked);
+				var over = Number(total.value);
+				if(this.checked){
+					// console.log(sps[this.index].innerHTML);
+					over = over + Number(sps[this.index].innerHTML);
+				}else{
+					over = over - Number(sps[this.index].innerHTML);
+				}
+
+				total.value = over;
+			}
+		}
+		console.log(ipts);
+	</script>
+</body>
+</html>

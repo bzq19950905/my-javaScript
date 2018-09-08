@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: #000;
+        }
+    </style>
+    <script>
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+        window.onload = function() {
+            var body = document.body;
+
+            var timer = setInterval(function() {
+                var oImg = document.createElement('img');
+                oImg.src = 'img/star.png';
+                var num = getRandom(30, 100);
+                oImg.style.position = 'absolute';
+                oImg.style.width = num + 'px';
+                oImg.style.height = num + 'px';
+                oImg.style.left = getRandom(0, 1000) + 'px';
+                oImg.style.top = getRandom(0, 400) + 'px';
+                oImg.onclick = function() {
+                    body.removeChild(this);
+                }
+                body.appendChild(oImg);
+            }, 1000);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

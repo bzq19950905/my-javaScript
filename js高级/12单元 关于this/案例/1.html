@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+			
+			
+			var a = 10;
+			var obj = {
+				a: 20
+			}
+
+			function fn() {
+				console.log(this.a);
+			}
+
+			fn(); // ?
+			fn.call(obj); // ?
+			
+			
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

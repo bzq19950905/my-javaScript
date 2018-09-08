@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none
+        }
+        
+        #list {
+            width: 330px;
+            margin: 20px auto;
+        }
+        
+        #list li {
+            float: left;
+            margin: 0 10px 10px 0;
+            width: 100px;
+            height: 100px;
+            background: #03a6dd;
+            font-size: 30px;
+            line-height: 100px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        #list li.active {
+            background: #53d4fe;
+        }
+        
+        #list li.button {
+            background: #fcc300;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var arr = ['手机', '平板', '电磁炉', '电视', '洗衣机', '电脑', '冰箱', '衣柜'];
+            arr.splice(4, 0, '开始'); // 把开始添加进数组
+
+            var oUl = document.getElementById('list');
+            var aLi = oUl.getElementsByTagName('li'); // 动态的方法
+            var timer = null; // 定时器
+
+            // 根据数组渲染视图
+            for (var i = 0; i < arr.length; i++) {
+                var oLi = document.createElement('li');
+                if (i === 0) {
+                    oLi.className = 'active';
+                } else if (i === 4) {
+                    oLi.className = 'button';
+                }
+                oLi.innerHTML = arr[i];
+                oUl.appendChild(oLi);
+            }
+
+            // 把类数组转换成真正的数组
+            for (var i = 0, eleArr = []; i < aLi.length; i++) {
+                eleArr.push(aLi[i]);
+            }
+
+            var oBtn = eleArr.splice(4, 1)[0]; // 开始按钮，eleArr就是我们要循环的内容
+
+            // 按钮点击
+            oBtn.onclick = function() {
+                if (this.innerHTML === '开始') {
+                    this.innerHTML = '停止';
+                    // 开启定时器
+                    timer = setInterval(function() {
+                        var n = Math.floor(Math.random() * eleArr.length); // 随机数
+                        // 让所有的li都没有样式，随机出来的哪个有样式
+                        for (var i = 0; i < eleArr.length; i++) {
+                            eleArr[i].className = '';
+                        }
+                        eleArr[n].className = 'active';
+                    }, 50);
+                } else if (this.innerHTML === '停止') {
+                    this.innerHTML = '开始';
+                    clearInterval(timer); // 清除定时器
+                    // 弹出奖品
+                    var aLi = oUl.getElementsByClassName('active')[0];
+                    alert(aLi.innerHTML);
+                }
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list"></ul>
+</body>
+
+</html>

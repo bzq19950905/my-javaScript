@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="box"></div>
+<script>
+	var str="我是小小画家,小王婷是小王八,孙澳琦是小母猪!";
+	var count=0;
+	var box=document.getElementById("box");
+	setInterval(function(){
+		count++;
+		if(count>str.length)
+		count=0;
+		var subStr=str.substr(0,count);
+		box.innerHTML=subStr;
+	},1000)
+
+
+
+
+	</script>
+</body>
+</html>

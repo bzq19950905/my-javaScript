@@ -1,0 +1,5 @@
+1、（封装方法）字符串转驼峰
+（如：background-color转成backgroundColor）。
+请用正则方式实现
+
+2、（封装方法）去掉字符串前后空格。

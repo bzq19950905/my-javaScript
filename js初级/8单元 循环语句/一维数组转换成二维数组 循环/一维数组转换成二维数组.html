@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+
+	<body>
+		<script>
+			//将数组中的转化为二维数组
+			var fruites = ["apple", "pear", "orange", "banner", "mango"];
+
+			function dateFormat(n) {
+				var smaFruites = [];
+				for(var i = 0, len = Math.ceil(fruites.length / n); i < len; i++) {
+					smaFruites[i] = [];
+					for(var m = 0; m < n; m++) {
+						if(fruites[i * n + m]) {
+							smaFruites[i].push(fruites[i * n + m]);
+						}
+					}
+				}
+				return smaFruites;
+			}
+			var temp = dateFormat(2);
+			console.log(temp);
+		</script>
+	</body>
+
+</html>

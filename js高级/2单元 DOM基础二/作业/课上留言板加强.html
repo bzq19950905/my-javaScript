@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oText = document.getElementById("text1");
+	var oBtn = document.getElementById("btn");
+	var oUl = document.getElementById("ul1");
+	var aLi = oUl.getElementsByTagName("li");
+	
+	oBtn.onclick = function(){
+		var tValue = oText.value;			//获取输入框的内容
+		if( tValue == "" ) return false;	//如果输入框内容为空，则返回
+		
+		var oLi = document.createElement("li");	//创建li元素
+		oLi.innerHTML = tValue;					//为li元素添加内容
+		
+		//新添加的元素在第一位，这里要判断一下，如果有第一个子元素，就添加到第一个子元素的前面，否则就用另一种方法添加
+		if( oUl.children[0] ){
+			oUl.insertBefore(oLi,oUl.children[0]);
+		}else{
+			oUl.appendChild(oLi);
+		}
+		
+		oText.value = "";			//清空输入框
+		
+		//如果超出了5第，就删除最先添加的
+		for( var i=5;i<aLi.length;i++ ){
+			oUl.removeChild(aLi[i]); 
+		}
+		
+	}
+	
+	
+}
+</script>
+</head>
+
+<body>
+    1.课上留言板加强
+	最多只能添加5（自己定）条，最先留的言会被清除
+<hr />
+
+	<input type="text" id="text1" />
+    <input type="button" value="留言" id="btn" />
+	<ul id="ul1"></ul>
+    
+    
+</body>
+</html>

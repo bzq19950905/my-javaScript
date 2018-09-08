@@ -1,0 +1,19 @@
+1、去掉字符串起始空格
+2、转驼峰，如：font-size转成fontSize(正则和字符串方法各实现一遍)
+3、封装getClass方法
+4、找出字符串最多的字符及个数：（正则和字符串两种方法各实现一遍）
+assssjdssskssalsssdkjsssdss --> 出现次数最多的是s，共出现了17次。
+5、解析url中的参数。封装为方法。如：（正则和字符串两种方法各实现一遍）
+var url="https://www.baidu.com?city=北京&name=张凯浪&age=86";
+text(url, 'city')返回北京。
+text(url, 'name')返回张凯浪。
+text(url, 'age')返回86。
+
+注意：以上均封装成方法调用
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<ul id="ul1" style="border: 1px solid red;">
+			<li>11</li>
+			<li>22</li>
+			<li>33</li>
+			<li>44</li>
+		</ul>
+		<script type="text/javascript">
+			var oUl = document.getElementById('ul1');
+			console.log(oUl.attributes.length); // 2
+			console.log(oUl.attributes[0]);	// 属性对象,id="ul1"
+			console.log(oUl.attributes[0].name); // id
+			console.log(oUl.attributes[0].value); // ul1
+			console.log(oUl.attributes[0].nodeType); // 2
+			
+			// 此方法不够灵活
+		</script>
+	</body>
+</html>

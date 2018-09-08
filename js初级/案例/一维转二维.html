@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 参数：数组，二维数组每一项的长度
+        function test(arr, n) {
+            var arr2 = [].concat(arr); // 得到一个新数组，为了不影响传入的数组
+            var newArr = []; // 用于存储新的二维数组
+            while (arr2.length) {
+                newArr.push(arr2.splice(0, n)); // arr2.splice(0, n)的返回值是一个数组，将它添加到新数组中
+            }
+            return newArr;
+        }
+
+        var arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+        var c = test(arr, 2);
+        console.log(c);
+
+        var d = test(arr, 3);
+        console.log(d);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

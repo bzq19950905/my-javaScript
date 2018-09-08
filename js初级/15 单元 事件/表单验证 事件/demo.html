@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>表单验证</title>
+		<style>
+			form {
+				width: 600px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background: #F6F6F6;
+				margin: auto;
+			}
+			
+			table {
+				width: 580px;
+				margin-left: 20px;
+			}
+			
+			tr {
+				height: 50px;
+				line-height: 50px;
+				border-bottom: 1px solid #ddd;
+				display: block;
+			}
+			
+			tr:last-child {
+				border: none;
+			}
+			
+			input {
+				margin-left: 100px;
+				width: 200px;
+				height: 28px;
+				border-radius: 4px;
+				outline: none;
+				border: 1px solid #ccc;
+				text-indent: 8px;
+				font-size: 14px;
+			}
+			
+			input:focus {
+				border: 1px solid red;
+			}
+			
+			span {
+				margin-right: 10px;
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- <a href="javascript:void(0)">点击</a> -->
+		<form action="javascript:" id="form">
+			<table>
+				<tr>
+					<td>
+						<label for="">姓&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+						<input type="text" name="username" placeholder="请输入用户名" autofocus id="username">
+						<span id="titleName"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+						<input type="text" name="pwd" placeholder="请输入密码" id="pwd">
+						<span id="titlePwd"></span>
+					</td>
+				</tr>
+				<tr>
+					<td style="display: inline-block;margin-left: 180px;">
+						<button id="btn" style="width: 100px;height: 40px;">登陆</button>
+					</td>
+				</tr>
+			</table>
+
+		</form>
+
+		<script>
+			// 焦点事件：失去焦点、获取焦点
+			var username = document.getElementById("username"),
+				pwd = document.getElementById("pwd"),
+				btn = document.getElementById("btn"),
+				titleName = document.getElementById("titleName"),
+				titlePwd = document.getElementById("titlePwd"),
+				form = document.getElementById("form");
+
+			username.onblur = function() {
+				var val = username.value;
+				if(val == "") {
+					// alert("用户名不能为空");
+					titleName.innerHTML = "用户名不能为空";
+					titleName.style.color = "red";
+					username.focus();
+				} else {
+					titleName.innerHTML = "用户名符合规范";
+					titleName.style.color = "green";
+				}
+			}
+
+			pwd.onblur = function() {
+				var val = pwd.value;
+				if(val == "") {
+					// alert("密码不能为空");
+					titlePwd.innerHTML = "密码不能为空";
+					titlePwd.style.color = "red";
+					pwd.focus();
+				} else {
+					titlePwd.innerHTML = "密码符合规范";
+					titlePwd.style.color = "green";
+				}
+			}
+
+			btn.onclick = function() {
+				var userVal = username.value,
+					pwdVal = pwd.value;
+
+				if(userVal == "pengzuohong" && pwdVal == "123456") {
+					alert("登陆成功");
+					form.action = "../demo.html";
+					// url 地址重定向
+					// location.href = "../demo.html";
+				} else {
+					alert("登陆失败");
+				}
+			}
+
+			// var arr = [];
+			// arr.push(username);
+			// console.log(arr);
+
+			// username.focus();
+			// username.onfocus = function(){
+			// 	alert("触发了获取焦点事件");
+			// }
+			// username.onblur = function(){
+			// 	alert("触发了失去焦点事件");
+			// }
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div{position:absolute;background:#f00;}
+</style>
+<script>
+
+document.onmousedown = function(ev){
+	var ev = ev || event;
+	var posX = ev.clientX;		//属标按下的X
+	var posY = ev.clientY;		//属标按下的Y
+	
+	var oDiv = document.createElement("div");
+	document.body.appendChild(oDiv);
+	
+	document.onmousemove = function(ev){
+		var ev = ev || event;
+		var disX = Math.abs(ev.clientX - posX);		//移动距离的绝对值
+		var disY = Math.abs(ev.clientY - posY);		
+		
+		if( ev.clientX > posX && ev.clientY > posY ){
+			
+			oDiv.style.left = posX + "px";
+			oDiv.style.top = posY + "px";
+			
+		}else if( ev.clientX > posX && ev.clientY < posY ){
+			
+			oDiv.style.left = posX + "px";
+			oDiv.style.top = posY - disY + "px";
+			
+		}else if( ev.clientX < posX && ev.clientY > posY ){
+			
+			oDiv.style.left = posX - disX + "px";
+			oDiv.style.top = posY + "px";
+			
+		}else if( ev.clientX < posX && ev.clientY < posY ){
+			
+			oDiv.style.left = posX - disX + "px";
+			oDiv.style.top = posY - disY + "px";
+			
+		}
+		
+		oDiv.style.width = disX + "px";
+		oDiv.style.height = disY + "px";
+		
+	}
+	
+	document.onmouseup = function(){
+		document.onmousemove = document.onmouseup = null;
+	}
+	
+}
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

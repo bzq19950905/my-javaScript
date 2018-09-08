@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>数字时钟</title>
+</head>
+<body style="background: #000;">
+	<div id="box" style="color: #fff;font-size: 50px;font-weight: bolder;">
+		<img src="" alt="">
+		<img src="" alt="">:
+		<img src="" alt="">
+		<img src="" alt="">:
+		<img src="" alt="">
+		<img src="" alt="">
+	</div>
+
+	<script>
+		var imgs = document.getElementById("box").getElementsByTagName("img");
+
+
+		function change(){
+			var date = new Date();
+			var hour = addZero(date.getHours())
+			,	minutes = addZero(date.getMinutes())
+			,	seconds = addZero(date.getSeconds());
+
+			var timeStr = hour + minutes + seconds;  // "153328"
+
+			// i = 0  1  1.png
+			// i = 1  5  5.png
+			// i = 2  3  3.png
+			// ......
+
+			for(var i=0;i<imgs.length;i++){
+				imgs[i].src = "img/" + timeStr[i] + ".png";
+			}
+		}
+
+		function addZero(param){
+			if(param<10){
+				param = "0" + param;
+			}
+			return param.toString();
+		}
+		change();
+		// 间歇调用
+		setInterval(change,1000);
+	</script>
+</body>
+</html>

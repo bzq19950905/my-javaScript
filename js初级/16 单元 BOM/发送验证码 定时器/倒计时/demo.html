@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<body>
+	<input type="text" id="phone" value="18603820238">  <button id="btn">发送验证码</button>
+	<span id="code"></span>
+
+	<script>
+		btn.onclick = function(){
+			var phoneValue = phone.value;
+			if(phoneValue.length != 11 || isNaN(phoneValue)){
+				alert("手机号填写有误");
+				return false;
+			}
+			code.innerHTML = randCode();
+			var count = 5; // 计数器的初始值
+			this.disabled = true; // 禁用按钮
+			this.innerHTML = count + "s后重新发送"; // 改变按钮名称
+			var that = this; 
+
+
+			// 定时执行
+			var id = setInterval(function(){
+				count--;
+				that.innerHTML = count + "s后重新发送";
+				if(count<=0){
+					that.innerHTML = "重新发送";
+					that.disabled = false;
+					clearInterval(id);
+				}
+			},1000);
+		}
+
+
+		function randCode(){
+			var str = "abfdasfewaftrfsda";
+			var code = "";
+			for(var i=0;i<4;i++){
+				var rand = Math.floor(Math.random()*str.length);
+				code += str[rand];
+			}
+			return code;
+		}
+	</script>
+</body>
+</html>

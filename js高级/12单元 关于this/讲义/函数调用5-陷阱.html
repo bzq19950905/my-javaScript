@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			// 陷阱: 内部函数中的this
+			// 一个函数调用中的常见错误就是以为this在内部函数中跟在外部函数中一样。
+			// 正确来说，内部函数的上下文依赖于调用方法，而不是外部函数的上下文。
+			
+			var numbers = {
+			   numberA: 5,
+			   numberB: 10,
+			   sum: function() {
+			     console.log(this === numbers); // ?
+			     function calculate() {
+			       console.log(this === numbers); // ?
+			       return this.numberA + this.numberB;
+			     }
+			     return calculate();
+			   }
+			};
+			
+			console.log(numbers.sum()); // ?
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

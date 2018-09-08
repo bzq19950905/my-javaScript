@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;box-sizing: border-box;}
+		#box{position: relative;left: 100px;}
+		ul{list-style: none;}
+		li{width: 80px;height: 40px;text-align: center;line-height: 40px;float: left;color: #000;border: 1px solid #ccc;cursor: pointer;}
+		#bottom{
+			position: absolute;
+			width: 320px;
+			height: 200px;
+			background: red;
+			text-align: center;
+			line-height: 200px;
+			top: 40px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+		<ul>
+			<li>幼儿园</li>
+			<li>小学</li>
+			<li>中学</li>
+			<li>八维</li>
+		</ul>
+		<div id="bottom">幼儿园</div>
+	</div>
+</body>
+<script>
+var colors=["red","pink","green","orange"];
+var lis=document.getElementById("box").getElementsByTagName("li");
+lis[0].style.background = colors[0];
+lis[0].style.color = "#fff";
+for(var i=0; i<lis.length;i++){
+	(function(index){
+		lis[i].onclick=function(){
+			for(var j=0;j<lis.length;j++){
+				if(j==index){
+					this.style.color="#fff";
+					this.style.background=colors[j];
+					bottom.style.background=colors[j];
+					bottom.innerHTML=this.innerHTML;
+				}else{
+					lis[j].style.color="#000";
+					lis[j].style.background="#fff"
+				}
+			}
+		}
+	})(i)
+}
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="all">全选</button>
+	<button id="rev">反选</button>
+	<button id="not">不选</button>
+	<hr>
+	<input type="checkbox" id="">吃饭
+	<input type="checkbox" id="">喝水
+	<input type="checkbox" id="">睡觉
+	<input type="checkbox" id="">打游戏
+	<input type="checkbox" id="">拳击
+	<input type="checkbox" id="">射箭
+	<input type="checkbox" id="">游泳
+	<input type="checkbox" id="">滑冰
+
+
+
+	<script>
+	//获取元素节点对象
+	var all=document.getElementById("all")
+	,	rev=document.getElementById("rev")
+	,	not=document.getElementById("not")
+	,	ipts=document.getElementsByTagName("input");
+	//点击事件
+	all.onclick =function(){
+		for(var i=0;i<ipts.length;i++){
+			ipts[i].checked=true;
+		}
+	}
+	rev.onclick =function(){
+		for(var i=0;i<ipts.length;i++){
+			if(ipts[i].checked==true){
+				ipts[i].checked=false;
+			}else{
+				ipts[i].checked=true;
+			}
+		}
+	}
+	not.onclick =function(){
+		for(var i=0;i<ipts.length;i++){
+			ipts[i].checked=false;
+		}
+	}
+</script>
+</body>
+
+</html>

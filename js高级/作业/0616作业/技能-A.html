@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+      <div>
+         <p>
+            请输入邮箱：<input type="text" id="user" />
+            <input type="button" value="添 加" id="btn" />
+         </p>
+         <ul id="list">
+               <li>marry@sohu.com</li>
+               <li>lili@sina.com.cn</li>
+               <li>my_admin@163.com</li>
+               <li>Jack_66@263.com</li>
+         </ul>
+      </div>
+	<script>
+          // 检测用户输入的邮箱，如果邮箱中没有包含"@"和"."则提示用户：“邮箱格式不正确”，如果邮箱格式正确则检测邮箱在ul列表中是否出现过，如果出现过则提示用户：“您输入的邮箱已经存在”，否则将用户输入的邮箱添加到ul中，添加的DOM结构为：“<li>用户输入的邮箱<span>X</span></li>”。点击“X”号弹出确认框，提示用户：“您确定要删除吗？”点击确定则删除该节点。
+         
+        // 检测用户输入邮箱的格式
+        // 检测是否已经存在这个邮箱（两个分支）
+        // 删除邮箱，提示是否删除
+        
+        var oUser = document.getElementById('user'); // 输入框
+        var oBtn = document.getElementById('btn'); // 添加按钮
+        var oUl = document.getElementById('list'); // ul
+        var aLi = oUl.getElementsByTagName('li'); // li
+        var re = /^\w+@\w+\.\w+$/;
+        
+        // 添加邮箱
+        oBtn.onclick = function (){
+        	var txt = oUser.value;
+        	
+        	// 用户没有输入
+        	if(!txt){
+        		alert('请输入邮箱');
+        		return false;
+        	}
+        	
+        	// 用户有输入
+        	if(re.test(txt)){
+        		// 正常的邮箱
+        		for(var i=0; i<aLi.length; i++){
+        			
+        			if(aLi[i].innerHTML === txt || aLi[i].innerHTML === txt+'<span>X</span>'){
+        				alert('邮箱已经存在');
+        				oUser.value = '';
+        				return false;
+        			}
+        		}
+        		
+        		// 创建新的邮箱
+        		var li = document.createElement('li');
+        		li.innerHTML = txt + '<span>X</span>';
+        		oUl.appendChild(li);
+        		
+        	}else{
+        		alert('哥们，请输入正确的邮箱');
+        	}
+        	oUser.value = '';
+        }
+        
+        // 删除
+        oUl.onclick = function (ev){
+        	var ev = ev || event;
+        	var target = ev.target || ev.srcElement;
+        	if(target.nodeName.toLocaleLowerCase() === 'span'){
+        		var message = confirm('您确定要删除吗？');
+        		if(message){
+        			oUl.removeChild(target.parentNode);
+        		}
+        	}
+        }
+        
+	</script>
+</body>
+</html>

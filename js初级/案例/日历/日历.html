@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        .dateBox {
+            width: 300px;
+            margin: 20px auto;
+        }
+        
+        .dateBox header {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            background: #17a4eb;
+            padding: 0 10px;
+        }
+        
+        .dateBox header span {
+            cursor: pointer;
+        }
+        
+        .dateBox table {
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .dateBox table th {
+            font-weight: bold;
+        }
+        
+        .dateBox table th,
+        .dateBox table td {
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            height: 30px;
+        }
+        
+        .red {
+            color: #f00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dateBox">
+        <header>
+            <span class="fl">上个月</span>
+            <span class="fr">下个月</span>
+            <h1>2021年9月</h1>
+        </header>
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th class="red">周日</th>
+                    <th>周一</th>
+                    <th>周二</th>
+                    <th>周三</th>
+                    <th>周四</th>
+                    <th>周五</th>
+                    <th class="red">周六</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var oDateBox = document.getElementsByClassName('dateBox')[0];
+        var oH1 = oDateBox.getElementsByTagName('h1')[0]; // h1标签
+        var aSpan = oDateBox.getElementsByTagName('span'); // 上个月，下个月
+        var oBody = oDateBox.getElementsByTagName('tbody')[0];
+        var aTd = oBody.getElementsByTagName('td'); // 所有的td
+
+
+        // 获取当前的年月
+        var date = new Date();
+        var year = date.getFullYear(); // 年
+        var month = date.getMonth() + 1; // 月
+        setDay(year, month); // 一开始就执行这个函数，传入当前的年月
+
+        // 上个月
+        aSpan[0].onclick = function() {
+            month--;
+            if (month < 1) {
+                month = 12;
+                year--;
+            }
+            setDay(year, month);
+        }
+
+        // 下个月
+        aSpan[1].onclick = function() {
+            month++;
+            if (month > 12) {
+                month = 1;
+                year++;
+            }
+            setDay(year, month);
+        }
+
+
+        // 写入当前月的天
+        function setDay(year, month) {
+            // 把上一次td的内容置空
+            for (var i = 0; i < aTd.length; i++) {
+                aTd[i].innerHTML = '';
+            }
+            aTd[35].parentNode.className = '';
+
+            var dateObj = getDayWeek(year, month);
+            var day = dateObj.day; // 当前这个月有多少天
+            var week = dateObj.week; // 第一天星期几
+
+            oH1.innerHTML = year + '年' + month + '月';
+
+            for (var i = week; i < day + week; i++) {
+                aTd[i].innerHTML = i - week + 1;
+            }
+
+            // 看最后一行有没有内容，没有内容，则隐藏
+            if (!aTd[35].innerHTML) {
+                // aTd[35].parentNode.style.display = 'none';
+                aTd[35].parentNode.className = 'undis';
+            }
+        }
+
+
+        // 传入我们日常生活的年月，返回当前这个月有多少天，第一天是星期几
+        function getDayWeek(year, month) {
+            return {
+                day: new Date(year, month, 0).getDate(),
+                week: new Date(year, month - 1, 1).getDay()
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+
+//border-bottom-color --> borderBottomColor
+
+alert( getHump("border-bottom-color") )
+alert( getHump("color") )
+
+
+
+function getHump(str){
+	if( str.indexOf("-") == -1 ){
+		return str;
+	}
+	
+	var arr = str.split("-");
+	for( var i=1;i<arr.length;i++ ){
+		var first = arr[i].substring(0,1).toUpperCase();
+		var last = arr[i].substring(1);
+		arr[i] = first + last;
+	}
+	
+	return arr.join("");
+	
+}
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

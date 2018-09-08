@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var calc = {
+			  num: 0,
+			  increment: function() {
+			    console.log(this === calc); // ?
+			    this.num += 1;
+			    return this.num;
+			  }
+			};
+			
+			calc.increment(); // ?
+			calc.increment(); // ?
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+
+var str = "aaaabbbccccddfgh";
+console.log(test(str));		//a=4 b=3 c=4 d=2 f=1 g=1 h=1
+
+function test(str){
+	var obj = {};
+	var s = "";
+	for (var i = 0; i < str.length; i++) {
+		var v = str.charAt(i);
+		if (obj[v] && obj[v].value == v) {
+			obj[v].count = ++obj[v].count;
+		} else {
+			obj[v] = {};
+			obj[v].count = 1;
+			obj[v].value = v;
+		}
+	}
+	//console.log(obj)
+	for (key in obj) {
+		s += obj[key].value + '=' + obj[key].count + ' ';
+	}
+	return s;
+}
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

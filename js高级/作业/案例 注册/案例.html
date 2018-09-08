@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.ts{display: none;color:#FF0000;}
+		</style>
+		<script type="text/javascript">
+			window.onload = function (){
+				var oForm = document.getElementById("myForm");
+				var user = oForm.user; // 用户名
+				var pwd = oForm.pwd; // 密码
+				var pwds = oForm.pwds; // 确认密码
+				var email = oForm.email; // 邮箱
+				var nicheng = oForm.nicheng; // 昵称
+				var aInput = oForm.getElementsByTagName('input');
+				var aTs = document.getElementsByClassName('ts');
+				var re = {
+					userRe: /^[a-z0-9]{4,16}$/i,
+					pwdRe: /^\w{6,16}$/,
+					emailRe: /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/
+				};
+				
+				// 用户名的验证
+				user.onkeyup = function (){
+					var val = this.value; // 输入框的值
+					var oSpan = this.nextElementSibling || this.nextSibling;
+					if (!re.userRe.test(val)) {
+						oSpan.style.display = 'inline-block';
+						return false;
+					}else{
+						oSpan.style.display = 'none';
+					}
+				}
+				
+				// 密码的验证
+				pwd.onkeyup = function (){
+					var val = this.value; // 输入框的值
+					var oSpan = this.nextElementSibling || this.nextSibling;
+					if (!re.pwdRe.test(val)) {
+						oSpan.style.display = 'inline-block';
+						return false;
+					}else{
+						oSpan.style.display = 'none';
+					}
+				}
+				
+				// 确认密码
+				pwds.onkeyup = function (){
+					var val = this.value;
+					var oSpan = this.nextElementSibling || this.nextSibling;
+					if (!val || val !== pwd.value) {
+						oSpan.style.display = 'inline-block';
+						return false;
+					}else if(val === pwd.value){
+						oSpan.style.display = 'none';
+					}
+				}
+				
+				
+				// email的验证
+				email.onkeyup = function (){
+					var val = this.value; // 输入框的值
+					var oSpan = this.nextElementSibling || this.nextSibling;
+					if (!re.emailRe.test(val)) {
+						oSpan.style.display = 'inline-block';
+						return false;
+					}else{
+						oSpan.style.display = 'none';
+					}
+				}
+				
+				nicheng.onkeyup = function (){
+					var val = this.value; // 输入框的值
+					var oSpan = this.nextElementSibling || this.nextSibling;
+					if (!val) {
+						oSpan.style.display = 'inline-block';
+						return false;
+					}else{
+						oSpan.style.display = 'none';
+					}
+				}
+				
+				
+				
+				oForm.onsubmit = function (){
+					var num = 0;
+					for (var i=0; i<aInput.length-1; i++) {
+						aInput[i].onkeyup();
+					}
+					
+					for (var i=0; i<aTs.length; i++) {
+						if (aTs[i].style.display === 'none') {
+							num ++;
+						}
+					}
+					
+					if (num !== aTs.length) {
+						return false;
+					}
+					
+				}
+				
+				// https://www.baidu.com/?user=1111&pwd=111111&pwds=111111&email=dsf%40dsf.com&nicheng=a
+				
+			}
+		</script>
+	</head>
+	<body>
+		<form action="" method="get" id="myForm">
+			<p>
+				用户名：
+				<input type="text" name="user" placeholder="用户名必须为4到16位的英文字母或数字" />
+				<span class="ts">用户名必须为4到16位的英文字母或数字</span>
+			</p>
+			<p>
+				密码：
+				<input type="password" name="pwd" placeholder="密码必须为6到16位" />
+				<span class="ts">密码必须为6到16位</span>
+			</p>
+			<p>
+				确认密码：
+				<input type="password" name="pwds" placeholder="两次密码输入要一致" />
+				<span class="ts">两次密码输入要一致</span>
+			</p>
+			<p>
+				email：
+				<input type="text" name="email" placeholder="Email格式要正确" />
+				<span class="ts">Email格式要正确</span>
+			</p>
+			<p>
+				昵称：
+				<input type="text" name="nicheng" placeholder="昵称不能为空" />
+				<span class="ts">昵称不能为空</span>
+			</p>
+			<input type="submit" value="注册" />
+		</form>
+	</body>
+</html>

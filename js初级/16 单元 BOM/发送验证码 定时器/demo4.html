@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<input type="text" id="tel" value="18677562341">
+<button id="btn">发送验证码</button>
+<span id="code"></span>
+<script>
+	btn.onclick=function(){
+		var telValue=tel.value;
+		if(telValue.length!=11 ||isNaN(telValue)){
+			alert("请输入有效的手机号码");
+			return false;
+		}
+
+		code.innerHTML=randCode();
+		var count=5;
+		btn.innerHTML=count+"s秒后重新发送";
+		btn.disabled=true;
+
+
+
+		var id=setInterval(function(){
+			count--;
+			btn.innerHTML=count+"s秒后重新发送";
+
+			if(count<=0){
+				btn.innerHTML="重新发送";
+				btn.disabled=false;
+				clearInterval(id);
+			}
+		},1000);
+
+
+		function randCode(){
+			var str="AGDSKGFLJADFHLSJK";
+			var code="";
+			for(var i=0;i<6;i++){
+				var rand=Math.floor(Math.random()*str.length);
+				code+=str[rand];
+
+			}
+			return code;
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

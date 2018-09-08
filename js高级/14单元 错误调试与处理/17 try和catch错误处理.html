@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+try{
+	alert(a);	//代码尝试执行这个块中的内容，如果有错误，则会执行catch里的代码，并且传入一个错误信息e做为catch的参数
+}catch(e){
+	alert(e);	// 错误信息的对象
+	alert(e.message); // 错误信息
+	alert("这块是有错误后可以执行的代码");
+}
+
+alert("执行到这里了");
+
+//说明：因为上面a没有定义，是个错误，所以它就走到下面catch里了，并用catch的参数就是错误信息。这里走完了就到下面了。
+
+
+
+//语法格式，也就是说我们应该把所有可能会抛出错误的代码都放在try语句块中，而把哪些用于错误处理的代码放在catch中，如果try中的代码发生了错误，就会立即退出代码执行过程，然后接着执行catch块。此时，catch块会接收到一个包含错误信息的对象。
+try{
+	// 可能会导致错误的代码
+}catch(error){
+	//在错误发生时怎么处理
+	alert(error.message);
+}
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

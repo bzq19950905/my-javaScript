@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			// 参考高级程序设计 62页
+			
+			var str = prompt('请输入你的分数？'); // 弹出让用户输入，接收输入的值
+			var num = !isNaN(str) ? parseFloat(str) : '输入有误'; // switch 语句在比较值时使用的是全等操作符
+			switch(true) {
+				case num >= 0 && num < 60:
+					console.log('你输入的是：'+str+'，你没有及格');
+					break;
+					
+				case num >= 60 && num < 80:
+					console.log('你输入的是：'+str+'，你的成绩一般，需要努力！');
+					break;
+					
+				case num >= 80 && num <= 100:
+					console.log('你输入的是：'+str+'，你的成绩优秀，再接再厉！');
+					break;
+					
+				default:
+					console.log('你输入的是：'+str+'，你输入有误');
+			}
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

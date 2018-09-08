@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>日历</title>
+	<style>
+		table{
+			margin: auto;
+		}
+		thead td{background: skyblue;}
+		td{width: 40px;height: 40px;text-align: center;line-height: 40px;cursor: pointer;}
+		td:hover{background: aqua;}
+	</style>
+</head>
+<body>
+	<button id="last">上个月</button>
+	<button id="next">下个月</button>
+	<div id="box"></div>
+	<table border="1">
+		<thead>
+			<td>日</td>
+			<td>一</td>
+			<td>二</td>
+			<td>三</td>
+			<td>四</td>
+			<td>五</td>
+			<td>六</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+		var tds = document.querySelector("tbody").querySelectorAll("td")
+		,	last = document.querySelector("#last")
+		,	next = document.querySelector("#next")
+		,	box = document.querySelector("#box");
+		/**
+		 * [getDays description]   获取参数月有多少天
+		 * @param  {[number]} year  [设置年]
+		 * @param  {[number]} month [设置月]
+		 * @return {[number]}       [设置的月份有多少天]
+		 */
+		function getDays(year,month){
+			return new Date(year,month,0).getDate();
+		}
+		/**
+		 * [change description]   把日期写到文档中去
+		 * @param  {[number]} year  [当前显示日历的年]
+		 * @param  {[number]} month [当前显示日历的月]
+		 */
+		function change(year,month){
+			// 当前月的第一天是星期几
+			var currentWeek = new Date(year,month,1).getDay();
+			// 上个月有多少天
+			var lastDays = getDays(year,month);
+			// 当前月有多少天
+			var currentDays = getDays(year,month+1);
+			// 如果说当前月的第一天是星期日，上个月应该显示7天，改变currentWeek的值为7
+			if(currentWeek == 0) currentWeek = 7;
+			// 遍历所有的td
+
+			for(var i=0;i<tds.length;i++){
+				// 每次显示日历的时候，默认所有td的字体颜色为黑色
+				tds[i].style.color = "#000";
+				// i currentWeek  lastDays
+				// i = 0  3   28   26
+				// i = 1  ......   27
+				// i = 2  ......   28
+				// lastDays - currentWeek + 1 + i
+				// 把上个月的日期加进去
+				if(i<currentWeek){
+					tds[i].style.color = "#666";
+					tds[i].innerHTML = lastDays - currentWeek + 1 + i;
+				}
+
+
+				// 把当前月的日期加进去
+				// i = 3  currentWeek 3   1
+				// i = 4     2
+				// .....
+				if(i>=currentWeek){
+					tds[i].innerHTML = i - currentWeek + 1;
+				}
+
+				// 把写个月的日期加进去
+				// i = 33      3      31        1
+				if(i >= currentWeek + currentDays){
+					tds[i].style.color = "#666";
+					tds[i].innerHTML = i - currentWeek - currentDays + 1;
+				}
+			}
+			box.innerHTML = year+"年"+(month + 1) + "月";
+		}
+
+		var date = new Date();
+		var year = date.getFullYear()
+		,	month = date.getMonth();
+		// 页面加载时显示当前月的日历
+		change( year,month );
+
+		last.onclick = function(){
+			// 没点击一次，让month减1
+			month--;
+			// 如果month小于0时，应该显示去年最后一个月的日历
+			if(month < 0){
+				month = 11;
+				year--;
+			}
+			// console.log(year,month);
+			change(year,month);
+		}
+
+		next.onclick = function(){
+			month++;
+			if(month > 11){
+				month = 0;
+				year++;
+			}
+			// console.log(year,month);
+			change(year,month);
+		}
+
+	</script>
+</body>
+</html>

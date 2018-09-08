@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 实现获取数组中不重复元素的方法,返回一个新数组；
+        // var arr = [2,1,2,3,2,3,4,3,3,4,1,5,4,4,2,6];
+        // 获取后的结果[5,6]
+
+        function test(array) {
+            var arr = [].concat(array);
+            console.log(arr);
+            var newArr = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr.lastIndexOf(arr[i], i - 1) === -1 && arr.indexOf(arr[i], i + 1) === -1) {
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+
+        var arr = [2, 1, 2, 3, 2, 3, 4, 3, 3, 4, 1, 5, 4, 4, 2, 6];
+        console.log(test(arr));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

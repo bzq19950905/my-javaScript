@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #span {
+            display: inline-block;
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+    </style>
+    <script type="text/javascript">
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        // 随机数
+        function random(n) {
+            var str = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            var newStr = '';
+            for (var i = 0; i < n; i++) {
+                newStr += str[getRandom(0, str.length - 1)];
+            }
+            return newStr;
+        }
+
+
+
+        window.onload = function() {
+            var oTel = document.getElementById('tel'); // 手机号
+            var oPws = document.getElementById('pws'); // 密码
+            var oText = document.getElementById('text'); // 验证码输入框
+            var oSpan = document.getElementById('span'); // 验证码span
+            var oBtnA = document.getElementById('btnA'); // 换一换
+            var oBtn = document.getElementById('btn'); // 登录按钮
+
+            // 随机数
+
+            oSpan.innerHTML = random(4);
+            oBtnA.onclick = function() {
+                oSpan.innerHTML = random(4);
+            }
+
+            // 验证手机号
+            oTel.onblur = function() {
+                var val = this.value;
+                if (val.length !== 11) {
+                    alert('手机号的长度为11位数字');
+                    this.value = '';
+                    return false;
+                }
+                if (val[0] !== '1') {
+                    alert('手机号的第一位是1');
+                    this.value = '';
+                    return false;
+                }
+                if (isNaN(val)) {
+                    alert('手机号要全是数字');
+                    this.value = '';
+                    return false;
+                }
+                // 提示
+
+            }
+
+            // 密码验证
+            oPws.onblur = function() {
+                var len = this.value.length;
+                if (len < 6 || len > 12) {
+                    alert('输入密码有误');
+                    this.value = '';
+                }
+            }
+
+            // 验证码
+            oText.onblur = function() {
+                var val = this.value;
+                if (val !== oSpan.innerHTML) {
+                    alert('请重新输入验证码！');
+                }
+            }
+
+            oBtn.onclick = function() {
+                oTel.onblur();
+                oPws.onblur();
+                oText.onblur();
+                open('http://www.baidu.com');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>手机号：<input type="text" id="tel"></p>
+    <p>密码：<input type="password" id="pws"></p>
+    <p>验证码：<input type="text" id="text" /><span id="span"></span><a href="javascript:;" id="btnA">换一换</a></p>
+    <p><input type="button" value="登录" id="btn" /></p>
+
+</body>
+
+</html>

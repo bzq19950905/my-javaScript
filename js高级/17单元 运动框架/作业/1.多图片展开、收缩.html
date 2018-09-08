@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="http://bdklzw.com/templets/klzw/css/base.css" type="text/css" rel="stylesheet" />
+<style>
+#ul1{width:330px;margin:100px auto 0;position:relative;}
+#ul1 li{width:100px;height:100px;background:#f00;float:left;margin:10px 0 0 10px;overflow:hidden;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("ul1");
+	var aLi = oUl.getElementsByTagName("li");
+	var arr = [];
+	var zIndex = 1;
+	
+	//将浮动定位，改变为绝对定位，先把它们的位置存起为一个数组，每个元素的left和top为一个json，再在下面调用。
+	for( var i=0;i<aLi.length;i++ ){
+		arr.push( {left: aLi[i].offsetLeft, top: aLi[i].offsetTop} );
+	};
+	
+	for( var i=0;i<aLi.length;i++ ){
+		aLi[i].index = i;						//添加索引
+		aLi[i].style.left = arr[i].left + "px";
+		aLi[i].style.top = arr[i].top + "px";
+		aLi[i].style.position = "absolute";
+		aLi[i].style.margin = "0px";			//这里要清除它的margin，否则它会同时lef或者top叠加。
+		
+		//滑上时变大，同时定位也改变。定位改变为增大的一半
+		aLi[i].onmouseover = function(){
+			this.style.zIndex = zIndex++;		//让滑入的这个层级最高
+			startMove(this,{
+				width:200,
+				height:200,
+				left:arr[this.index].left - 50,
+				top:arr[this.index].top - 50
+			});
+		}
+		
+		//滑离时变回原来的
+		aLi[i].onmouseout = function(){
+			startMove(this,{
+				width:100,
+				height:100,
+				left:arr[this.index].left,
+				top:arr[this.index].top
+			});
+		}
+		
+	}
+
+}
+</script>
+</head>
+
+<body>
+
+<ul id="ul1" class="clearfix">
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+	<li><img src="img/5.jpg" /></li>
+</ul>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+			// 写一个按照下面方式调用都能正常工作的sum方法
+			// sum(2,3);   // Outpus 5;
+			// sum(2)(3);  // Outpus 5;
+			
+			function sum(a, b) {
+				if(arguments.length === 2) {
+					return a + b;
+				} else if(arguments.length === 1) {
+					return function(b) {
+						return a + b;
+					}
+				}
+			}
+			console.log(sum(2, 3));
+			console.log(sum(2)(3));
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

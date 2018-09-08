@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body style="background: #000;">
+	<div id="box" style="color: #fff;font-size: 50px;font-weight: bolder;">
+		<img src="" alt="">
+		<img src="" alt="">:
+		<img src="" alt="">
+		<img src="" alt="">:
+		<img src="" alt="">
+		<img src="" alt="">
+	</div>
+	<script>
+	var imgs=document.getElementById("box").getElementsByTagName("img");
+	//封装一个函数
+	function change(){
+		var date =new Date;
+		var hours=addZero(date.getHours()),
+			minutes=addZero(date.getMinutes()),
+			seconds=addZero(date.getSeconds());
+			var timeStr=hours+minutes+seconds;
+			for(var i=0;i<imgs.length;i++){
+				imgs[i].src = "img/" + timeStr[i] + ".png";
+			}
+	}
+	//封装一个补零函数
+	function addZero(arr){
+		if(arr<10){
+			arr="0"+arr;
+		}
+		return arr.toString();
+	}
+	change();
+	setInterval(change,1000);
+	</script>
+</body>
+</html>

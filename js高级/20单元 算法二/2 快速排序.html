@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var arr = [12, 5, 37, 6, 22, 40];
+			console.log(quickSort(arr));
+
+			function quickSort(arr) {
+
+				if(arr.length <= 1) {
+					return arr;
+				}
+
+				var num = Math.floor(arr.length / 2); //获取基准点，并向下取整
+				var numValue = arr.splice(num, 1); //获取基准点的值并删除它。返回删除的元素。数组长度减小1
+				var left = []; //存放小于基准点值的。
+				var right = []; //存放大于或等于基准点值的
+
+				for(var i = 0; i < arr.length; i++) {
+					if(arr[i] < numValue) {
+						left.push(arr[i]);
+					} else {
+						right.push(arr[i]);
+					}
+				}
+
+				return quickSort(left).concat(numValue, quickSort(right)); //把它们边接起来。然后调用递归。concat()方法是连接数组
+
+			}
+		</script>
+	</head>
+
+	<body>
+		这是从小到大，如果从大到小，只要把arr[i] > numValue 即可。
+		<br /> 实际应用中，有sort()方法可用。
+	</body>
+
+</html>

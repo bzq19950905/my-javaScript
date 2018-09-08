@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//var score =prompt("请输入您的成绩","0-100之间的数字");
+	//if语句的成绩输入
+	/*	if(score ==null){
+			alert("您点击了取消按钮");
+		}else{
+			if(score ==""){
+				alert("您没有输入");
+			}else{
+				if(isNaN(score)){
+					alert("输入格式错误");
+					}
+					else if(score <60){
+						alert("不及格");
+					}else if(score >=75 && score <=80){
+						alert("良好");
+					}else if(score >=90 && score <=99){
+						alert("优秀");
+					}else if(score ==100){
+						alert("满分");
+					}else{
+						alert("输入有误");
+					}
+				}
+			}
+*/
+
+ 		//成绩输入
+		/*var score =prompt("请输入成绩");
+		if(score ==null){
+			alert("请输入您的成绩");
+		}else{
+			if(score ==""){
+				alert("请输入您的成绩");
+			}else{
+				if(isNaN(score)){
+					alert("成绩输入有误");
+				}else{
+					if(score <0 && score >100){
+						alert("成绩输入有误");
+					}else if(score <60){
+							alert("您的成绩为不及格");
+						}else if(score >=60 && score<=99){
+								alert("您的成绩为及格");
+							}else if(score ==100){
+									alert("您的成绩为满分");
+							}else{
+									alert("您输入有误");
+				}
+			}
+		}
+	}*/
+	//if和switch结合的成绩输入
+	var score=prompt("请输入您的成绩");
+	var level="";
+	if(score==null){
+		alert("您点击了取消按钮");
+	}else{
+		if(score==""){
+			alert("请输入您的成绩");
+		}else{
+			if(isNaN(score)){
+				alert("请您输入数字");
+			}else{
+				if(score<0 || score>100){
+					alert("您输入的成绩有误");
+				}else{
+					switch(parseInt(score/10)){
+						case 0:
+						case 1:
+						case 2:
+						case 3:
+						case 4:
+						case 5:
+						level="不及格";
+						break;
+						case 6:
+						level="及格";
+						break;
+						case 7:
+						level="一般";
+						break;
+						case 8:
+						level="良";
+						break;
+						case 9:
+						level="优";
+						break;
+						default :
+						level="满分"
+					}
+					alert("您的成绩是"+level);
+				}
+			}
+		}
+	}
+
+	</script>
+
+</body>
+</html>

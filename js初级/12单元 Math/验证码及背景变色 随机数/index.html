@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+
+	<body>
+		<div id="box" style="width:100px;height:100px;text-align:center;color:#fff;line-height:100px;font-size:30px"></div>
+		<button id="btn" style="margin-top:10px;margin-left:20px;">点击</button>
+
+		<script>
+			function randColor() {
+				var str = "0123456789abcdef";
+				var newStr = "#";
+				for(var i = 0; i < 6; i++) {
+					var rand = Math.floor(Math.random() * str.length);
+					newStr += str[rand];
+				}
+				return newStr;
+			}
+
+			btn.onclick = function() {
+
+				box.style.background = randColor();
+				//box.innerHTML=randCode(6,2);
+			}
+
+			// 生成随机验证码：
+
+			/**
+			 * [randCode description]  生成随机验证码
+			 * @param  {[number]} n    [验证码的长度]
+			 * @param  {[number]} type [1：验证码只有小写字母 2：验证码是大小写字母  3：大小写字母加数字]
+			 * @return {[string]}      [验证码]
+			 */
+			/*function randCode(n,type){
+				var code="";
+				var str="abcdefghijklmnopqrstuvwxyz0123456789";
+				var date=null;
+				switch(type){
+					case 1:
+					date=str.substr(0,26);
+					break;
+					case 2:
+					date=str.substring(0,26)+str.substring(0,26).toUpperCase();
+					break;
+
+					case 3:
+					date=str.substring(0,26)+str.substring(0,26).toUpperCase()+str.substr(-10);
+					break;
+					default:
+					date=str.substring(0,26)+str.substring(0,26).toUpperCase()+str.substr(-10);
+					}
+					for(var i=0;i<n;i++){
+						var randIndex=Math.floor(Math.random()*date.length);
+						code+=date[randIndex];
+					}
+					return code;
+			}
+			console.log(randCode(6,2));*/
+
+			/*function addZero(param){
+				if(param<10){
+					param="0"+param;
+				}return param.toString();
+
+			}
+			function time(){
+				var date=new Date;
+				var year=addZero(date.getFullYear())
+				,	month=addZero(date.getMonth()+1)
+				,	day=addZero(date.getDate())
+				,	hours=addZero(date.getHours())
+				,	minutes=addZero(date.getMinutes())
+				,	seconds=addZero(date.getSeconds());
+				var timeStr=year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+				box.innerHTML=timeStr;
+			}
+			time();
+			setInterval(time,1000);*/
+		</script>
+	</body>
+
+</html>

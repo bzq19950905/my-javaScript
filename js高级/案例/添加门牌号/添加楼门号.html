@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        #list span {
+            margin: 0 20px;
+            cursor: pointer;
+        }
+        
+        #list span.active {
+            color: #f00;
+        }
+        
+        .box {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            text-align: center;
+            position: fixed;
+            z-index: 2;
+        }
+        
+        .mark {
+            background: #000;
+            opacity: 0.3;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            var oAddBtn = document.getElementById('addBtn');
+            var oList = document.getElementById('list');
+            var re = /^[a-zA-Z][座-][1-9]\d{2,3}$/;
+
+            // 添加地址
+            oAddBtn.onclick = function() {
+                // 可视区
+                var viewWidth = document.documentElement.clientWidth;
+                var viewHeight = document.documentElement.clientHeight;
+
+                // 创建窗体
+                var oBox = document.createElement('div');
+                oBox.className = 'box';
+                oBox.style.left = (viewWidth - 342) / 2 + 'px';
+                oBox.style.top = (viewHeight - 242) / 2 + 'px';
+                oBox.innerHTML = '<p>请填入小区或大厦的名称</p><input type="text" id="text1" /><p>楼号门牌号</p><input type="text" id="text2" placeholder="a-123" /><br /><br /><input type="button" value="保存" id="btn1" /><input type="button" value="取消" id="btn2" />';
+                document.body.appendChild(oBox);
+
+                // 遮罩
+                var oMark = document.createElement('div');
+                oMark.className = 'mark';
+                oMark.style.width = viewWidth + 'px';
+                oMark.style.height = viewHeight + 'px';
+                document.body.appendChild(oMark);
+
+                // 取消
+                var btn2 = document.getElementById('btn2');
+                btn2.onclick = function() {
+                    document.body.removeChild(oBox);
+                    document.body.removeChild(oMark);
+                }
+
+                // 保存
+                var btn1 = document.getElementById('btn1');
+                btn1.onclick = function() {
+                    var text1 = document.getElementById('text1');
+                    var text2 = document.getElementById('text2');
+                    // 判断有没有输入小区名
+                    if (!text1.value) {
+                        alert('请填入小区或大厦的名称');
+                        return false;
+                    }
+                    // 判断有没有输入楼号门牌号
+                    if (!text2.value) {
+                        alert('请填入楼号门牌号');
+                        return false;
+                    }
+
+                    // 楼号门牌号符不符规则
+                    if (!re.test(text2.value)) {
+                        alert('请填入正确的楼号门牌号');
+                        return false;
+                    }
+
+                    // 符合规则，则创建列表li
+                    var oLi = document.createElement('li');
+                    oLi.innerHTML = '<i>' + text1.value + text2.value + '</i><span class="active">默认地址</span><a href="javascript:;">删除</a>';
+
+                    // 让之前的span没有样式
+                    var aSpan = oList.getElementsByTagName('span');
+                    for (var i = 0; i < aSpan.length; i++) {
+                        aSpan[i].className = '';
+                        aSpan[i].innerHTML = '设为默认';
+                    }
+
+                    oList.appendChild(oLi);
+                    btn2.onclick(); // 隐藏弹窗
+                }
+
+            }
+
+            // 事件代理
+            oList.onclick = function(ev) {
+                var ev = ev || event;
+                var target = ev.target || ev.srcElement;
+
+                if (target.nodeName.toLowerCase() === 'a') {
+                    // 删除，如果是默认，则不可删除
+                    var oSpan = target.parentNode.getElementsByTagName('span')[0];
+                    if (oSpan.className === 'active') {
+                        return false;
+                    } else {
+                        this.removeChild(target.parentNode);
+                    }
+
+                } else if (target.nodeName.toLowerCase() === 'span') {
+                    // 设置默认
+                    var aSpan = oList.getElementsByTagName('span');
+                    for (var i = 0; i < aSpan.length; i++) {
+                        aSpan[i].className = '';
+                        aSpan[i].innerHTML = '设为默认';
+                    }
+                    target.className = 'active';
+                    target.innerHTML = '默认地址';
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    详细信息<input type="button" value="添加" id="addBtn" />
+
+    <ul id="list">
+        <li>
+            <i>我的家在黄土高坡</i>
+            <span class="active">默认地址</span>
+            <a href="javascript:;">删除</a>
+        </li>
+        <li>
+            <i>我的家在东北</i>
+            <span>设为默认</span>
+            <a href="javascript:;">删除</a>
+        </li>
+    </ul>
+
+
+    <!-- <div class="box">
+        <p>请填入小区或大厦的名称</p>
+        <input type="text" id="text1" />
+        <p>楼号门牌号</p>
+        <input type="text" id="text2" placeholder="a-123" />
+        <br /><br />
+        <input type="button" value="保存" id="btn1" />
+        <input type="button" value="取消" id="btn2" />
+    </div>
+    <div class="mark"></div> -->
+
+</body>
+
+</html>

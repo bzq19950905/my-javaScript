@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度音乐的全选操作</title>
+	<style>
+		html, body, ul {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+		#songs {
+			border: 1px solid #eee;
+			width: 400px;
+			margin: 20px auto;
+			font-size: 14px;
+		}
+		#list li {
+			height: 30px;
+			line-height: 30px;
+		}
+		#toolbar {
+			border-top: 1px solid #DEDEDE;
+			border-bottom: 2px solid #424242;
+			width: 100%;
+			height: 35px;
+			line-height: 35px;
+		}
+		#toolbar li {
+			float: left;
+			width: 100px;
+			text-align: left;
+		}
+		#toolbar .button{
+			border: 1px solid #CECECE;
+			height: 20px;
+			margin: 6px 5px;
+			width: 60px;
+			line-height: 24px;
+			padding-left: 10px;
+			border-radius: 5px;
+			text-align: center;
+			opacity: 0.3;
+		}
+		#list .title {
+			display: inline-block;
+			width: 280px;
+		}
+		.gray{
+			background: #efefef;
+		}
+
+		.blue {
+			background: #f7ffff;
+		}
+		.white {
+			background: #fff;
+		}
+	</style>
+<script>
+window.onload = function(){
+
+	var oUl = document.getElementById("list");					//大盒子
+	var aLi = oUl.getElementsByTagName("li");					//列表
+	var aInput = oUl.getElementsByTagName("input");				//列表里的input
+	var allCheched = document.getElementById("allCheched");		//全选按钮
+	
+	for( var i=0;i<aLi.length;i++ ){
+	
+		aLi[i].index = i;		//给li添加索引值
+		
+		//隔行变色
+		if( i%2 == 0 ){
+			aLi[i].className = "blue";
+		}else{
+			aLi[i].className = "white";
+		}
+		
+		//滑上
+		aLi[i].onmousemove = function(){
+			this.className = "gray";
+		};
+		
+		//滑离
+		aLi[i].onmouseout = function(){
+		
+			var oInput = this.getElementsByTagName("input")[0];		//判断它下面的input是不是选中状态。这里是关键。要判断一下。
+			
+			if( oInput.checked ){
+				//如果是选中状态，滑离时就让它保持滑上后添加的class。即啥也不用干。
+			}else{
+			
+				//如果不是选中状态，就要让它返回原来的背景。
+				if( this.index%2 == 0 ){
+					this.className = "blue";
+				}else{
+					this.className = "white";
+				}
+
+			}
+			
+		}
+		
+		//点击某一个input时
+		aInput[i].onclick = function(){
+			
+			var onOff = true;		//定义一个开关
+			
+			if( this.checked ){		//如果当前选的这个为真，哪就有多种情况，要看一下其它的是不是为真，只要有一个不为真。哪么全选哪个也不为真。
+			
+				for( var j=0;j<aInput.length;j++ ){
+					if( aInput[j].checked == false ){	//如果有一个为false，则开关为false;
+						onOff = false;
+					}
+				}
+				
+				if( onOff ){		//如果开关为真。则全选为真
+					allCheched.checked = true;
+				}
+				
+			}else{
+				allCheched.checked = false;		//只要当前选的这个不为真，哪么全选就不为真。
+			}
+		}
+		
+	}
+	
+	//点击全选。这里面要干两件事，一是input的状态，二是li的背景
+	allCheched.onclick = function(){
+	
+		for( var i=0;i<aInput.length;i++ ){
+		
+			aInput[i].checked = this.checked;		//当前这些个li下面的input的checked等于全选的这个的checked。全选只有两种状态，要么全选，要么全不选
+			
+			if( this.checked ){		//如果全选按钮是全选的
+				aLi[i].className = "gray";
+			}else{
+				if( i%2 == 0 ){
+					aLi[i].className = "blue";
+				}else{
+					aLi[i].className = "white";
+				}
+			}
+			
+		}
+		
+	}
+	
+
+}
+</script>
+</head>
+<body>
+	<div id="songs">
+		<ul id="list">
+			<li>
+				<input type="checkbox">
+				<span class="title">私奔</span>
+				<span class="singer">梁博</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">北京北京</span>
+				<span class="singer">梁博、黄勇</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">我爱你中国</span>
+				<span class="singer">梁博</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">花火</span>
+				<span class="singer">梁博</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">回来</span>
+				<span class="singer">梁博</span>
+			</li>
+			<li>
+				<input type="checkbox">
+				<span class="title">爱要有你才完美</span>
+				<span class="singer">梁博、那英</span>
+			</li>
+		</ul>
+		<ul id="toolbar">
+			<li>
+				<input id="allCheched" type="checkbox">全选
+			</li>
+			<li>
+				<div class="button" id="favorite">收藏</div>
+			</li>
+			<li>
+				<div class="button" id="add">添加</div>
+			</li>
+			<li>
+				<div class="button" id="delete">删除</div>
+			</li>
+		</ul>
+	</div>
+	
+	实现步骤：隔行变色————滑上————滑离————点击全选————点击某一个input时
+	
+</body>
+</html>

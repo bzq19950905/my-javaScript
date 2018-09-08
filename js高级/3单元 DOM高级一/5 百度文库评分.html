@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="http://bdklzw.com/templets/klzw/css/base.css" type="text/css" rel="stylesheet" />
+<style>
+
+#score span{display:inline-block;width:19px;height:20px;background:url(images/0.png) no-repeat;}
+#score span.active1{background:url(images/1.png) no-repeat;}
+#score span.active2{background:url(images/2.png) no-repeat;}
+
+</style>
+
+<script>
+window.onload = function(){
+	var oScore = document.getElementById("score");
+	var aLi = oScore.getElementsByTagName("li");
+	var arr = ["1分","2分","3分","4分","5分"]
+	for( var i=0;i<aLi.length;i++ ){
+		fnScore( aLi[i] );
+	};
+	
+	
+	function fnScore( obj ){
+		var aSpan = obj.getElementsByTagName("span");
+		var oStrong = obj.getElementsByTagName("strong")[0];
+		var iNow = -1;
+		
+		for( var i=0;i<aSpan.length;i++ ){
+			aSpan[i].index = i;
+			
+			//滑上
+			aSpan[i].onmouseover = function(){
+				fnClear();	//清除所有的class
+				for( var i=0;i<=this.index;i++ ){
+					if( this.index<=1 ){
+						aSpan[i].className = "active1";	
+					}else{
+						aSpan[i].className = "active2";	
+					}
+				}
+			}
+			
+			//滑离
+			aSpan[i].onmouseout = function(){
+				fnClear();	//清除所有的class
+				for( var i=0;i<=iNow;i++ ){
+					if( iNow<=1 ){
+						aSpan[i].className = "active1";	
+					}else{
+						aSpan[i].className = "active2";	
+					}
+				}
+			}
+			
+			//点击
+			aSpan[i].onclick = function(){
+				iNow = this.index;
+				oStrong.innerHTML = arr[iNow];
+			}
+			
+			
+		}
+		
+	
+		//删除class。
+		function fnClear(){
+			for( var i=0;i<aSpan.length;i++ ){
+				aSpan[i].className = "";
+			}
+		}
+	
+	}
+
+}
+
+
+
+
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<ul id="score" class="m50">
+	<li>
+    	<span></span><span></span><span></span><span></span><span></span><strong></strong>
+    </li>
+	<li>
+    	<span></span><span></span><span></span><span></span><span></span><strong></strong>
+    </li>
+	<li>
+    	<span></span><span></span><span></span><span></span><span></span><strong></strong>
+    </li>
+	<li>
+    	<span></span><span></span><span></span><span></span><span></span><strong></strong>
+    </li>
+	<li>
+    	<span></span><span></span><span></span><span></span><span></span><strong></strong>
+    </li>
+</ul>
+
+
+</body>
+</html>

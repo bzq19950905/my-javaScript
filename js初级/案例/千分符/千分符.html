@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1、var num = 123456543478; 为数字添加千分符，返回'$12,345,678.00'; -->
+    <script>
+        function getstr(num) {
+            var arr = num.toString().split('').reverse();
+            for (var i = 3; i < arr.length; i += 4) {
+                arr.splice(i, 0, ',');
+            }
+            return '$' + arr.reverse().join('') + '.00';
+        }
+        var num = 1234567;
+        console.log(getstr(num));
+    </script>
+</body>
+
+</html>

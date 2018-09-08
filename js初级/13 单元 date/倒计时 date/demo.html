@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<body>
+	<div id="box">
+		<input type="text" id="year">年<input type="text" id="month">月<input type="text" id="day">日
+		<span id="s"></span>
+		<button id="btn">开始</button>
+	</div>
+	<script>
+		var year = document.getElementById("year")
+		,	month = document.getElementById("month")
+		,	day = document.getElementById("day")
+		,	s = document.getElementById("s")
+		,	btn = document.getElementById("btn");
+
+
+		btn.onclick = function(){
+			window.yearVal = year.value
+			window.monthVal = month.value
+			window.dayVal = day.value;
+
+			if(yearVal == "" || monthVal == "" || dayVal == "" || isNaN(yearVal) || isNaN(monthVal) || isNaN(dayVal)){
+				alert("请填写完整");
+				return false;
+			}
+			time();
+
+			setInterval(function(){
+				time();
+			},1000);
+		}
+
+		function time(){
+			var dateNow = new Date();
+			var dateExam = new Date(yearVal,monthVal - 1,dayVal);
+			if(dateExam <= dateNow){
+				alert("时间已过");
+				return false;
+			}
+			var range = dateExam - dateNow;
+			var dayTimeStamp = 24*60*60*1000
+			,	hoursTimeStamp = 60*60*1000
+			,	minutesTimeStamp = 60*1000
+			,	secondsTimeStamp = 1000;
+
+			var days = Math.floor(range/dayTimeStamp)
+			,	hours = Math.floor(range%dayTimeStamp/hoursTimeStamp)
+			,	minutes = Math.floor(range%hoursTimeStamp/minutesTimeStamp)
+			,	seconds = Math.floor(range%minutesTimeStamp/secondsTimeStamp);
+			var str = "距离考试时间：" + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
+			s.innerHTML = str; 
+		}
+	</script>
+</body>
+</html>

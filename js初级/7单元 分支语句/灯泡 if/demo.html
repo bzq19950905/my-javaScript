@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>灯泡开关</title>
+</head>
+<body>
+	<div id="box">
+		<img src="off.png" alt="" id="light">
+	</div>
+	<button id="btn">开</button>
+
+	<script>
+	/*	var light = document.getElementById("light");
+		var btn = document.getElementById("btn");
+		btn.onclick = function(){
+			var btnVal=btn.innerHTML;
+			if(btnVal=="开"){
+				light.src="on.png";
+				btn.innerHTML = "关";
+			}else{
+				light.src="off.png";
+				btn.innerHTML = "开";
+			}
+		}
+		console.log(light);*/
+	/*var light =document.getElementById("light");
+	var btn =document.getElementById("btn");
+	btn.onclick =function(){
+		var val =btn.innerHTML;
+		if(val =="开"){
+			light.src="on.png";
+			btn.innerHTML="关";
+		}else{
+			light.src="off.png";
+			btn.innerHTML="开";
+		}
+	}*/
+	var light =document.getElementById("light")
+	,	btn   =document.getElementById("btn");
+	btn.onclick =function(){
+		var val =btn.innerHTML;
+		if(val =="开"){
+			light.src="on.png";
+			btn.innerHTML="关";
+		}else{
+			light.src="off.png";
+			btn.innerHTML="开";
+		}
+	}
+	</script>
+
+
+</body>
+</html>

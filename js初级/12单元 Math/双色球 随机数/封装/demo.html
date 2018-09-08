@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.s{
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: inline-block;
+			background: red;
+			color: white;
+			font-size: 24px;
+			text-align: center;
+			line-height: 40px;
+		}
+
+		.s:nth-child(7){
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<button id="start">开始</button>
+	<button id="stop" disabled="true">停止</button>
+	<script>
+		// 封装一个排序函数:
+		/**
+		 *
+		 * @param  {[array]} arr  [数组]
+		 * @param  {[boolean]} flag [升降序：true==》升序  false ===》 降序]
+		 * @return {[array]}      [排序后的数组]
+		 *
+		 */
+		function order(arr,flag){
+			var condition = null;
+			for(var i=0;i<arr.length;i++){
+				for(var j=i+1;j<arr.length;j++){
+					if(flag === true){
+						condition = arr[i] > arr[j];
+					}else{
+						condition = arr[i] < arr[j];
+					}
+					if(condition){
+						var temp = arr[i];
+						arr[i] = arr[j];
+						arr[j] = temp;
+					}
+				}
+			}
+			return arr;
+		}
+
+
+		// 封装一个随机取数的函数：
+
+		/**
+		 * [rand description] :封装一个随机取不重复数的函数
+		 * @param  {[number]} min [范围最小值]
+		 * @param  {[number]} max [范围最大值]
+		 * @param  {[number]} n   [随机数的个数]
+		 * @return {[array]}     [随机数的集合]
+		 */
+		function rand(min,max,n){
+			var tempArr = [];
+			while(tempArr.length<n){
+				var rand = Math.floor(Math.random()*(max - min + 1)) + min;
+				if(tempArr.indexOf(rand) == -1) tempArr.push(rand);
+			}
+			return tempArr;
+		}
+
+		var sps = document.getElementsByTagName("span");
+		var start = document.getElementById("start");
+		var stop = document.getElementById("stop");
+
+		/**
+		 * [change description]   给span标签添加数字
+		 */
+		function change(){
+			var redBalls = order(rand(1,33,6),true);
+			var blueBall = rand(1,16,1);
+			var balls = redBalls.concat(blueBall);
+			for(var i=0;i<sps.length;i++){
+				sps[i].innerHTML = balls[i];
+			}
+		}
+		change();
+		function change(){
+			var redBalls=order(rand(1,33,6),true);
+			var blueBall=rand(1,16,1);
+			var balls=redBalls.concat(blueBall);
+			for(var i=0;i<sps.length;i++){
+				sps[i].innerHTML=balls[i];
+			}
+		}
+		change();
+
+		var id = null;  // 定时器
+		start.onclick = function(){
+			this.disabled = true;
+			stop.disabled = false;
+			id = setInterval(function(){
+				change();
+			},100);
+		}
+
+
+		stop.onclick = function(){
+			start.disabled = false;
+			this.disabled = true;
+			clearInterval(id);
+		}
+
+
+
+
+
+
+
+
+
+
+
+		// Array.prototype.order = function(flag){
+		// 	var condition = null;
+		// 	for(var i=0;i<this.length;i++){
+		// 		for(var j=i+1;j<this.length;j++){
+		// 			if(flag === true){
+		// 				condition = this[i] > this[j];
+		// 			}else{
+		// 				condition = this[i] < this[j];
+		// 			}
+		// 			if(condition){
+		// 				var temp = this[i];
+		// 				this[i] = this[j];
+		// 				this[j] = temp;
+		// 			}
+		// 		}
+		// 	}
+		// 	return this;
+		// }
+
+		// console.log([1,4,2,7,6,5].order(false));
+
+	</script>
+</body>
+</html>

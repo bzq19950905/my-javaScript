@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="aj.js"></script>
+		<script type="text/javascript">
+			// 参数为事件对象，返回120或-120，正为向上，负为向下
+			function getWheelDelta(ev) {
+				if(ev.wheelDelta) {
+					// ie/chrome
+					return ev.wheelDelta;
+				} else {
+					// firefox
+					return -ev.detail * 40;
+				}
+			}
+
+			function handleMouseWheel(ev) {
+				var ev = ev || event;
+				var delta = getWheelDelta(ev);
+				console.log(delta);
+			}
+
+			window.onload = function() {
+				// ie/chrome
+				bind(document, 'mousewheel', handleMouseWheel);
+				// firefox
+				bind(document, 'DOMMouseScroll', handleMouseWheel);
+			}
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function sum(a, b) {
+				console.log(this === window);// ?
+				this.myNumber = 20;
+				return a + b;
+			}
+			
+			sum(15, 16);// ?
+			window.myNumber; // ?
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

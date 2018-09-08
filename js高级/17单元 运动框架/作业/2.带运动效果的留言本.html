@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="http://bdklzw.com/templets/klzw/css/base.css" type="text/css" rel="stylesheet" />
+<style>
+#ul1{position:absolute;left:500px;top:8px;width:700px;height:500px;border:1px solid #000;padding:10px;overflow:auto;background:#fff;}
+#ul1 li{line-height:28px;border-bottom:1px dotted #000;overflow:hidden;border-collapse:collapse;word-wrap:break-word;word-break:keep-all;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload = function(){
+	var oContent = document.getElementById("content");
+	var oBtn = document.getElementById("btn");
+	var oUl = document.getElementById("ul1");
+	
+	oBtn.onclick = function(){
+		var oLi = document.createElement("li");		//创建元素
+		oLi.innerHTML = oContent.value;				//给元素内容
+		if( oUl.children[0] ){						//添加进ul
+			oUl.insertBefore(oLi,oUl.children[0])
+		}else{
+			oUl.appendChild(oLi);
+		}
+		
+		oContent.value = "";						//把输入框置空
+		
+		//var iH = parseInt( getStyle(oLi, "height") );	//获取元素的高，实际高，这里要在样式中设置高。否则在IE下有问题，是getStyle(oLi, "height")函数的问题。
+		var iH = oLi.clientHeight;					//这里获取的是元素加padding的高，这里面没有padding，所以可以使用此种方法。上面一种方法没法做到兼容IE
+		oLi.style.height = "0px";					//把元素的高置为0，要配合css中的overflow: hidden;使用
+		oLi.style.opacity = "0";					//把透明度置为0
+		oLi.style.filter = "alpha(opacity=0)";
+		
+		//运动显示元素。
+		startMove(oLi, {
+			height : iH,		//这里的高是变量，在IE下运行有问题，如果改成具体的数字，就OK了，原因查明，是css中没有给元素设置高。
+			opacity : 100
+		})
+		
+		
+	}
+}
+</script>
+</head>
+
+<body>
+
+	<textarea id="content" rows="10" cols="50"></textarea>
+    <input type="button" value="留言" id="btn" />
+    <ul id="ul1"></ul>
+
+
+    <p>这里有一个两难的问题，不给li设置高度的话，不能兼容IE，如果设置高的话，又不知道具体设置多少。这真是个问题。</p>
+
+</body>
+</html>

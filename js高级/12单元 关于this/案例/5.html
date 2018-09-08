@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			
+			var a = 20;
+			var obj = {
+				a: 10,
+				c: this.a + 20,
+				fn: function() {
+					return this.a;
+				}
+			}
+
+			console.log(obj.c); // ?
+			console.log(obj.fn()); // ?
+
+
+
+
+
+
+/*
+对象obj中的c属性使用this.a + 20来计算，而他的调用者obj.c并非是一个函数。因此他不适用于上面的规则，我们要对这种方式单独下一个结论。
+
+在非严格模式中，无论obj在哪里声明（全局或函数环境中），无论obj.c在什么地方调用，这里的this都指向全局对象window
+*/
+
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

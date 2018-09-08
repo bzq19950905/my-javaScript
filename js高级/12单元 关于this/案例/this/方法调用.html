@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			// 当一个表达式以属性访问的形式执行时，执行的是方法调用
+			// 和函数调用最主要的区别在于方法调用要求函数以属性访问的形式调用
+			// 当调用一个对象上的方法时，this变成这个对象自身。
+			
+			var myObject = {
+				helloFunction: function() {
+					return 'Hello World!';
+				}
+			};
+			var message = myObject.helloFunction(); // ?
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

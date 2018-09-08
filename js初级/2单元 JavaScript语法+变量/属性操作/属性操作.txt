@@ -1,0 +1,159 @@
+一、
+HTML元素 的属性操作：读、写
+		属性名：
+		属性值：
+		
+		读操作：获取、找到
+		元素.属性名
+		
+		写操作：“添加”、替换、修改
+		元素.属性名 = 新的值
+
+div p a 
+input select textarea
+img
+
+
+注意：style
+背景不能判断
+color red #f00 
+相对路径
+
+
+
+		
+<input id="text1" type="text" />
+<select id="select1">
+	<option value="北京">北京</option>
+	<option value="上海">上海</option>
+	<option value="杭州">杭州</option>
+</select>
+<input id="btn1" type="button" value="按钮" />	
+
+	
+<img id="img1" src="img/1.jpg" width="200" />
+<p></p>
+
+二、
+<input id="text1" type="text" />
+<input id="btn1" type="button" value="按钮" />
+<p id="p1">这是一些文字</p>
+
+
+三、案例
+文字放大缩小
+<input id="btn1" type="button" value="-" />
+<input id="btn2" type="button" value="+" />
+<p id="p1" style="font-size:16px;">10月28日晚，中央纪委监察部官网发布消息，贵州省委常委、遵义市委书记廖少华因涉嫌严重违纪违法接受组织调查。3天后中组部宣布对其免职。廖成为十八大后中纪委一连串"打虎"行动中第十一位落马的副省部级以上高官。</p>
+
+
+四、
+什么时间修改class
+
+五、相对路径的问题
+<img id="img1" src="img/1.jpg" width="400" />
+
+
+
+六、浮动的问题
+oDiv.style.float = 'right';
+oDiv.style.styleFloat = 'right';		// IE
+oDiv.style.cssFloat = 'left';			// 非IE
+
+
+七、关于表单元素的属性值修改问题
+oInp.onclick = function (){
+	
+	oInp.type = 'checkbox';
+	
+	// 咱们有仨位“祖宗”
+	/*
+		IE6 IE7 IE8
+	*/
+};
+
+
+八、小实例，见效果图
+<div id="div1"></div>
+<strong id="strong1">张三：</strong>
+<input id="text1" type="text" />
+<input id="btn1" type="button" value="提交" />
+
+九、关于判断
+if(){}					在做这事之前，有个条件
+if(){}else{}		2件事，根据条件，选一个来做
+if(){}else if(){}else if(){}else if(){}
+if(){}else if(){}else if(){}else if(){}else{}
+
+用小实例改改，如果为空时弹出提示
+
+
+十、关于判断的小实例
+用前面改文字的来讲，控制字号大小
+
+
+
+十一、
+通关口令，关于咱们班的接头暗号
+<input id="text1" type="text" />
+<input id="btn1" type="button" value="口令确认" />
+<!--
+	CSS
+  JS
+  HTML5
+-->
+
+oBtn.onclick = function (){
+		if( oText.value == '' ){
+			alert('请输入');
+		} else if ( oText.value == 'CSS' ){
+			alert('ok，您输入的是：CSS，恭喜通过！');
+		} else if ( oText.value == 'JS' ){
+			alert('ok，您输入的是：CSS，恭喜通过！');
+		} else if ( oText.value == 'HTML5' ){
+			alert('ok，您输入的是：CSS，恭喜通过！');
+		} else {
+			alert('我不喜欢你写的内容，88~');
+		}
+	};
+
+十二、图片切换
+用开关图灯来演示
+
+
+
+十三、数组，我们每一个申明一个变量很麻烦，所以会有数组，一个数据仓库
+
+var num = 1;
+var str = '这是一句话';
+
+// 用数组：
+var arr = [ 1, 2, 3, 'img/1.jpg', 'bbb' ];		// 放数据的仓库
+// alert( arr.length );		// 5
+// alert( arr[3] );
+// alert( arr[4] );
+// alert( arr[arr.length-1] );		// 最后一个
+
+arr.push('img/3.jpg');			// 往数组的最后一位添加"数据"
+
+
+十四、图片切换
+<img id="img1" src="img/1.jpg" width="400" height="400" />
+
+var oImg = document.getElementById('img1');
+	var arr = [ 'img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg' ];
+	var num = 0;
+	
+	oImg.onclick = function (){
+		// num = num + 2;
+		// num += 2;
+		num ++;
+		if(num == arr.length){
+			num = 0;
+		}
+		// alert( arr[num] );
+		oImg.src = arr[num];
+	};
+
+
+

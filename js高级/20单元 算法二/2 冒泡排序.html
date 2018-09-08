@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var a = [12,5,37,6,22,40];
+
+alert( bubbleSort(a) );
+
+function bubbleSort(arr){
+	for( var i=0;i<arr.length;i++ ){
+		for( var j=0;j<arr.length-i;j++ ){
+			toCon(j,j+1);
+		}
+	}
+	function toCon( prev,next ){
+		var tmp = "";
+		if( arr[prev] > arr[next] ){
+			tmp = arr[prev];
+			arr[prev] = arr[next];
+			arr[next] = tmp;
+		}
+	}
+	return arr;
+}
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

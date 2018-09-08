@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#ul1{margin:100px auto 0;width:700px;}
+#ul1 li{list-style:none;float:left;margin:0 10px 10px 0;border:1px solid #ccc;}
+#ul1 li img{width:300px;height:250px;display:block;}
+</style>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("ul1");
+	var aImg = oUl.getElementsByTagName("img");		//获取所有的img
+	
+	imgAuto();						//一开始就执行按需加载
+	window.onscroll = imgAuto;		//滚动时执行按需加载
+	
+	function imgAuto(){
+		for( var i=0;i<aImg.length;i++ ){
+			showImage( aImg[i] );
+		}
+	}
+	//按需加载函数
+	function showImage(obj){
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;		//滚动条的距离
+		//如果当前元素的isLoad为假，并且元素到顶部的值小于滚动条的距离+可视区的高，就改变元素的src属性，并且将isLoad置为真，下次就不再执行这块了。优化性能
+		if( !obj.isLoad && getPos(obj).top < scrollTop + document.documentElement.clientHeight ){
+			obj.src = obj.getAttribute("_src");
+			obj.isLoad = true;
+		}
+	}
+
+}
+
+
+//返回元素到浏览器左边和顶部的绝对值(不带单位)。用法：getPos(元素).left	返回元素到浏览器左边的绝对值。getPos(元素).top	返回元素到浏览器顶部的绝对值
+function getPos(obj) {
+	var pos = {left:0, top:0};
+	while (obj) {
+		pos.left += obj.offsetLeft;
+		pos.top += obj.offsetTop;
+		obj = obj.offsetParent;
+	};
+	return pos;
+};
+
+
+
+
+</script>
+</head>
+
+<body>
+
+<ul id="ul1">
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/1.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/2.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/3.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/4.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/5.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/6.jpg" src="img/white.JPG" /></li>
+	<li><img _src="img/7.jpg" src="img/white.JPG" /></li>
+</ul>
+
+</body>
+</html>

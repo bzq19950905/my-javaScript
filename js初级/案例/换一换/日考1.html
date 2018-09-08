@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #list {
+            width: 330px;
+            position: relative;
+            margin: 20px auto;
+        }
+        
+        #list li {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 0 10px 10px 0;
+            transition: 0.5s;
+        }
+        
+        #list img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        #list a {
+            display: block;
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            var oUl = document.getElementById('list');
+            var aLi = oUl.getElementsByTagName('li');
+            var oA = oUl.getElementsByTagName('a')[0];
+
+            // 浮动布局改成定位布局
+            var arr = [];
+            for (var i = 0; i < aLi.length; i++) {
+                arr.push([aLi[i].offsetLeft, aLi[i].offsetTop]);
+            }
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].style.position = 'absolute';
+                aLi[i].style.left = arr[i][0] + 'px';
+                aLi[i].style.top = arr[i][1] + 'px';
+            }
+
+            // 取得排除最后一个所有的li的位置
+            var newArr = arr.slice(0, -1);
+            oA.onclick = function() {
+                // 对数组进行随机排序
+                newArr.sort(function(a, b) {
+                    return 0.5 - Math.random();
+                });
+
+                // 排除最后一个，因为最后一个是a
+                for (var i = 0; i < aLi.length - 1; i++) {
+                    aLi[i].style.left = newArr[i][0] + 'px';
+                    aLi[i].style.top = newArr[i][1] + 'px';
+                }
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list">
+        <li><img src="img/1.jpg" alt=""></li>
+        <li><img src="img/2.jpg" alt=""></li>
+        <li><img src="img/3.jpg" alt=""></li>
+        <li><img src="img/4.jpg" alt=""></li>
+        <li><img src="img/5.jpg" alt=""></li>
+        <li><img src="img/6.jpg" alt=""></li>
+        <li><img src="img/7.jpg" alt=""></li>
+        <li><img src="img/8.jpg" alt=""></li>
+        <li><a href="javascript:;">换一换</a></li>
+    </ul>
+
+
+</body>
+
+</html>

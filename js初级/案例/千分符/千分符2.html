@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function formatMoney(num) {
+            num = num.toString(); // 转换为字符串
+            var n = num.length % 3; // 最前面有几个数值
+
+            var arr = [];
+            if (n) {
+                arr.push(num.substring(0, n));
+                num = num.substring(n);
+            }
+
+            for (var i = 0; i < num.length; i += 3) {
+                arr.push(num.substr(i, 3));
+            }
+            return '$' + arr.join(',') + '.00';
+        }
+
+        var revenue = 1234567;
+        console.log(formatMoney(revenue)); // $12,345,678.00
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

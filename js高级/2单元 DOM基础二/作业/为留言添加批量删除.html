@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+.active{background:#f00;}
+</style>
+<script>
+window.onload = function(){
+	var oText = document.getElementById("text1");
+	var oBtn = document.getElementById("btn");
+	var oBtn2 = document.getElementById("btn2");
+	
+	var oUl = document.getElementById("ul1");
+	var aLi = oUl.getElementsByTagName("li");
+	
+	oBtn.onclick = function(){
+		var tValue = oText.value;			//获取输入框的内容
+		if( tValue == "" ) return false;	//如果输入框内容为空，则返回
+		
+		var oLi = document.createElement("li");	//创建li元素
+		oLi.innerHTML = tValue;					//为li元素添加内容
+		
+		//新添加的元素在第一位，这里要判断一下，如果有第一个子元素，就添加到第一个子元素的前面，否则就用另一种方法添加
+		if( oUl.children[0] ){
+			oUl.insertBefore(oLi,oUl.children[0]);
+		}else{
+			oUl.appendChild(oLi);
+		}
+		
+		oText.value = "";			//清空输入框
+		
+		//如果超出了5第，就删除最先添加的
+		for( var i=5;i<aLi.length;i++ ){
+			oUl.removeChild(aLi[i]); 
+		}
+		
+		//点击留言项，添加class，为删除做准备
+		for( var i=0;i<aLi.length;i++ ){
+			aLi[i].onOff = true;
+			
+			aLi[i].onclick = function(){
+				if(this.onOff){
+					this.className = "active";
+				}else{
+					this.className = "";
+				}
+				this.onOff = !this.onOff;
+			}
+			
+		}
+		
+		
+		
+	}
+	
+	//点击删除
+	oBtn2.onclick = function(){
+		
+		var aActive = getElementsByClassName( oUl,"active" );
+		
+		//常规方法，不好使。但是在IE8及以前里面，如好使。原因参考：http://blog.sina.com.cn/s/blog_6819fa800100lkvq.html
+		/*for( var i=0;i<aActive.length;i++ ){
+			oUl.removeChild( aActive[i] );
+		}*/
+		
+		//方法一，逆方法，从最后面开始删除。全兼容
+		for( var i=aActive.length-1;i>=0;i-- ){
+			oUl.removeChild( aActive[i] );
+		}
+		
+		//方法二，从前面删除，每次只删除第一个。注意for循环方式。这里不用i++。是因为每循环一次，就删除一个了，所以aActive.length在减小一。此种方法不兼容IE8及以前。
+		/*for( var i=0;i<aActive.length;){
+			oUl.removeChild( aActive[0] );
+		}*/
+
+	}
+	
+	
+}
+
+
+//通过class获取元素。格式：getElementsByClassName( 搜索起点-祖先级,类名 );	//IE8以上通过新方法获取。IE8及以下用老方法获取。
+function getElementsByClassName( node,classname ){
+	if( node.getElementsByClassName ){
+		return node.getElementsByClassName( classname );
+	}else{
+		var arr = [];
+		var elems = node.getElementsByTagName( "*" );
+		for( var i=0;i<elems.length;i++ ){
+			var aClassName = elems[i].className.split(" ");
+			for( var j=0;j<aClassName.length;j++ ){
+				if( aClassName[j] == classname ){
+					arr.push( elems[i] );
+					break;
+				}
+			}
+		}
+		return arr;
+	}
+}
+
+
+
+//添加class
+function addClass(obj, sClass) { 
+    var aClass = obj.className.split(' ');
+    if (!obj.className) {
+        obj.className = sClass;
+        return;
+    }
+    for (var i = 0; i < aClass.length; i++) {
+        if (aClass[i] === sClass) return;
+    }
+    obj.className += ' ' + sClass;
+}
+
+
+
+</script>
+</head>
+
+<body>
+    2.为留言添加批量删除
+	可以点击选择单个留言，点击批量删除按钮，可以删除被选中的留言内容
+<hr />
+
+
+	<input type="text" id="text1" />
+    <input type="button" value="留言" id="btn" />
+    <input type="button" value="批量删除" id="btn2" />
+	<ul id="ul1"></ul>
+    
+    
+</body>
+</html>

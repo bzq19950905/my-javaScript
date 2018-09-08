@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+//assssjdssskssalsssdkjsssdss --> 出现次数最多的是s，共出现了17次。
+var str = "assssjdssskssalsssdkjsssdss";
+
+alert( test(str) );
+
+function test(str){
+	var obj = {};
+	var num = 0;
+	var value = "";
+	
+	for( var i=0;i<str.length;i++ ){
+		if( !obj[ str[i] ] ){		//如果obj下面的属性没有str[i]这个属性，则给它创建一个数组。下面再接着给这个数组添加进str[i]。如果有了则直接添加
+			obj[ str[i] ] = [];
+		}
+		obj[ str[i] ].push( str[i] );
+	}	
+	
+	//console.log(obj)
+	for( var attr in obj ){
+		if( num < obj[attr].length ){
+			num = obj[attr].length;
+			value = obj[attr][0];
+		}
+	}
+	
+	return "出现次数最多的是" + value + "，共出现了" + num + "次。"
+	
+}
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

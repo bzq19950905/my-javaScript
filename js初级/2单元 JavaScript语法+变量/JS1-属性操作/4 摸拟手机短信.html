@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link href="http://bdklzw.com/templets/klzw/css/base.css" type="text/css" rel="stylesheet" />
+<style>
+#box{height:400px;border:5px solid #2b2b2b;margin-bottom:10px;padding:10px;overflow-y:auto;}
+.imgs{width:40px;height:40px;}
+#text1{height:18px;width:185px;padding:10px;}
+</style>
+<script>
+window.onload = function(){
+	var oBox = document.getElementById("box");
+	var oImg = document.getElementById("img1");
+	var oText = document.getElementById("text1");
+	var oBtn = document.getElementById("btn");
+	
+	var onOff = true;
+	
+	oImg.onclick = function(){
+		if( onOff ){
+			oImg.src = "images/b.gif";
+			onOff = false;
+		}else{
+			oImg.src = "images/a.gif";
+			onOff = true;
+		}
+	}
+	
+	oBtn.onclick = function(){
+	
+		if( oText.value != "" ){
+			
+			
+			if( onOff ){
+				oBox.innerHTML = "<p><img src='images/a.gif' class='imgs vm'>" + oText.value +"</p>"+ oBox.innerHTML;
+			}else{
+				oBox.innerHTML = "<p><img src='images/b.gif' class='imgs vm'>" + oText.value +"</p>"+ oBox.innerHTML;
+			}
+		
+			oText.value = "";
+		}
+	
+	}
+	
+	
+	
+	
+	
+	
+}
+</script>
+
+
+</head>
+
+<body>
+
+<div style="width:300px;height:500px;border:10px solid #ccc;margin:20px auto 0;background:#fff;">
+
+	<div id="box"></div>
+	<img src="images/a.gif" id="img1" class="vm imgs" /><input type="text" id="text1" /><input type="button" id="btn" value="发送" />
+	
+</div>
+
+</body>
+</html>

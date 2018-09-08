@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.box{
+		padding:100px;
+
+	}
+	.left,.tip{
+		float:left;
+	}
+	.left{
+		margin-right: 20px;
+	}
+	.tip{
+		display:none;
+		font-size:16px;
+	}
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="left">
+		<input type="text" id="pho" placeholder="请输入手机号码">
+	</div>
+	<div class="tip" id="tip">
+		请输入有效的手机号码
+	</div>
+	<script>
+	window.onload=function(){
+		//获取文本框和提示
+		var pho=document.getElementById("pho")
+		,	tip=document.getElementById("tip");
+		//给文本框绑定激活事件
+		pho.onfocus=function(){
+			tip.style.display="block";
+		}
+		pho.onblur=function(){
+			var phoVal=this.value;
+			if(phoVal.length==11&& isNaN(phoVal)==false){
+				tip.innerHTML="您输入正确";
+			}else{
+				tip.innerHTML="您输入有误";
+			}
+		}
+	}
+	</script>
+</div>
+</body>
+</html>

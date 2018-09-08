@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖</title>
+</head>
+<body>
+	您抽中了:<span id="prize"  style="width: 100px;display: inline-block;"></span>  <button id="btn">开始</button>
+	<script>
+		var prizeData = ["iPhone7","洗衣机","冰箱","谢谢参与","八维"];
+		prize.innerHTML = prizeData[Math.floor(Math.random()*prizeData.length)];
+		var count = 0;
+
+		btn.onclick = function(){
+			count++;
+			if(count > 3){
+				alert("今天的抽奖次数已用完");
+				return false;
+			}
+
+			btn.innerHTML = "等待...";
+			btn.disabled = true;
+
+			var id = setInterval(function(){
+				prize.innerHTML = prizeData[Math.floor(Math.random()*prizeData.length)];
+			},100);
+
+			setTimeout(function(){
+				btn.innerHTML = "重新抽奖";
+				btn.disabled = false;
+				clearInterval(id);
+			},3000);
+		}
+
+
+	</script>
+</body>
+</html>

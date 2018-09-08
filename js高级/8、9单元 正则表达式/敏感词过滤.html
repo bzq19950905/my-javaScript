@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			// 人民日报：美国减税就是在挑起“税务战”
+			// **日报：美国**就是在挑起“***”
+			// 一个汉字对应一个*号
+			window.onload = function() {
+				var aT = document.getElementsByTagName('textarea');
+				var oInput = document.getElementById('input1');
+				var re = /人民|减税|税务战/g;
+				oInput.onclick = function() {
+					aT[1].value = aT[0].value.replace(re, function(str) {
+						var result = '';
+						for(var i = 0; i < str.length; i++) {
+							result += '*';
+						}
+						return result;
+					});
+				};
+			};
+		</script>
+	</head>
+
+	<body>
+		替换前
+		<br />
+		<textarea></textarea>
+		<br /> 替换后
+		<br />
+		<textarea></textarea>
+		<br />
+		<input type="button" value="确定" id="input1" />
+	</body>
+
+</html>

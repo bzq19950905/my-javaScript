@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+//assssjdssskssalsssdkjsssdss --> 出现次数最多的是s，共出现了17次。
+var str = "assssjdssskssalsssdkjsssdss";
+
+alert( test(str) );
+
+function test(str){
+	str = str.split("").sort().join("");
+	
+	var re = /(\w)\1+/g;
+	var num = 0;
+	var value = "";
+	
+	str.replace(re,function($0,$1){
+		if( num < $0.length ){
+			num = $0.length;
+			value = $1;
+		}
+	});
+	return "出现次数最多的是"+ value +"，共出现了"+ num +"次。";
+	
+}
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

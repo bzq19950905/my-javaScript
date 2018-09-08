@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;margin: 0;
+			}
+			div {
+				border-radius: 50%;
+				position: absolute;
+			}
+		</style>
+		<script src="base.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script>
+
+			document.onclick = function(ev) {
+				var ev = ev || window.event;
+				var X = ev.clientX;
+				var Y = ev.clientY;
+				var mx = document.documentElement.clientWidth;
+				var my = document.documentElement.clientHeight;
+				//var count = sj(50, 7);
+				for(var i = 0; i < 6; i++) {
+					var newdiv = document.createElement("div");
+					var dm = sj(50, 100);
+					newdiv.style.width = dm + "px";
+					newdiv.style.height = dm + "px";
+					newdiv.style.background = "rgba(" + sj(255, 0) + "," + sj(255, 0) + "," + sj(255, 0) + "," + Math.random() + ")";
+					newdiv.style.top = Y + "px";
+					newdiv.style.left = X + "px";
+					document.body.appendChild(newdiv);
+				}
+				var div = document.getElementsByTagName("div");
+				for(var j = 0; j < div.length; j++) {
+					startMove(div[j], { "left": sj(mx - 100, 0),"top": sj(my-100, 0) });
+				}
+			}
+
+		</script>
+	</body>
+
+</html>

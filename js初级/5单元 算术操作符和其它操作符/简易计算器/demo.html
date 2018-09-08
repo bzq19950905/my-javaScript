@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" placeholder="请填写第一个数字" id="txt1">
+	<input type="radio" name="rd" id="rd1" value="" checked>+
+	<input type="radio" name="rd" id="rd2" value="">-
+	<input type="radio" name="rd" id="rd3" value="">*
+	<input type="radio" name="rd" id="rd4" value="">/
+	<input type="radio" name="rd" id="rd5" value="">%
+	<input type="text" placeholder="请填写第二个数字" id="txt2">
+	<input type="button" value="计算" id="btn">
+	<input type="button" value="重置" id="reset">
+	<input type="text" placeholder="结果" id="txt3" readonly>
+
+	<script>
+		// 获取元素节点对象
+		var txt1 = document.getElementById("txt1")
+		,	txt2 = document.getElementById("txt2")
+		,	txt3 = document.getElementById("txt3")
+		,	rd1 = document.getElementById("rd1")
+		,	rd2 = document.getElementById("rd2")
+		,	rd3 = document.getElementById("rd3")
+		,	rd4 = document.getElementById("rd4")
+		,	rd5 = document.getElementById("rd5")
+		,	btn = document.getElementById("btn")
+		,	reset = document.getElementById("reset");
+
+
+		// 给按钮添加点击事件：return能中断整个函数体
+		btn.onclick = function(){
+			var val1 = txt1.value
+			,	val2 = txt2.value;
+			if((isNaN(val1) || val1 == "") && (isNaN(val2) || val2 == "")){
+				alert("请填写正确的数字");
+				return false;
+			}
+			var val3 = null;
+			var v1 = Number(val1)
+			,	v2 = Number(val2);
+			if(rd1.checked == true){
+				val3 = v1 + v2;
+			}else if(rd2.checked == true){
+				val3 = v1 - v2;
+			}else if(rd3.checked == true){
+				val3 = v1 * v2;
+			}else if(rd4.checked == true){
+				val3 = (v1 / v2).toFixed(2);
+			}else{
+				val3 = v1 % v2;
+			}
+
+			txt3.value = val3;
+		}
+
+		reset.onclick = function(){
+			txt1.value = "";
+			txt2.value = "";
+			txt3.value = "";
+		}
+	</script>
+</body>
+</html>

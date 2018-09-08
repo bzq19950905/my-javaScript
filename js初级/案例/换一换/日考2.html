@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #list {
+            width: 330px;
+            margin: 20px auto;
+        }
+        
+        #list li {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 0 10px 10px 0;
+        }
+        
+        #list img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        #list a {
+            display: block;
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        window.onload = function() {
+            var oUl = document.getElementById('list');
+            var aImg = oUl.getElementsByTagName('img');
+            var oA = oUl.getElementsByTagName('a')[0];
+
+            var arr = [];
+            for (var i = 0; i < aImg.length; i++) {
+                arr.push(aImg[i].getAttribute('src'));
+            }
+
+            oA.onclick = function() {
+                var arr2 = [].concat(arr); // 克隆原数组
+
+                var newArr = []; // 存储随机打乱顺序的数组
+                for (var i = 0; i < 8; i++) {
+                    var n = getRandom(0, arr2.length - 1);
+                    newArr.push(arr2.splice(n, 1)[0]);
+                }
+
+                for (var i = 0; i < aImg.length; i++) {
+                    aImg[i].src = newArr[i];
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list">
+        <li><img src="img/1.jpg" alt=""></li>
+        <li><img src="img/2.jpg" alt=""></li>
+        <li><img src="img/3.jpg" alt=""></li>
+        <li><img src="img/4.jpg" alt=""></li>
+        <li><img src="img/5.jpg" alt=""></li>
+        <li><img src="img/6.jpg" alt=""></li>
+        <li><img src="img/7.jpg" alt=""></li>
+        <li><img src="img/8.jpg" alt=""></li>
+        <li><a href="javascript:;">换一换</a></li>
+    </ul>
+</body>
+
+</html>

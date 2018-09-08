@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<script>
+
+	var ccc = {
+		"a":"10"
+	};
+	
+	var ddd = copy(ccc);
+	
+	
+	ddd.a = 20;
+	
+	alert(ccc.a)
+	alert(ddd.a)
+	
+	
+	
+	//克隆对象。这种是一种浅拷贝，即只拷贝了一层
+	function copy(obj){
+		var newObj = {};
+		for( var attr in obj ){
+			newObj[attr] = obj[attr];
+		}
+		return newObj;
+	}
+	
+	
+	
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

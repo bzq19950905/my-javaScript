@@ -1,0 +1,129 @@
+1.&lt;h1&gt;&lt;span&gt;文字&lt;span&gt;标题&lt;/h1&gt;结构中,把h1标签不包含内容 克隆一份的语法正确的是：：
+
+  正确答案：B
+
+A  document.getElementsByTagName('h1')[0].cloneNode
+
+B  document.getElementsByTagName('h1')[0].cloneNode(false)
+
+C  document.getElementsByTagName('h1')[0].cloneNode(true)
+
+D  document.getElementsByTagName('h1')[0].cloneNode()
+
+
+
+2.var a=[1,2,3],b=[1,2,3];console.log(a==b)的打印结果是（   ）：
+						 
+正确答案： 【错题  不选】
+A?1
+B?null
+C?NaN
+D?0
+
+
+3、var x = 0;
+function test() {
+
+    alert(this.x);
+
+}
+var 0 = {};
+o.x = 1;
+o.m = test;
+o.m.apply(o);
+以下结果不正确的是：
+正确答案：B、C、D
+A  是1
+B  是2
+C  undefined
+D  是0
+
+
+
+4.在兼容DOM浏览器和ie浏览器中，以下哪个方法可以返回事件的目标（）：
+? 正确答案：B 
+A ? preventDefault()
+B ?getTarget()
+C ?getEvent()
+D ?stopPropagation()
+
+
+
+5、<p> 
+      <a href="#" class='bg'>信息1</a> 
+      <a href="#" class='bg'>信息2</a> 
+      <a href="#" class='bg'>信息3</a>
+ </p>
+ var oA = document.getElementsByClassName('bg') 在IE9的返回值：： 
+ 
+    正确答案： C 
+    
+    A 所有样式是bg的标签
+    
+    B 报错
+    
+    C 所有样式有bg的a标签 
+    
+    D 所有a标签
+    
+    
+    
+ 6、<p> 
+      <a href="#" class='bg'>信息1</a> 
+      <a href="#" class='bg'>信息2</a> 
+      <a href="#" class='bg'>信息3</a>
+ </p>
+var oA=document.getElementsByClassName('bg')在FF的返回值：：
+
+  正确答案：A
+
+A  所有样式有bg的a标签
+
+B  报错
+
+C  所有样式是bg的标签
+
+D  所有a标签
+
+
+
+7、offsetRight指的是：：
+						 
+
+正确答案：C ; D
+
+A 以上都不对
+
+B 无论何时，都是相对于浏览器的距离
+
+C 在没有定位的情况下，元素右边框距离浏览器窗口的距离
+
+D 在父级元素有定位的情况下，是元素右边框距离有定位的父级元素的距离
+
+
+
+8、以下语句中存在语法错误的有：
+						 
+
+正确答案：A ; B
+
+A var user;age = 8;
+
+B var level = 1;switch(level){ case = 1:console.log("钻石会员");break;case = 2:console.log("金牌会员");break;}
+
+C var user = "marry",msg; if(user) msg = "hello qin";
+
+D var sock = 88,msg; msg = sock>=60 ? "及格" : "不及格";
+
+
+9、用于验证正则表达式的方法有（    ）：
+						 
+正确答案：A ; C ; D
+
+A match
+
+B replace
+
+C exec
+
+D test

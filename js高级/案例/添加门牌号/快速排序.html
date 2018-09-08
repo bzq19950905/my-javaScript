@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var arr = [12, 5, 37, 6, 22, 40, 50, -5, -6, 99, 100, 250];
+			var newArr = test(arr);
+			console.log(newArr);
+			
+			function test(arr){
+				
+				if(arr.length <= 1){
+					return arr;
+				}
+				
+				var index = Math.floor(arr.length / 2);
+				var num = arr.splice(index, 1);
+				var arrLeft = [];
+				var arrRight = [];
+				for(var i=0; i<arr.length; i++){
+					if(arr[i] < num){
+						arrLeft.push(arr[i]);
+					}else{
+						arrRight.push(arr[i]);
+					}
+				}
+				
+				return test(arrLeft).concat(num, test(arrRight));
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

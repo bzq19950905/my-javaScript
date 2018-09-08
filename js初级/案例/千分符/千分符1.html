@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function test(str, n) {
+            var arr = str.split('');
+            for (var i = arr.length - (1 + n); i >= 0; i -= n) {
+                arr[i] = arr[i] + ',';
+            }
+            return '$' + arr.join('') + '.00';
+        }
+        var str = '1234567';
+        console.log(test(str, 3));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

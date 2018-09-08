@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			// 找出下列正数组的最大差值比，如：输入[10,5,11,7,8,9]，返回6，因为最大值是11，最小值是5，最大差值比就是6。
+			function ab(a, b){
+				return a - b;
+			}
+			function test(arr){
+				var newArr = [].concat(arr);
+				newArr.sort(ab);
+				return newArr[newArr.length - 1] - newArr[0];
+			}
+			
+			var arr = [10,5,11,7,8,9];
+			console.log(test(arr));
+			
+			// 另
+			console.log(Math.max(4, 6, 3)); // 6
+			console.log(Math.min(4, 6, 3)); // 3
+			console.log(Math.max.apply(Math, arr)); // 11
+			console.log(Math.min.apply(Math, arr)); // 5
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

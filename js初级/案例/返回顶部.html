@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #btn {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oBtn = document.getElementById('btn');
+            var timer = null;
+
+            // 滚动条向下滚动时，滚动距离超过200，则返回顶部显示
+            document.onscroll = function() {
+                var scrollT = document.documentElement.scrollTop;
+                if (scrollT > 200) {
+                    oBtn.style.display = 'block';
+                } else {
+                    oBtn.style.display = 'none';
+                }
+            }
+
+            // 点击返回顶部按钮
+            oBtn.onclick = function() {
+                // 滚动的高度
+                var T = document.documentElement.scrollTop || document.body.scrollTop;
+
+                // 开启定时器
+                timer = setInterval(function() {
+                    T -= 50;
+                    if (T <= 0) {
+                        clearInterval(timer);
+                    }
+                    document.documentElement.scrollTop = T;
+                    document.body.scrollTop = T;
+                }, 10);
+            }
+
+        }
+    </script>
+</head>
+
+<body style="height: 3000px;">
+    <button id="btn">返回顶部</button>
+</body>
+
+</html>

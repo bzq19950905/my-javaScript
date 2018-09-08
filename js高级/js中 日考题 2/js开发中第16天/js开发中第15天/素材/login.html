@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<script>
+    //encodeURL  编码
+    //decodeURL  解码
+	/*var url=decodeURI(location.search);
+	console.log(url)*/
+	function getQueryString(name){
+			//匹配析地址栏中的参数格式以^或&开头以$或&结尾中间以name=字符连接
+			//input=张三&pwd=zhangsan123
+			var reg=new RegExp("(//?|^|&)"+name+"=([^&]*)$");
+			//var reg=new RegExp("(\/?|^&)"+name+"=([^&]+)$")
+			//获取地址栏中的所有参数并与正则表达式匹配
+			var arr=location.search.substr(1).match(reg);
+			console.log(arr)
+			if(arr){ //如果匹配返回参数的值
+				return decodeURI(arr[2]);
+			}
+			return null; //不匹配返回空值
+
+	}
+	//var url="abc.html?id=123&url=http";
+	console.log(getQueryString("user"));
+</script>
+</body>
+</html>

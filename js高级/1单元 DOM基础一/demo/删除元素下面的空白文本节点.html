@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			// 删除元素下面的空白文本节点
+			function delspace(ele) {
+				var child = ele.childNodes;
+				for(var i = 0; i < child.length; i++) {
+					if(child[i].nodeType === 3 && /^\s+$/.test(child[i].nodeValue)) {
+						child[i].parentNode.removeChild(child[i]);
+					}
+				}
+			}
+			window.onload = function() {
+				var oUl = document.getElementById('ul1');
+				delspace(oUl);
+				console.log(oUl.childNodes.length)
+			}
+		</script>
+	</head>
+
+	<body>
+		<ul id="ul1">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+
+</html>

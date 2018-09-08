@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1{width:100px;height:100px;background:#f00;position:absolute;right:0;top:0;filter:alpha(opacity=0);opacity:0;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload = function(){
+	var oDiv = document.getElementById("div1");
+	var iTimer = null;
+	var b = 0;
+	
+	setTop();
+	window.onscroll = function(){
+		if( b != 1 ){				//如果这里的b=1，说明当前这个window.onscroll事件是定时器触发的。
+			clearInterval(iTimer);	//如果不等于1，哪么就是非定时器的其它任何一个操作触发的该事件，就清除定时器
+		}
+		b = 2;
+		setTop();
+	}
+	
+	//点击运动返回
+	oDiv.onclick = function(){
+		clearInterval(iTimer);
+		var iCur = iSpeed = 0;		//滚动条的当前值和速度 都初始化都为0
+		iTimer = setInterval(function(){
+			iCur = document.documentElement.scrollTop || document.body.scrollTop;
+			iSpeed = Math.floor( ( 0 - iCur ) / 8 );
+			if( iCur == 0 ){		//等于0，说明运动到顶部了，否则就给滚动条赋值
+				clearInterval(iTimer);
+			}else{
+				document.documentElement.scrollTop = document.body.scrollTop = iCur + iSpeed;	//这里赋值一次，即触发window.onscroll一次。
+			}
+			b = 1;			
+		},30)
+	}
+	
+	//此函数使它在底部，并且滚动距离小于100时，隐藏
+	function setTop(){
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;					//滚动条的距离
+		oDiv.style.top = scrollTop + document.documentElement.clientHeight - oDiv.offsetHeight + "px";	//滚动条+可视区-元素高
+		if( scrollTop<100 ){
+			startMove(oDiv,{opacity:0},function(){
+				oDiv.style.display = "none";
+			});
+		}else{
+			oDiv.style.display = "block";
+			startMove(oDiv,{opacity:100});
+		}
+	}
+}
+</script>
+</head>
+
+<body style="height:3000px">
+
+	这里可以在返回顶部时，拖动滚动条，就停止返回，在IE8及以下有问题。
+    <div id="div1"></div>
+    
+</body>
+</html>

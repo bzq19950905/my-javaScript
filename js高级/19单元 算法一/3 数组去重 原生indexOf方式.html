@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var nums = [5, 8, 9, 3, 4, 5, 8, 9, 3, 4];
+			console.log(removeRepeat(nums));
+
+			// 数组去重，返回去重以后的数组。
+			function removeRepeat(arr) {
+				var newArr = [];
+				for(var i = 0, len = arr.length; i < len; i++) {
+					if(arrIndexOf(newArr, arr[i]) === -1) {
+						newArr.push(arr[i]);
+					}
+				}
+				return newArr;
+			}
+
+			function arrIndexOf(arr, val, index) {
+				var i = typeof(index) === 'undefined' ? 0 : index;
+				var len = arr.length;
+				for(; i < len; i++) {
+					if(arr[i] === val) {
+						return i;
+					}
+				}
+				return -1;
+			}
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+window.onload = function(){
+
+	var oDiv = document.createElement("div");
+	oDiv.style.cssText = " width:80px;height:80px;background:#f00;position:absolute;right:0; ";
+	document.body.appendChild(oDiv);
+
+	var oDivT = parseInt(getStyle( oDiv, "height" ));									//获取元素高
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;		//获取滚动条到顶部距离
+	
+	autoTop();					//初始化
+	window.onresize = autoTop;	//当窗口大小发生变化的时候触发
+	
+	//计算元素到顶部距离函数
+	function autoTop(){
+		if( scrollTop > 10 ){
+			oDiv.style.display = "block";
+		}else{
+			oDiv.style.display = "none";
+		}
+		oDiv.style.top = (document.documentElement.clientHeight - oDivT + scrollTop) + "px";	//可视区高减去元素高加滚动高得到元素到顶部的距离
+	}
+	
+	//滚滚动条时时
+	window.onscroll = function(){
+		scrollTop = document.documentElement.scrollTop || document.body.scrollTop;		//重新得到滚动条到顶部距离
+		autoTop();
+	};	
+	
+	//点击返回顶部时
+	oDiv.onclick = function(){
+		oDiv.timer = setInterval(function(){
+			
+			if(scrollTop <= 0){
+				scrollTop = 0;
+				clearInterval(oDiv.timer);
+			}else{
+				scrollTop -= 20;
+			}
+			autoTop();
+			document.documentElement.scrollTop = scrollTop;
+			document.body.scrollTop = scrollTop;
+
+		},14)
+	}
+
+}
+
+
+//获取元素的样式属性值。使用方法：getStyle（元素，"样式属性名"）;getStyle(oDiv,"width");
+//注意一点，获取background时，要用backgroundColor。要用单一样式。不要用复合样式。有兼容性的问题。而且不要拿来做判断。还有，不要用来获取没有给元素设置的样式。
+function getStyle( obj, attr ){
+	if( obj.currentStyle ){
+		return obj.currentStyle[attr];
+	}else{
+		return getComputedStyle( obj )[attr];
+	}
+};
+
+</script>
+</head>
+
+<body style="height:3000px;margin:0;">
+
+
+
+
+</body>
+</html>

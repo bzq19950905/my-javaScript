@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function (){
+				var All = document.getElementById("all"); // 全选
+				var oUl = document.getElementById("list"); // ul
+				var aInput = oUl.getElementsByTagName('input'); // 所有的单项
+				
+				// 全选
+				All.onclick = function (){
+					for (var i=0; i<aInput.length; i++) {
+						aInput[i].checked = this.checked;
+					}
+				}
+				
+				// 点击单个
+				for (var i=0; i<aInput.length; i++) {
+					aInput[i].onclick = function (){
+						var count = 0; // 计数器
+						for (var i=0; i<aInput.length; i++) {
+							if (aInput[i].checked) {
+								count ++;
+							}
+						}
+						if (count === aInput.length) {
+							All.checked = true;
+						}else{
+							All.checked = false;
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		
+		全选：<input type="checkbox" id="all" />
+		<ul id="list">
+			<li><input type="checkbox" />泥瓦工</li>
+			<li><input type="checkbox" />焊工</li>
+			<li><input type="checkbox" />搬砖工</li>
+			<li><input type="checkbox" />木工</li>
+			<li><input type="checkbox" />电工</li>
+		</ul>
+		
+	</body>
+</html>

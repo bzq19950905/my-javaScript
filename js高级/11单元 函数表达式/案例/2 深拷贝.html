@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<script>
+
+	var ccc = {
+		"a":{"z":"10"}
+	};
+	
+	var ddd = deepCopy(ccc);	//深拷贝一个对象。
+	
+	
+	ddd.a.z = 20;				//修改新对象的某一个值
+	
+	alert(ccc.a.z)				//弹出原来对象中的哪个值
+	alert(ddd.a.z)				//弹出新对象中的哪个值
+	
+	
+	
+	//深拷贝。递归方法
+	function deepCopy(obj){
+		if( typeof obj != "object" ){	//如果最后一层不是对象了，就返回它
+			console.trace();			//在控制台中查看执行情况
+			return obj;
+		}
+		var newObj = {};
+		for( var attr in obj ){
+			newObj[attr] = arguments.callee( obj[attr] );
+		}
+		return newObj;
+	}
+	
+	/*实参对象arguments有个特殊属性callee，代指当前正在执行的函数*/
+	
+	
+</script>
+
+</head>
+
+<body>
+
+关于深拷贝。JSON.stringify()和JSON.parse()深度克隆更好。也更容易理解。
+
+</body>
+</html>

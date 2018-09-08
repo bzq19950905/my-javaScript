@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		
+			var arr = [1,1,'1','1',0,0,'0','0',undefined,undefined,null,null,NaN,NaN,{},{},[],[],/a/,/a/];
+			
+			console.log(unique(arr))
+	
+			function unique(arr){
+			    var set = new Set(arr);
+			    //return Array.from(set);	//把类数组转成数组，或者使用下面哪种方法
+			    return [...set];
+			}
+			
+			//ES6的set方法，但是IE不支持。因为IE不支持Array.from()方法
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

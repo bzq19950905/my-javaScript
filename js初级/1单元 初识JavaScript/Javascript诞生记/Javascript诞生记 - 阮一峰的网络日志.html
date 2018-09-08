@@ -1,0 +1,854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0063)http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="generator" content="Movable Type  5.2.2">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./Javascript诞生记 - 阮一峰的网络日志_files/styles.css" type="text/css">
+		<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home">
+		<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng">
+		<script async="" src="./Javascript诞生记 - 阮一峰的网络日志_files/analytics.js"></script>
+		<script type="text/javascript" src="./Javascript诞生记 - 阮一峰的网络日志_files/mt.js"></script>
+		<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2017/03/pointfree.html">
+<dc:title>Pointfree 编程风格指南</dc:title>
+<dc:description>本文要回答一个很重要的问题：函数式编程有什么用？...</dc:description>
+<dc:creator>阮一峰</dc:creator>
+<dc:date>2017-03-13T06:56:10+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+		<link rel="prev" href="http://www.ruanyifeng.com/blog/2011/06/days_with_my_father.html" title="与父亲在一起的日子（组图）">
+		<link rel="next" href="http://www.ruanyifeng.com/blog/2011/06/10_design_defects_in_javascript.html" title="Javascript的10个设计缺陷">
+
+		<title>Javascript诞生记 - 阮一峰的网络日志</title>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/bsStatic.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/fingerprint2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/bs-engine.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			a.bshareDiv,
+			#bsPanel,
+			#bsMorePanel,
+			#bshareF {
+				border: none;
+				background: none;
+				padding: 0;
+				margin: 0;
+				font: 12px Helvetica, Calibri, Tahoma, Arial, 宋体, sans-serif;
+				line-height: 14px;
+			}
+			
+			#bsPanel div,
+			#bsMorePanel div,
+			#bshareF div {
+				display: block;
+			}
+			
+			.bsRlogo .bsPopupAwd,
+			.bsRlogoSel .bsPopupAwd,
+			.bsLogo .bsPopupAwd,
+			.bsLogoSel .bsPopupAwd {
+				line-height: 16px !important;
+			}
+			
+			a.bshareDiv div,
+			#bsFloatTab div {
+				*display: inline;
+				zoom: 1;
+				display: inline-block;
+			}
+			
+			a.bshareDiv img,
+			a.bshareDiv div,
+			a.bshareDiv span,
+			a.bshareDiv a,
+			#bshareF table,
+			#bshareF tr,
+			#bshareF td {
+				text-decoration: none;
+				background: none;
+				margin: 0;
+				padding: 0;
+				border: none;
+				line-height: 1.2
+			}
+			
+			a.bshareDiv span {
+				display: inline;
+				float: none;
+			}
+			
+			div.buzzButton {
+				cursor: pointer;
+				font-weight: bold;
+			}
+			
+			.buzzButton .shareCount a {
+				color: #333
+			}
+			
+			.bsStyle1 .shareCount a {
+				color: #fff
+			}
+			
+			span.bshareText {
+				white-space: nowrap;
+			}
+			
+			span.bshareText:hover {
+				text-decoration: underline;
+			}
+			
+			a.bshareDiv .bsPromo,
+			div.bshare-custom .bsPromo {
+				display: none;
+				position: absolute;
+				z-index: 100;
+			}
+			
+			a.bshareDiv .bsPromo.bsPromo1,
+			div.bshare-custom .bsPromo.bsPromo1 {
+				width: 51px;
+				height: 18px;
+				top: -18px;
+				left: 0;
+				line-height: 16px;
+				font-size: 12px !important;
+				font-weight: normal !important;
+				color: #fff;
+				text-align: center;
+				background: url(http://static.bshare.cn/frame/images/bshare_box_sprite2.gif) no-repeat 0 -606px;
+			}
+			
+			div.bshare-custom .bsPromo.bsPromo2 {
+				background: url(http://static.bshare.cn/frame/images/bshare_promo_sprite.gif) no-repeat;
+				cursor: pointer;
+			}
+		</style>
+		<style type="text/css">
+			.bsBox {
+				display: none;
+				z-index: 100000001;
+				font-size: 12px;
+				background: url(http://static.bshare.cn/frame/images//background-opaque-dark.gif) !important;
+				padding: 6px !important;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+			}
+			
+			.bsClose {
+				_overflow: hidden;
+				cursor: pointer;
+				position: absolute;
+				z-index: 10000000;
+				color: #666;
+				font-weight: bold;
+				font-family: Helvetica, Arial;
+				font-size: 14px;
+				line-height: 20px;
+			}
+			
+			.bsTop {
+				color: #666;
+				background: #f2f2f2;
+				height: 24px;
+				line-height: 24px;
+				border-bottom: 1px solid #e8e8e8;
+			}
+			
+			.bsTop span {
+				float: left;
+			}
+			
+			.bsFrameDiv,
+			#bsMorePanel {
+				border: none;
+				background: #fff;
+			}
+			
+			.bsReturn {
+				float: right;
+				*margin-right: 20px;
+				margin-right: 36px;
+				text-align: right;
+				cursor: pointer;
+				line-height: 24px;
+				color: #666;
+				opacity: 0.5;
+			}
+			
+			#bsReturn:hover {
+				text-decoration: underline;
+				opacity: 1;
+			}
+		</style>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/bsMore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/bshareS1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div.bsClear {
+				clear: both;
+				height: 0;
+				line-height: 0;
+				overflow: hidden;
+				font-size: 0;
+			}
+			
+			.bsSearchDiv {
+				padding: 5px 15px;
+				background-color: #fafafa;
+			}
+			
+			.bFind-wrapper-top {
+				background: #fff;
+				border-color: #ccc #aaa #aaa #ccc;
+				border-style: solid;
+				border-width: 1px;
+				height: 16px;
+				padding: 4px;
+				margin: 0;
+			}
+			
+			.bFind-wrapper-top input {
+				padding: 0 !important;
+				border: none !important;
+				box-shadow: none !important;
+				line-height: 16px !important;
+			}
+			
+			.bFind-placeholder {
+				background: url("http://static.bshare.cn/css/images/search-icon.gif") no-repeat;
+				display: block;
+				float: left;
+				height: 16px;
+				width: 16px;
+			}
+			
+			.bFind {
+				background: none;
+				border: none;
+				float: left;
+				font-size: 11px !important;
+				height: 16px !important;
+				margin-left: 3px;
+				outline: none;
+				padding: 0;
+				width: 400px;
+			}
+			
+			.bsPlatDiv {
+				height: 322px;
+				background: #fff;
+				overflow: auto;
+				padding: 0 15px;
+			}
+			
+			#bsLogoList {
+				display: block;
+				list-style: none;
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#bsLogoList li {
+				float: left;
+				display: inline-block;
+				width: 71px;
+				text-align: center;
+				font-size: 12px;
+				height: 80px;
+				margin: 0 !important;
+			}
+			
+			#bsLogoList .bsPlatIcon {
+				cursor: pointer;
+				display: block !important;
+				text-align: center;
+			}
+			
+			#bsLogoList .bsPlatImg {
+				width: 32px;
+				height: 32px;
+				border: none !important;
+				display: inline-block;
+			}
+			
+			#bsLogoList .bsPlatImg:hover {
+				-moz-border-radius: 7px;
+				-webkit-border-radius: 7px;
+				border-radius: 7px;
+				box-shadow: 0 0 15px #a7a8ac;
+			}
+			
+			#bsLogoList .bsPlatName {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-align: center;
+				color: #333 !important;
+				margin-top: 2px;
+				line-height: 140%;
+				*width: 70px;
+			}
+			
+			#bsLogoList .bsPromoM {
+				text-align: center;
+			}
+			
+			.bsFooterDiv {
+				height: 24px;
+				line-height: 24px;
+				padding: 0 15px;
+				border-top: 1px solid #e8e8e8;
+				background: #f2f2f2;
+				text-align: right;
+			}
+			
+			a.bsLogoLink {
+				color: #666;
+			}
+			
+			.bsLogoLink:hover {
+				text-decoration: underline;
+			}
+			
+			.bsPromoM {
+				background: url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;
+			}
+			
+			.bsNew,
+			.bsHot,
+			.bsRec,
+			.bsAwd {
+				background-position: 0 -552px;
+				width: 19px;
+				margin: 5px auto 1px;
+				line-height: 16px;
+				height: 18px;
+				font-size: 12px;
+				color: #fff;
+				overflow: hidden;
+			}
+			
+			.bsNew {
+				background-position: 0 -570px;
+			}
+			
+			.bsRec {
+				width: 30px;
+				background-position: 0 -588px;
+			}
+			
+			.bsAwd {
+				background: url(http://static.bshare.cn/frame/images//promot/promote.gif) no-repeat;
+			}
+		</style>
+		<script src="./Javascript诞生记 - 阮一峰的网络日志_files/bshare_view" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			a.bsSiteLink {
+				text-decoration: none;
+				color: #666;
+			}
+			
+			a.bsSiteLink:hover {
+				text-decoration: underline;
+			}
+			
+			a.bshareDiv {
+				overflow: hidden;
+				height: 16px;
+				line-height: 18px;
+				font-size: 14px;
+				color: #333;
+				padding-left: 0;
+			}
+			
+			a.bshareDiv:hover {
+				text-decoration: none;
+			}
+			
+			div.bsTitle {
+				padding: 0 8px;
+				border-bottom: 1px solid #e8e8e8;
+				color: #666;
+				background: #f2f2f2;
+				text-align: left;
+			}
+			
+			div.buzzButton {
+				cursor: pointer;
+			}
+			
+			div.bsRlogo,
+			div.bsRlogoSel {
+				width: 68px;
+				float: left;
+				margin: 0;
+				padding: 2px 0;
+			}
+			
+			div.bsRlogo a,
+			div.bsRlogoSel a {
+				float: left;
+			}
+			
+			div.bsLogo,
+			div.bsLogoSel {
+				float: left;
+				width: 111px;
+				text-align: left;
+				height: auto;
+				padding: 2px 4px;
+				margin: 2px 0;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			div.bsLogoSel,
+			div.bsRlogoSel {
+				border: 1px solid #ddd;
+				background: #f1f1f1;
+			}
+			
+			div.bsLogo,
+			div.bsRlogo {
+				border: 1px solid #fff;
+				background: #fff;
+			}
+			
+			div.bsLogo a,
+			div.bsLogoSel a {
+				display: block;
+				height: 16px;
+				line-height: 16px;
+				padding: 0 0 0 24px;
+				text-decoration: none;
+				float: left;
+				overflow: hidden;
+			}
+			
+			div.bsLogoSel a,
+			div.bsRlogoSel a {
+				color: #000;
+				border: none;
+			}
+			
+			div.bsLogo a,
+			div.bsRlogo a {
+				color: #666;
+				border: none;
+			}
+			
+			div.bsLogoLink {
+				width: 121px;
+				overflow: hidden;
+				background: #FFF;
+				float: left;
+				margin: 3px 0;
+			}
+			
+			#bsLogin {
+				float: right;
+				text-align: right;
+				overflow: hidden;
+				height: 100%;
+			}
+			
+			#bsPanel {
+				position: absolute;
+				z-index: 100000000;
+				font-size: 12px;
+				width: 258px;
+				background: url(http://static.bshare.cn/frame/images/background-opaque-dark.png) !important;
+				padding: 6px !important;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+			}
+			
+			div.bsClear {
+				clear: both;
+				height: 0;
+				line-height: 0;
+				font-size: 0;
+				overflow: hidden;
+			}
+			
+			div.bsPopupAwd {
+				background: url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;
+				background-position: 0 -624px;
+				width: 18px;
+				padding-left: 3px;
+				text-align: center;
+				float: left;
+				margin-left: 2px;
+				height: 15px;
+				font-size: 12px;
+				color: #fff;
+				overflow: hidden;
+			}
+			
+			div.bsRlogo .bsPopupAwd,
+			div.bsRlogoSel .bsPopupAwd {
+				float: left;
+				margin: 5px 0 0 -14px;
+			}
+		</style>
+		<style type="text/css">
+			a.bsSiteLink {
+				text-decoration: none;
+				color: #666;
+			}
+			
+			a.bsSiteLink:hover {
+				text-decoration: underline;
+			}
+			
+			a.bshareDiv {
+				overflow: hidden;
+				height: 16px;
+				line-height: 18px;
+				font-size: 14px;
+				color: #333;
+				padding-left: 0;
+			}
+			
+			a.bshareDiv:hover {
+				text-decoration: none;
+			}
+			
+			div.bsTitle {
+				padding: 0 8px;
+				border-bottom: 1px solid #e8e8e8;
+				color: #666;
+				background: #f2f2f2;
+				text-align: left;
+			}
+			
+			div.buzzButton {
+				cursor: pointer;
+			}
+			
+			div.bsRlogo,
+			div.bsRlogoSel {
+				width: 68px;
+				float: left;
+				margin: 0;
+				padding: 2px 0;
+			}
+			
+			div.bsRlogo a,
+			div.bsRlogoSel a {
+				float: left;
+			}
+			
+			div.bsLogo,
+			div.bsLogoSel {
+				float: left;
+				width: 111px;
+				text-align: left;
+				height: auto;
+				padding: 2px 4px;
+				margin: 2px 0;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			div.bsLogoSel,
+			div.bsRlogoSel {
+				border: 1px solid #ddd;
+				background: #f1f1f1;
+			}
+			
+			div.bsLogo,
+			div.bsRlogo {
+				border: 1px solid #fff;
+				background: #fff;
+			}
+			
+			div.bsLogo a,
+			div.bsLogoSel a {
+				display: block;
+				height: 16px;
+				line-height: 16px;
+				padding: 0 0 0 24px;
+				text-decoration: none;
+				float: left;
+				overflow: hidden;
+			}
+			
+			div.bsLogoSel a,
+			div.bsRlogoSel a {
+				color: #000;
+				border: none;
+			}
+			
+			div.bsLogo a,
+			div.bsRlogo a {
+				color: #666;
+				border: none;
+			}
+			
+			div.bsLogoLink {
+				width: 121px;
+				overflow: hidden;
+				background: #FFF;
+				float: left;
+				margin: 3px 0;
+			}
+			
+			#bsLogin {
+				float: right;
+				text-align: right;
+				overflow: hidden;
+				height: 100%;
+			}
+			
+			#bsPanel {
+				position: absolute;
+				z-index: 100000000;
+				font-size: 12px;
+				width: 258px;
+				background: url(http://static.bshare.cn/frame/images/background-opaque-dark.png) !important;
+				padding: 6px !important;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+			}
+			
+			div.bsClear {
+				clear: both;
+				height: 0;
+				line-height: 0;
+				font-size: 0;
+				overflow: hidden;
+			}
+			
+			div.bsPopupAwd {
+				background: url(http://static.bshare.cn/frame/images//bshare_box_sprite2.gif) no-repeat top left;
+				background-position: 0 -624px;
+				width: 18px;
+				padding-left: 3px;
+				text-align: center;
+				float: left;
+				margin-left: 2px;
+				height: 15px;
+				font-size: 12px;
+				color: #fff;
+				overflow: hidden;
+			}
+			
+			div.bsRlogo .bsPopupAwd,
+			div.bsRlogoSel .bsPopupAwd {
+				float: left;
+				margin: 5px 0 0 -14px;
+			}
+		</style>
+	</head>
+	<style type="text/css" id="1400268000"></style>
+
+	<body id="scrapbook" class="mt-entry-archive one-column">
+		<script>
+			if(/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+			window.addEventListener('load', function(event) {
+				setTimeout(function() {
+					hab('#sup-post-2');
+					hab('#gd1-inner');
+				}, 1000);
+			});
+		</script>
+		<div id="container">
+			<div id="container-inner">
+
+				<div id="content">
+					<div id="content-inner">
+
+						<div id="alpha">
+							<div id="alpha-inner">
+
+								<div id="entry-1575" class="entry-asset asset hentry">
+									
+									<article class="hentry">
+										<h1 id="page-title" class="asset-name entry-title">Javascript诞生记</h1>
+										<div id="share_button" style="float:right;padding-right:2em;padding-top:1em;">
+											<a class="bshareDiv" href="http://www.bshare.cn/share" style="display: block; text-decoration: none; padding: 0px; margin: 0px; font-size: 12px; height: 21px; width: 51px;">
+												<div class="bsPromo bsPromo1"></div>
+												<div class="buzzButton bsStyle10" style="height:21px;color:#333;;background:transparent url(http://static.bshare.cn/frame/images/button_custom10-zh-Orange.gif) no-repeat;text-align:center;width:51px;"></div>
+												<div style="clear:both;"></div>
+											</a>
+
+											<script type="text/javascript" charset="utf-8" src="./Javascript诞生记 - 阮一峰的网络日志_files/buttonLite.js"></script>
+											<script type="text/javascript" charset="utf-8">
+												bShare.addEntry({
+													title: document.getElementById("page-title").innerHTML,
+													url: window.location.href
+												});
+											</script>
+										</div>
+										<div class="asset-meta">
+
+											<p class="vcard author">作者：
+												<a class="fn url" href="http://www.ruanyifeng.com/">阮一峰</a>
+											</p>
+											<p>日期：
+												<a href="http://www.ruanyifeng.com/blog/2011/06/"><abbr class="published" title="2011-06-24T23:30:33+08:00">2011年6月24日</abbr></a>
+											</p>
+
+										</div>
+
+										<div class="asset-content entry-content" id="main-content">
+
+											<!-- div class="asset-body" -->
+											<p>1.</p>
+
+											<p>二周前，我谈了
+												<a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank">一点</a>Javascript的历史。</p>
+											<!-- /div -->
+
+											<!-- div id="more" class="asset-more" -->
+											<p>今天把这部分补全，从历史的角度，说明Javascript到底是如何设计出来的。</p>
+
+											<p>只有了解这段历史，才能明白Javascript为什么是现在的样子。我依据的资料，主要是
+												<a href="http://brendaneich.com/2008/04/popularity/" target="_blank">Brendan Eich的自述</a>。</p>
+
+											<p>2.</p>
+
+											<p>
+												<a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank">上一篇文章</a>写道：</p>
+
+											<blockquote>
+
+												<p>"1994年，网景公司（Netscape）发布了Navigator浏览器0.9版。这是历史上第一个比较成熟的网络浏览器，轰动一时。但是，这个版本的浏览器只能用来浏览，不具备与访问者互动的能力。......<strong>网景公司急需一种网页脚本语言，使得浏览器可以与网页互动。</strong>"</p>
+
+											</blockquote>
+
+											<p><img src="./Javascript诞生记 - 阮一峰的网络日志_files/bg2011062401.jpg"></p>
+
+											<p>网页脚本语言到底是什么语言？网景公司当时有两个选择：一个是采用现有的语言，比如Perl、Python、Tcl、Scheme等等，允许它们直接嵌入网页；另一个是发明一种全新的语言。</p>
+
+											<p>这两个选择各有利弊。第一个选择，有利于充分利用现有代码和程序员资源，推广起来比较容易；第二个选择，有利于开发出完全适用的语言，实现起来比较容易。</p>
+
+											<p>到底采用哪一个选择，网景公司内部争执不下，管理层一时难以下定决心。</p>
+
+											<p>3.</p>
+
+											<p>就在这时，发生了另外一件大事：1995年Sun公司将Oak语言改名为Java，正式向市场推出。</p>
+
+											<p>Sun公司大肆宣传，许诺这种语言可以"一次编写，到处运行"（Write Once, Run Anywhere），它看上去很可能成为未来的主宰。</p>
+
+											<p><img src="./Javascript诞生记 - 阮一峰的网络日志_files/bg2011062402.png"></p>
+
+											<p>网景公司动了心，决定与Sun公司结成联盟。它不仅允许Java程序以applet（小程序）的形式，直接在浏览器中运行；甚至还考虑直接将Java作为脚本语言嵌入网页，只是因为这样会使HTML网页过于复杂，后来才不得不放弃。</p>
+
+											<p><strong>总之，当时的形势就是，网景公司的整个管理层，都是Java语言的信徒，Sun公司完全介入网页脚本语言的决策。</strong>因此，Javascript后来就是网景和Sun两家公司一起携手推向市场的，这种语言被命名为"Java+script"并不是偶然的。</p>
+
+											<p>4.</p>
+
+											<p>此时，34岁的系统程序员Brendan Eich登场了。1995年4月，网景公司录用了他。</p>
+
+											<p>Brendan Eich的主要方向和兴趣是函数式编程，网景公司招聘他的目的，是研究将Scheme语言作为网页脚本语言的可能性。Brendan Eich本人也是这样想的，以为进入新公司后，会主要与Scheme语言打交道。</p>
+
+											<p><img src="./Javascript诞生记 - 阮一峰的网络日志_files/bg2011060503.jpg"></p>
+
+											<p>仅仅一个月之后，<strong>1995年5月，网景公司做出决策，未来的网页脚本语言必须"看上去与Java足够相似"，但是比Java简单，使得非专业的网页作者也能很快上手。</strong>这个决策实际上将Perl、Python、Tcl、Scheme等非面向对象编程的语言都排除在外了。</p>
+
+											<p>Brendan Eich被指定为这种"简化版Java语言"的设计师。</p>
+
+											<p>5.</p>
+
+											<p>但是，他对Java一点兴趣也没有。为了应付公司安排的任务，他只用10天时间就把Javascript设计出来了。</p>
+
+											<p>由于设计时间太短，语言的一些细节考虑得不够严谨，导致后来很长一段时间，Javascript写出来的程序混乱不堪。如果Brendan Eich预见到，未来这种语言会成为互联网第一大语言，全世界有几百万学习者，他会不会多花一点时间呢？</p>
+
+											<p>总的来说，他的设计思路是这样的：</p>
+
+											<blockquote>
+
+												<p>　　（1）借鉴C语言的基本语法；</p>
+
+												<p>　　（2）借鉴Java语言的数据类型和内存管理；</p>
+
+												<p>　　（3）借鉴Scheme语言，将函数提升到"第一等公民"（first class）的地位；</p>
+
+												<p>　　（4）借鉴
+													<a href="http://en.wikipedia.org/wiki/Self_(programming_language)" target="_blank">Self语言</a>，使用基于原型（prototype）的继承机制。</p>
+
+											</blockquote>
+
+											<p>所以，<strong>Javascript语言实际上是两种语言风格的混合产物----（简化的）函数式编程+（简化的）面向对象编程。</strong>这是由Brendan Eich（函数式编程）与网景公司（面向对象编程）共同决定的。</p>
+
+											<p>6.</p>
+
+											<p>多年以后，Brendan Eich还是看不起Java。</p>
+
+											<p>他说：</p>
+
+											<blockquote>
+
+												<p>"Java（对Javascript）的影响，主要是把数据分成基本类型（primitive）和对象类型（object）两种，比如字符串和字符串对象，以及引入了Y2K问题。这真是不幸啊。"</p>
+
+											</blockquote>
+
+											<p>把基本数据类型包装成对象，这样做是否可取，这里暂且不论。Y2K问题则是直接与Java有关。根据设想，Date.getYear()返回的应该是年份的最后两位：</p>
+
+											<blockquote>
+
+												<p>　　var date1 = new Date(1999,0,1); </p>
+
+												<p>　　var year1 = date1.getYear();</p>
+
+												<p>　　alert(year1); // 99</p>
+
+											</blockquote>
+
+											<p>但是实际上，对于2000年，它返回的是100！</p>
+
+											<blockquote>
+
+												<p>　　var date2 = new Date(2000,0,1); </p>
+
+												<p>　　var year2 = date2.getYear();</p>
+
+												<p>　　alert(year2); // 100</p>
+
+											</blockquote>
+
+											<p>如果用这个函数生成年份，某些网页可能出现"19100"这样的结果。这个问题完全来源于Java，因为Javascript的日期类直接采用了java.util.Date函数库。Brendan Eich显然很不满意这个结果，这导致后来不得不添加了一个返回四位数年份的Date.getFullYear()函数。</p>
+
+											<p>如果不是公司的决策，Brendan Eich绝不可能把Java作为Javascript设计的原型。作为设计者，他一点也不喜欢自己的这个作品：</p>
+
+											<blockquote>
+
+												<p>"与其说我爱Javascript，不如说我恨它。它是C语言和Self语言一夜情的产物。<strong>十八世纪英国文学家约翰逊博士说得好：'它的优秀之处并非原创，它的原创之处并不优秀。'</strong>（the part that is good is not original, and the part that is original is not good.）"</p>
+
+											</blockquote>
+
+										</div>
+									</article>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	
+	</body>
+
+</html>

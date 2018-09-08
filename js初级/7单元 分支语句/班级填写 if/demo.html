@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script>
+		var classes = prompt("请输入班级名称","5-8位");
+		if(classes == null){
+			alert("您点击了取消按钮");
+		}else{
+			if(classes.length == 0){
+				alert("请输入班级");
+			}else{
+				if(classes.length >=5 && classes.length <=8){
+					if(parseInt(classes).toString().length ==4){
+						alert("您的班级是:", + "classes");
+					}else{
+						alert("输入有误");
+					}
+				}else{
+					alert("您输入有误");
+				}
+			}
+		}
+
+/*var classes =prompt("请输入名字");
+	if(classes ==null){
+		alert("您点击了取消按钮");
+	}else{
+		if(classes ==""){
+			alert("请输入");
+		}else{
+			if(classes.length >=5 && classes.length<=8){
+				if(parseInt(classes).toString().length ==4){
+					alert("您的班级:", + classes);
+				}else{
+					alert("按要求输入");
+				}
+			}else{
+				alert("您输入有误");
+			}
+		}
+	}
+*/
+
+
+
+
+	</script>
+</body>
+</html>

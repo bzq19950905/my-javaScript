@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100px; height: 100px; background: red; position: absolute; left: 0px; top: 30px; left: 400px;}
+</style>
+
+<script>
+window.onload = function(){
+	var oDiv1 = document.getElementById('div1');
+	var oImg1 = document.getElementById('img1');
+	
+	//方式一，同时运动多个属性。格式：startMove( 元素,{属性1:值1,属性2:值2},回调 )	注意不要px单位，不要引号
+	/*oDiv1.onclick = function() {
+		startMove( this,{width : 200,height : 200} );
+	}*/
+	
+	//方式二，同时只运动一个属性，完了再回调运动另一个属性。
+	oDiv1.onclick = function() {
+		startMove(this, {width : 200}, function() {
+			startMove(this, {height : 200});			//这里的this经过回调函数处理过，指的是当前这个元素
+		});
+	}
+	
+	//改变透明度
+	oImg1.onclick = function(){
+		startMove(this,{opacity:50})		//注意这里是百分制，50即透明度为0.5，透明度不兼容IE6
+		//为了兼容IE8及以下，更改透明度时，这里需要给元素添加上透明度getStyle(opacity:1);，否则会不起作用。原因是getStyle(obj, attr)只能获取已有的css样式。
+	}
+	
+	
+}
+
+//减速运动框架
+function startMove(obj, json, fn){
+	clearInterval(obj.iTimer);
+	var iCur = 0;		//当前要改变属性的值
+	var iSpeed = 0;		//速度
+		
+	obj.iTimer = setInterval(function() {
+		var iBtn = true;
+		for ( var attr in json ) {
+			var iTarget = json[attr];		//终点值
+			if (attr == 'opacity') {
+				iCur = Math.round(getStyle( obj, 'opacity' ) * 100);
+			} else {
+				iCur = parseInt(getStyle(obj, attr));
+			}
+			iSpeed = ( iTarget - iCur ) / 8;
+			iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+			if (iCur != iTarget) {
+				iBtn = false;
+				if (attr == 'opacity') {
+					obj.style.opacity = (iCur + iSpeed) / 100;
+					obj.style.filter = 'alpha(opacity='+ (iCur + iSpeed) +')';
+				} else {
+					obj.style[attr] = iCur + iSpeed + 'px';
+				}
+			}
+		}
+		if (iBtn) {
+			clearInterval(obj.iTimer);
+			fn && fn.call(obj);
+		}
+	}, 30);
+}
+function getStyle(obj, attr) {
+	if (obj.currentStyle) {
+		return obj.currentStyle[attr];
+	} else {
+		return getComputedStyle(obj, false)[attr];
+	}
+}
+
+</script>
+</head>
+
+<body>
+
+    <div id="div1"></div>
+    <img src="1.jpg" id="img1" style="opacity:1;" />
+
+</body>
+</html>

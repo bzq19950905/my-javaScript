@@ -1,0 +1,96 @@
+   
+   1.
+        var a= 'abc';
+
+	function f1() {
+	    console.log(a);
+	}
+
+	function f2() {
+
+	    function f1() {
+	        console.log(a);
+	    }
+
+	    f1();
+
+	    var a= 'def';
+	}
+
+	f1(); //执行结果: 
+	f2(); //执行结果:
+
+    
+    2.
+      function t(){
+   	 function s(){
+   	 	x=10;
+   	 }
+   	 s();
+   	 var x=20;
+      }
+      t();
+      alert(window.x);//执行结果
+
+   3.
+     var a,b;
+     (function () {
+	    console.log(a);// 执行结果
+	    console.log(b);// 执行结果
+
+	    var a = b = 0;
+
+	    //console.log(a);// 执行结果
+	    //console.log(b);// 执行结果
+     })();
+     console.log(a);//执行结果
+     console.log(b);//执行结果 
+
+
+   4.
+    window.color = "red";
+    var o = {color:"blue"};
+    function sayColor(){
+      console.log(this.color);
+    }
+    sayColor();
+    o.sayColor = sayColor;
+    o.sayColor();
+
+
+   5. 
+   (function f(f){ 
+      return typeof f(); 
+   })(function(){ return 1; }); 
+
+
+
+   6.实现解析地址栏参数至少两种方式(用正则写一种);
+
+
+
+
+   7.正则封装getElementsByClassName方法
+
+
+
+   8.
+    下面这个ul点击每一列的时候弹出其index值,，要求绑定事件用DOM2事件,必须封装DOM2级事件用封装的DOM2级事件方法来做。
+
+     <ul id="list">
+   	<li></li>
+   	<li></li>
+   	<li></li>
+   	<li></li>
+   	<li></li>
+     </ul>
+
+   
+
+9、http://www.sina.com.cn/?a=10&age=20&sex=”男” 获取参数信息，封装函数getURL(name)当，传递getURL(“a”) 返回值为10.
+
+
+
+10、封装一个函数repeatify.要求：这个函数接收一个整数参数，来明确字符串重复几次。
+比如：repeatify(str,num)  //repeatify(‘abc’,3) 的结果为 abcabcabc
+   

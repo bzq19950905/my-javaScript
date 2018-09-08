@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//数组去重，IE9及以上支持
+			function removeRepeat(arr){
+				return arr.filter(function (ele, index, array) {
+				    return array.indexOf(ele) === index;
+				});
+			}
+			
+			var arr = ['彭作洪', '彭晓婷', '彭作洪', '谭传凤', '彭作洪', '彭晓婷'];
+			console.log(removeRepeat(arr));
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

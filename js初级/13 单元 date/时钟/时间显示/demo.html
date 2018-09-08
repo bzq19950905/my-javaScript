@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="box"></div>
+	<script>
+
+	//封装一个补零函数
+	function addZero(param){
+		if(param<10){
+			param="0"+param;
+		}return param;
+	}
+
+
+	function time(){
+		var date =new Date;
+		var year=date.getFullYear()
+		,	month=addZero(date.getMonth()+1)
+		,	day=addZero(date.getDate())
+		,   hours=addZero(date.getHours())
+		,	minutes=addZero(date.getMinutes())
+		,	seconds=addZero(date.getSeconds());
+		var str=year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+		box.innerHTML=str;
+	}
+	time();
+	setInterval(time,1000);
+
+
+
+	</script>
+</body>
+</html>

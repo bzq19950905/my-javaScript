@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        function test() {
+            var str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            var newStr = '';
+            for (var i = 0; i < 6; i++) {
+                var n = getRandom(0, str.length - 1);
+                var s = str[n]; // 某一个字符
+
+                if (newStr.indexOf(s) === -1) {
+                    newStr += s;
+                } else {
+                    i--;
+                }
+            }
+            return newStr;
+        }
+
+        window.onload = function() {
+            var aInput = document.getElementsByTagName('input');
+            var len = 5;
+            var timer = null;
+
+            // 获取验证码
+            aInput[1].onclick = function() {
+                this.disabled = true; // 禁用
+
+                timer = setInterval(function() {
+                    len--;
+                    aInput[1].value = len;
+
+                    // 停止定时器
+                    if (len <= 0) {
+                        // 1，清定时器，2，值要回到原来，3，按钮启用
+                        clearInterval(timer);
+                        len = 5;
+                        aInput[1].disabled = false;
+                        aInput[1].value = test();
+                    }
+                }, 1000);
+            }
+
+            // 登录
+            aInput[2].onclick = function() {
+                if (aInput[0].value === aInput[1].value) {
+                    alert('验证码输入正确');
+                } else {
+                    alert('验证输入错误');
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" />
+    <input type="button" value="获取验证码" />
+    <input type="button" value="登录" />
+</body>
+
+</html>

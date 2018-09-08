@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var numbers = {
+				numberA: 5,
+				numberB: 10,
+				sum: function() {
+					console.log(this === numbers); // ?
+					function calculate() {
+						console.log(this === numbers); // ?
+						return this.numberA + this.numberB;
+					}
+					return calculate.call(this);
+				}
+			};
+			console.log(numbers.sum()); // ?
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

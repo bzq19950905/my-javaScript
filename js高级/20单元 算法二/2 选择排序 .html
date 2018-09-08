@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+var arr = [12,5,37,6,22,40];
+console.log( selectSort(arr) );
+
+function selectSort(arr){
+	if( arr.length == 1 ){
+		return arr;
+	}
+	var iMin = arr[0];
+	var iIndex = 0;
+	for( var i=0; i<arr.length; i++ ){
+		if( iMin > arr[i] ){
+			iMin = arr[i];
+			iIndex = i;
+		}
+	}
+	
+	var prev = arr.splice(iIndex,1);	//原理，每次循环找到最小的哪个存入一个数组，原数组长度减一，然后调用递归
+	return prev.concat( selectSort(arr) );
+	
+}
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+        dd {
+            cursor: pointer;
+        }
+        
+        dd.active {
+            color: #f00;
+        }
+        
+        #div1 span {
+            margin: 0 10px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oDiv = document.getElementById("div1");
+            var aDl = document.getElementsByTagName("dl");
+            var arr = [];
+
+            for (var i = 0; i < aDl.length; i++) {
+                aDl[i].index = i;
+                arr.push("");
+                addE(aDl[i]); //函数传参
+            }
+
+            function addE(obj) {
+                var aDd = obj.getElementsByTagName("dd");
+                for (var i = 0; i < aDd.length; i++) {
+
+                    aDd[i].onclick = function() {
+
+                        var _index = this.parentNode.index; //获取dl的索引值
+
+                        if (this.className == "active") {
+                            this.className = "";
+                            arr[_index] = "";
+                        } else {
+                            for (var i = 0; i < aDd.length; i++) {
+                                aDd[i].className = "";
+                            }
+                            this.className = "active";
+                            arr[_index] = this.innerHTML;
+                        }
+
+                        //清空div，然后再给div添加内容。这一块有点耗性能
+                        oDiv.innerHTML = "";
+                        for (var i = 0; i < arr.length; i++) {
+                            var oSpan = document.createElement("span");
+                            oSpan.innerHTML = arr[i];
+                            oDiv.appendChild(oSpan);
+                        }
+
+                    }
+
+
+
+                }
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+        //通过class获取元素。格式：getElementsByClassName( 搜索起点-祖先级,类名 );	//IE8以上通过新方法获取。IE8及以下用老方法获取。
+        function getElementsByClassName(node, classname) {
+            if (node.getElementsByClassName) {
+                return node.getElementsByClassName(classname);
+            } else {
+                var arr = [];
+                var elems = node.getElementsByTagName("*");
+                for (var i = 0; i < elems.length; i++) {
+                    var aClassName = elems[i].className.split(" ");
+                    for (var j = 0; j < aClassName.length; j++) {
+                        if (aClassName[j] == classname) {
+                            arr.push(elems[i]);
+                            break;
+                        }
+                    }
+                }
+                return arr;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <dl>
+        <dt>地区<dt>
+    <dd>东城</dd>
+    <dd>西城</dd>
+    <dd>朝阳</dd>
+    <dd>昌平</dd>
+</dl>
+
+<dl>
+	<dt>职位<dt>
+    <dd>美工设计</dd>
+    <dd>前端工程师</dd>
+    <dd>后台开发</dd>
+</dl>
+
+<dl>
+	<dt>薪资<dt>
+    <dd>4000</dd>
+    <dd>5000</dd>
+    <dd>6000</dd>
+</dl>
+
+<div id="div1"></div>
+
+
+
+</body>
+</html>

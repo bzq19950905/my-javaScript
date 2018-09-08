@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link href="http://bdklzw.com/templets/klzw/css/base.css" type="text/css" rel="stylesheet" />
+<script src="http://bdklzw.com/templets/klzw/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<style>
+#content{width:640px;height:400px;border:10px solid #ccc;margin:0 auto;position:relative;background:#fff url(images/loader_website.gif) no-repeat center center;}
+#content a{width:50px;height:50px;border:5px solid #fff;background:#000;color:#fff;position:absolute;top:170px;text-align:center;line-height:50px;font-size:30px;text-decoration:none;opacity:0.5;}
+#content a:hover{opacity:1;}
+#prev{left:0;}
+#next{right:0;}
+#span1{position:absolute;left:0;top:0;width:100%;height:30px;background:#000;text-align:center;color:#fff;line-height:30px;}
+#text1{position:absolute;left:0;bottom:0;width:100%;height:30px;background:#000;text-align:center;color:#fff;line-height:30px;}
+</style>
+
+<script>
+window.onload = function(){
+	
+	var arrUrl = ["images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg"];
+	var arrText = ["第一个猫","第二个猫","第三个猫","第四个猫"]
+	var oPrev = document.getElementById("prev");
+	var oNext = document.getElementById("next");
+	var oSpan = document.getElementById("span1");
+	var oText = document.getElementById("text1");
+	var oImg = document.getElementById("img1");	
+	var aBtn = document.getElementsByTagName("input");
+	
+	var num = 0;
+	var onOff = true;
+	
+	aBtn[0].onclick = function(){
+		onOff = true;
+	}
+	aBtn[1].onclick = function(){
+		onOff = false;
+	}
+	
+	
+	oPrev.onclick = function(){
+		num--;
+		if( num < 0 ){
+			if(onOff){
+				num = arrUrl.length-1;
+			}else{
+				num = 0;
+				alert("已到第一个了")
+			}
+		}
+		fnTab();
+	}
+	
+	oNext.onclick = function(){
+		num++;
+		if( num > arrUrl.length-1 ){
+			if(onOff){
+				num = 0;	
+			}else{
+				num = arrUrl.length-1;
+				alert("已到最后一个了")
+			}
+		}
+		fnTab();
+	}
+	
+	
+	fnTab();
+	function fnTab(){
+		span1.innerHTML = num+1+ " / " + arrText.length;
+		text1.innerHTML = arrText[num];
+		oImg.src = arrUrl[num];
+	}
+}
+</script>
+
+
+
+</head>
+
+<body>
+<p class="tc mt50">
+    <input type="button" value="循环切换" />
+    <input type="button" value="顺序切换" />
+</p>
+<div id="content">
+
+	<a href="javascript:;" id="prev">&lt;</a>
+	<a href="javascript:;" id="next">&gt;</a>
+	<span id="span1">正在计算中……</span>
+	<p id="text1">图片文字加载中……</p>
+	<img id="img1" width="640" height="400" />
+
+</div>
+
+
+</body>
+</html>

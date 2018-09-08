@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+li.active{background:#f00}
+</style>
+<script>
+window.onload = function(){
+	var oText = document.getElementById("text1");
+	var oBtn = document.getElementById("btn");
+	var oBtn2 = document.getElementById("btn2");
+	var oUl = document.getElementById("ul1");
+	var aLi = oUl.getElementsByTagName("li");
+	var aActive = null;		//选中的项
+	var len = 5;
+	var arr = [];
+	
+	oBtn.onclick = function(){
+		if( oText.value == "" ){
+			return false;
+		}
+		
+		var oLi = document.createElement("li");
+		oLi.innerHTML = oText.value;
+		
+		if( oUl.children[0] ){
+			oUl.insertBefore( oLi,oUl.children[0] );
+		}else{
+			oUl.appendChild(oLi);
+		}
+		
+		oText.value = "";
+		
+		for( var i=len;i<aLi.length;i++ ){
+			oUl.removeChild(aLi[i]);
+		}
+		init();
+		
+	}
+	
+	function init(){
+		for( var i=0;i<aLi.length;i++ ){
+			
+			aLi[i].onOff = true;
+			
+			aLi[i].onclick = function(){
+				
+				if( this.onOff ){
+					this.className = "active";
+				}else{
+					this.className = "";
+				}
+				this.onOff = !this.onOff;
+				
+				//把选中的项添加进数组
+				aActive = getElementsByClassName( oUl,"active" );	//获取一遍选中的项，为了兼容IE78
+				arr = [];
+				for( var i=0;i<aActive.length;i++ ){
+					arr.push(aActive[i]);
+				}
+			}
+		}
+	}
+	
+	//删除
+	oBtn2.onclick = function(){
+		for( var i=0;i<arr.length;i++ ){
+			oUl.removeChild( arr[i] );
+		}
+	}
+	
+	
+	
+	
+	
+}
+
+//通过class获取元素。格式：getElementsByClassName( 搜索起点-祖先级,类名 );	//IE8以上通过新方法获取。IE8及以下用老方法获取。
+function getElementsByClassName( node,classname ){
+	if( node.getElementsByClassName ){
+		return node.getElementsByClassName( classname );
+	}else{
+		var arr = [];
+		var elems = node.getElementsByTagName( "*" );
+		for( var i=0;i<elems.length;i++ ){
+			var aClassName = elems[i].className.split(" ");
+			for( var j=0;j<aClassName.length;j++ ){
+				if( aClassName[j] == classname ){
+					arr.push( elems[i] );
+					break;
+				}
+			}
+		}
+		return arr;
+	}
+}
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+    1.课上留言板加强
+	最多只能添加5（自己定）条，最先留的言会被清除
+    <hr />
+
+	<input type="text" id="text1" />
+    <input type="button" value="留言" id="btn" />
+    <input type="button" value="删除选中的项" id="btn2" />
+	<ul id="ul1"></ul>
+
+
+
+</body>
+</html>

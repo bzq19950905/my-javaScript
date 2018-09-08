@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<style>
+#box{width:400px;margin:50px auto;}
+#box span{color:#f00;cursor:pointer;}
+#tishi{padding:5px 10px;background:#f00;color:#fff;font-size:12px;font-weight:normal;}
+</style>
+
+<script>
+window.onload = function(){
+	var oBox = document.getElementById("box");
+	var aSpan = oBox.getElementsByTagName("span");
+	
+	for( var i=0;i<aSpan.length;i++ ){
+		
+		aSpan[i].onmouseover = function(){
+			
+			var b = document.createElement("b");	//创建元素
+			b.setAttribute("id","tishi");			//给元素添加ID
+			var title = this.title;
+			this.title = "";
+			b.innerHTML = title;
+			
+			var L = getPos(this).left;
+			var T = getPos(this).top;
+			var W = this.offsetWidth;
+			b.style.position = "absolute";
+			b.style.left = L + W + 5 + "px";
+			b.style.top = T + "px";
+			
+			document.body.appendChild(b);			//将创建的元素添加到body中
+						
+		}
+		
+		
+		aSpan[i].onmouseout = function(){
+			var oTishi = document.getElementById("tishi");	//获取提示的元素
+			this.title = oTishi.innerHTML;					//得到它的内容，再把这个内容给当前这个元素做为title
+			document.body.removeChild(oTishi);				//删除提示元素
+		}
+		
+	}
+	
+	
+	
+}
+
+
+//返回元素到浏览器左边和顶部的绝对值(不带单位)。用法：getPos(元素).left	返回元素到浏览器左边的绝对值。getPos(元素).top	返回元素到浏览器顶部的绝对值
+function getPos(obj) {
+	var pos = {left:0, top:0};
+	while (obj) {
+		pos.left += obj.offsetLeft;
+		pos.top += obj.offsetTop;
+		obj = obj.offsetParent;
+	};
+	return pos;
+};
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="box">
+
+<p><span title="PC电脑">PC</span> 时代当然还没有结束，至于它什么时候接近尾声谁也不清楚，但现在的确处于低潮期。近日，全球两大著名的市场调研机构 Gartner 和 IDC 发布的数据均表明，PC 的发展势头非常严峻。另一方面，<span title="window">微软</span>新一代操作系统 Windows 10 并没有重燃 PC 销量，没有太多的消费者愿意购买运行 Windows 10 的 PC，众多迹象表明 PC 行业的表现非常让人失望。</p>
+
+<p>IDC分析结果显示 PC 行业非常悲观，2015 年第三季度，全球 PC 的出货量跌幅高达 10.8%，相比之前预测的 9.2% 更夸张，出货量仅为 710 万。另一方面，Gartner 的数据则显示该季度行业 PC 行业下滑达到 <span title="反正是下降">7.7%</span>。</p>
+
+<p>至于细分到品牌厂商的出货量，台湾的宏碁受伤程度最为严重，Gartner 和 IDC 的数据称其出货量在本季度分别下降了 19.9% 和 25.9%。同时，IDC 的报告还表示，联想、惠普、戴尔和苹果的全球销售额都在以个位数的百分点下滑，而 <span title="我也不知道这个是个啥">Gartner</span> 则表示戴尔和苹果分别上升了 0.5% 和 1.5%。</p>
+
+
+
+</div>
+
+</body>
+</html>

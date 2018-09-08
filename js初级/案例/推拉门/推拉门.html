@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .list {
+            width: 580px;
+            height: 120px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        
+        .list li {
+            float: left;
+            width: 50px;
+            height: 120px;
+            transition: 0.3s;
+        }
+        
+        .list li:first-child {
+            width: 330px;
+        }
+        
+        .list li img {
+            display: block;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oUl = document.getElementsByClassName('list')[0];
+            var aLi = oUl.getElementsByTagName('li');
+
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].index = i;
+                aLi[i].onmouseover = function() {
+                    for (var i = 0; i < aLi.length; i++) {
+                        if (i == this.index) {
+                            aLi[i].style.width = '330px';
+                        } else {
+                            aLi[i].style.width = '50px';
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul class="list">
+        <li><img src="img/1.png" /></li>
+        <li><img src="img/2.png" /></li>
+        <li><img src="img/3.png" /></li>
+        <li><img src="img/4.png" /></li>
+        <li><img src="img/5.png" /></li>
+        <li><img src="img/6.png" /></li>
+    </ul>
+</body>
+
+</html>

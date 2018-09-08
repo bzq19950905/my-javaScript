@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+
+//border-bottom-color --> borderBottomColor
+
+alert( getHump("border-bottom-color") )
+alert( getHump("color") )
+
+
+function getHump(str){
+	var re = /-(\w)/g;
+	return str.replace(re, function($0, $1){
+		return $1.toUpperCase();
+	});
+}
+
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

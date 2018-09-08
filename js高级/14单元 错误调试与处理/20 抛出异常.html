@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var add = function(a, b) {
+				if(typeof a !== 'number' || typeof b !== 'number') {
+					throw {
+						name: '类型错误',
+						message: '参数要是数字'
+					};
+				}
+				return a + b;
+			}
+
+			var try_it = function() {
+				try {
+					console.log(add("seven"));
+					// console.log(add(3, 4));
+				} catch(e) {
+					console.log(e.name + ': ' + e.message);
+				}
+			}
+
+			try_it();
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

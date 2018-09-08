@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var oDiv = document.getElementById('div1');
+
+				function fn(ev) {
+					var ev = ev || event;
+					var b = true;
+					if(ev.wheelDelta) {
+						// ie/chrome
+						b = ev.wheelDelta > 0 ? true : false;
+					} else {
+						// firefox
+						b = ev.detail < 0 ? true : false;
+					}
+					// console.log(b);
+					if(b) {
+						this.style.height = this.offsetHeight - 10 + 'px';
+					} else {
+						this.style.height = this.offsetHeight + 10 + 'px';
+					}
+
+					// 在有滚动条的时候，这个时候触发了滚动的默认行为，需要阻止
+					
+					// 阻止用addEventListener绑定的形式
+					if(ev.preventDefault) {
+						ev.preventDefault();
+					}
+					return false;	// 阻止普通形式的事件
+				}
+
+				// ie/chrome
+				oDiv.onmousewheel = fn;
+
+				// firefox ，这样是有问题的，在非标准IE下，会报错。因为没有addEventListener这个方法
+				// oDiv.addEventListener('DOMMouseScroll', fn, false);
+
+				// 解决非标准IE报错
+				if(oDiv.addEventListener) {
+					oDiv.addEventListener('DOMMouseScroll', fn, false);
+				}
+
+			}
+		</script>
+	</head>
+
+	<body style="height: 2000px;">
+		<div id="div1"></div>
+	</body>
+
+</html>

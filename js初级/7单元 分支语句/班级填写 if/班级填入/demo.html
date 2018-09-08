@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var classes =prompt("请输入班级名称");
+		if(classes==null ||classes==""){
+			alert("请输入班级")
+		}else{
+			if(classes.length>=5 && classes.length<=8){
+				if(parseInt(classes).toString().length==4){
+					alert("您所在的班级是")
+				}else{
+					alert("您输入有误");
+				}
+			}else{
+					alert("您输入有误");
+				}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="base.css" type="text/css" rel="stylesheet" />
+<style>
+#div1{width:520px;height:280px;overflow:hidden;border:1px solid #ccc;position:relative;margin:100px auto 0;}
+#div1 ul{position:absolute;left:0;top:0;}
+#div1 li{float:left;}
+#div1 li img{display:block;}
+
+#div1 p{width:100%;position:absolute;bottom:10px;text-align:center;}
+#div1 p a{display:inline-block;width:10px;height:10px;overflow:hidden;border-radius:5px;background:#ccc;margin:0 3px;}
+#div1 p a.active{background:#f00}
+
+#div1 .preNext{display:block;width:45px;height:100px;background:url(images/sprite.png) no-repeat left top;position:absolute;top:50%;margin-top:-50px;cursor:pointer;}
+#div1 .pre{left:0;}
+#div1 .next{right:0;background-position:right top;}
+
+</style>
+
+<script src="move.js"></script>
+
+<script>
+window.onload = function(){
+	
+	var oDiv = document.getElementById("div1");				//大盒子
+	var oUl = document.getElementById("ul1");				//ul
+	var aLi = oUl.getElementsByTagName("li");				//li
+	var oPre = getElementsByClassName(oDiv,"pre")[0];		//上一张
+	var oNext = getElementsByClassName(oDiv,"next")[0];		//下一张
+	
+	var oP = document.getElementById("navigation");			//p
+	var aA = oP.getElementsByTagName("a");					//p里的a
+	var str = "";
+	var num = 0;
+	var timer = null;
+	
+	var iLength = aLi.length;								//获取个数
+	var iWidth = aLi[0].offsetWidth;						//获取一个li的宽度
+	oUl.style.width = iLength * iWidth + "px";				//给ul设置宽度
+	
+	//初始化
+	for(var i=0;i<iLength;i++){
+		str += '<a href="javascript:;"></a>';
+	};
+	oP.innerHTML = str;				//给p添数据
+	aA[0].className = "active";
+	oPre.style.opacity = oNext.style.opacity = "0.3";		//上一张、下一张半透明
+	oPre.style.filter = oNext.style.filter = "alpha(opacity=30)";
+	//初始化完
+	
+	//滑上、滑离上一张、下一张透明度变化
+	oPre.onmouseover = oNext.onmouseover = function(){
+		startMove(this,{
+			opacity : 60
+		});
+	}
+	oPre.onmouseout = oNext.onmouseout = function(){
+		startMove(this,{
+			opacity : 30
+		});
+	}
+		
+	//一开始就自动执行
+	timer = setInterval(autoFn,3000);
+	//滑上停止自动执行
+	oDiv.onmouseover = function(){
+		clearInterval(timer);
+	}
+	//滑离再继续自动执行
+	oDiv.onmouseout = function(){
+		timer = setInterval(autoFn,3000);
+	}
+	
+	//滑上各个小A
+	for( var i=0;i<iLength;i++ ){
+		aA[i].index = i;
+		aA[i].onmouseover = function(){
+			num = this.index;
+			sport();
+		}
+	};
+	//点击上一张
+	oPre.onclick = function(){
+		num--;
+		if(num<0){
+			num = iLength-1;
+		}
+		sport();
+	}
+	//点击下一张
+	oNext.onclick = function(){
+		num++;
+		if(num>=iLength){
+			num = 0;
+		};
+		sport();
+	}
+	
+	//自动
+	function autoFn(){
+		num++;
+		if(num>=iLength){
+			num = 0;
+		}
+		sport();
+	};
+
+	//运动
+	function sport(){
+		for( var i=0;i<iLength;i++ ){
+			aA[i].className = "";
+		}
+		aA[num].className = "active";
+		startMove(oUl,{
+			left : - num * iWidth
+		})
+	}
+	
+	
+	
+	
+	
+}
+
+
+//通过class获取元素。格式：getElementsByClassName( 搜索起点-祖先级,类名 );	//IE8以上通过新方法获取。IE8及以下用老方法获取。
+function getElementsByClassName( node,classname ){
+	if( node.getElementsByClassName ){
+		return node.getElementsByClassName( classname );
+	}else{
+		var arr = [];
+		var elems = node.getElementsByTagName( "*" );
+		for( var i=0;i<elems.length;i++ ){
+			var aClassName = elems[i].className.split(" ");
+			for( var j=0;j<aClassName.length;j++ ){
+				if( aClassName[j] == classname ){
+					arr.push( elems[i] );
+					break;
+				}
+			}
+		}
+		return arr;
+	}
+}
+
+</script>
+</head>
+
+<body>
+
+<div id="div1">
+	<ul id="ul1" class="clearfix">
+    	<li><img src="images/1.png"></li>
+    	<li><img src="images/2.jpg"></li>
+    	<li><img src="images/3.jpg"></li>
+    	<li><img src="images/4.jpg"></li>
+    	<li><img src="images/5.jpg"></li>
+    	<li><img src="images/6.jpg"></li>
+    </ul>
+    <span class="preNext pre" title="上一张"></span>
+    <span class="preNext next" title="下一张"></span>
+    <p id="navigation"></p>
+</div>
+
+</body>
+</html>

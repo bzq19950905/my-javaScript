@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #list {
+            width: 400px;
+            margin: 0 auto;
+        }
+        
+        #list li {
+            padding: 20px 15px;
+            border-bottom: 1px solid #ccc;
+            vertical-align: middle;
+        }
+        
+        #list li div {
+            float: right;
+        }
+        
+        #list li div i {
+            margin: 0 10px;
+            display: none;
+        }
+        
+        #list li div span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        #list li div span:first-child {
+            display: none;
+        }
+        
+        #check {
+            width: 400px;
+            margin: 20px auto;
+            color: #f00;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            var oUl = document.getElementById('list');
+            var aLi = oUl.getElementsByTagName('li');
+            var aI = oUl.getElementsByTagName('i');
+            var check = document.getElementById('check');
+
+            for (var i = 0; i < aLi.length; i++) {
+                auto(aLi[i]);
+            }
+
+            function auto(obj) {
+                // 实现一条，通过函数传参找到父级
+                var oStrong = obj.getElementsByTagName('strong')[0]; // 单价
+                var oStrongvalue = parseInt(oStrong.innerHTML, 10); // 单价的值
+                var aSpan = obj.getElementsByTagName('span'); // 加减按钮
+                var oI = obj.getElementsByTagName('i')[0]; // 件数
+                var oIvalue = parseInt(oI.innerHTML, 10); // 件数的值
+
+                // 减
+                aSpan[0].onclick = function() {
+                    oIvalue--;
+                    fn();
+                };
+
+                // 加
+                aSpan[1].onclick = function() {
+                    oIvalue++;
+                    fn();
+                }
+
+                function fn() {
+                    oI.innerHTML = oIvalue;
+                    oI.setAttribute('data-num', oIvalue * oStrongvalue);
+                    if (oIvalue <= 0) {
+                        aSpan[0].style.display = 'none';
+                        oI.style.display = 'none';
+                    } else {
+                        aSpan[0].style.display = 'inline-block';
+                        oI.style.display = 'inline-block';
+                    }
+                    jisuan();
+                }
+            }
+
+            function jisuan() {
+                var num1 = 0; // 件数
+                var num2 = 0; // 总价
+                for (var i = 0; i < aI.length; i++) {
+                    num1 += aI[i].innerHTML * 1;
+                    num2 += aI[i].getAttribute('data-num') * 1;
+                }
+                check.innerHTML = '已选：' + num1 + '份 总计：' + num2 + '元';
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list">
+        <li>
+            <b>宫爆鸡丁</b>
+            <strong>25</strong>
+            <div>
+                <span>-</span>
+                <i>0</i>
+                <span>+</span>
+            </div>
+        </li>
+        <li>
+            <b>宫爆鸡丁</b>
+            <strong>26</strong>
+            <div>
+                <span>-</span>
+                <i>0</i>
+                <span>+</span>
+            </div>
+        </li>
+        <li>
+            <b>宫爆鸡丁</b>
+            <strong>30</strong>
+            <div>
+                <span>-</span>
+                <i>0</i>
+                <span>+</span>
+            </div>
+        </li>
+        <li>
+            <b>宫爆鸡丁</b>
+            <strong>13</strong>
+            <div>
+                <span>-</span>
+                <i>0</i>
+                <span>+</span>
+            </div>
+        </li>
+        <li>
+            <b>宫爆鸡丁</b>
+            <strong>12</strong>
+            <div>
+                <span>-</span>
+                <i>0</i>
+                <span>+</span>
+            </div>
+        </li>
+    </ul>
+
+    <p id="check">已选：0份 总计：0元</p>
+</body>
+
+</html>

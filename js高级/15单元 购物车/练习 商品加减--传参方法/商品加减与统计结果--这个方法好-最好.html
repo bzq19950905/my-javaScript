@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("list");			//盒子
+	var aLi = oUl.getElementsByTagName("li");			//单列
+	var aImg = oUl.getElementsByTagName("img");			//获取所有商品的前面的图片	
+	var aStrong = oUl.getElementsByTagName("strong");	//获取所有商品的件数
+	var aEm = oUl.getElementsByTagName("em");			//获取所有商品的单价
+	var aSpan = oUl.getElementsByTagName("span");		//获取所有商品的合计
+	var oP = document.getElementById("p1");				//获取提示语句
+	var oImg = document.getElementById("tupian");		//提示单价最贵的哪张图片
+	var arr = [];
+	
+	for( var i=0;i<aLi.length;i++ ){
+		fnCalculate( aLi[i] );
+		arr.push(0);
+	}
+
+	function fnAdd(){
+		var num1 = 0;	//总件数
+		var num2 = 0;	//总价
+		var iMax = 0;	//求数组中最大的哪一个。
+		var index = 0;	//单价最高的哪件商品的index
+		
+		for( var i=0;i<aStrong.length;i++ ){
+			
+			//如果当前的件数大于1，则把单价添加进数组
+			if( aStrong[i].innerHTML > 0 ){
+				arr[i] = parseFloat( aEm[i].innerHTML );
+			}else{
+				arr[i] = 0;
+			}
+			
+			num1 += Number( aStrong[i].innerHTML );
+			num2 += parseFloat( aSpan[i].innerHTML );
+		}
+				
+		iMax = arr[0];	//让它先等于第一个，然后同它后面的比较，得出单价最高的哪一个
+		for( var i=1;i<arr.length;i++ ){
+			if( iMax < arr[i] ){
+				iMax = arr[i];
+				index = i;
+			}
+		}
+		
+		//显示图片，只要iMax不等于0，就证明有商品选中
+		if( iMax != 0 ){
+			oImg.src = aImg[index].src;
+			oImg.style.display = "block";			
+		}else{
+			oImg.style.display = "none";		
+		}
+		
+		oP.innerHTML = '商品合计共：'+ num1 +'件，共花费了：'+ num2 +'元<br />其中最贵的商品单价是：'+ iMax +'元';
+	}
+	
+	
+	
+	function fnCalculate( obj ){
+		var aInput = obj.getElementsByTagName("input");
+		var oStrong = obj.getElementsByTagName("strong")[0];
+		var oEm = obj.getElementsByTagName("em")[0];
+		var oSpan = obj.getElementsByTagName("span")[0];
+		var commodityN = Number( oStrong.innerHTML );		//单个商品件数
+		var commodityUP = parseFloat( oEm.innerHTML );		//单个商品单价
+		//减
+		aInput[0].onclick = function(){
+			commodityN --;
+			if( commodityN < 0 ){
+				commodityN = 0;
+			}
+			jisan();
+			fnAdd();	//调用全局的一个函数
+		}
+		//加
+		aInput[1].onclick = function(){
+			commodityN ++;
+			jisan();
+			fnAdd();	//调用全局的一个函数
+		}
+		//单个商品计算
+		function jisan(){
+			oStrong.innerHTML = commodityN;						//当前商品件数
+			oSpan.innerHTML = commodityN * commodityUP + "元";	//当前商品总价
+		};
+		
+	}
+	
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<ul id="list">
+
+    <li>
+    	<img src="img/1.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>12.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/2.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>10.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/3.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>8.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/4.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>8元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/5.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>14.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+</ul>
+
+<p id="p1">
+    商品合计共：0件，共花费了：0元<br />
+    其中最贵的商品单价是：0元
+</p>
+<img style="display:none;" id="tupian" width="50" height="50" />
+
+
+</body>
+</html>

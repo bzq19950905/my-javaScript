@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<img src="on.png" alt="" id="light">
+	<button id="btn">关</button>
+	<script>
+		var  light =document.getElementById("light")
+		,	 btn =document.getElementById("btn");
+
+		btn.onclick =function(){
+			var lighter =btn.innerHTML;
+			if(lighter=="关"){
+				light.src="off.png";
+				btn.innerHTML="开";
+			}else{
+				light.src="on.png";
+				btn.innerHTML="关";
+			}
+		}
+	</script>
+
+</body>
+</html>

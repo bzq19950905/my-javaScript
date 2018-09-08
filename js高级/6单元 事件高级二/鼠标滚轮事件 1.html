@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var oDiv = document.getElementById('div1');
+
+				function fn(ev) {
+					alert(1);
+				}
+
+				// ie/chrome
+				oDiv.onmousewheel = fn;
+				
+				// firefox ，这样是有问题的，在非标准IE下，会报错。因为没有addEventListener这个方法
+				// oDiv.addEventListener('DOMMouseScroll', fn, false);
+				
+				// 解决非标准IE报错
+				if(oDiv.addEventListener){
+					oDiv.addEventListener('DOMMouseScroll', fn, false);
+				}
+
+			}
+		</script>
+	</head>
+
+	<body style="height: 2000px;">
+		<div id="div1"></div>
+	</body>
+
+</html>

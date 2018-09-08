@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+//在10到100之间随机生成10个数放入数组
+var nums=[];
+function getRandom(n,m){
+	var choice=m-n+1;
+	return Math.floor(Math.random()*choice+n);
+}
+	for(var i=0;i<10;i++){
+		var random=getRandom(10,100);
+		nums.push(random);
+	}
+
+console.log(nums.sort(function(a,b){return a<b}))
+
+
+</script>
+</body>
+</html>

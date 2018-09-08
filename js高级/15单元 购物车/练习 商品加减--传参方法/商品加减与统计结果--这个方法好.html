@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("list");
+	var aLi = oUl.getElementsByTagName("li");
+	var oP = document.getElementById("p1");
+	var aImg = oUl.getElementsByTagName("img");		//每列前的img
+	var oImg = document.getElementById("tupian");	//单价最高的哪个的图片
+	
+	var arr1 = [];	//商品合计件
+	var arr2 = [];	//总花费
+	var arr3 = [];	//买了的商品单价
+	
+	
+	for( var i=0;i<aLi.length;i++ ){
+		count(aLi[i],i);		//传i是当前第几个。
+		arr1.push(0);
+		arr2.push(0);
+		arr3.push(0);
+	}
+		
+
+	function count( obj,n ){
+		var aInput = obj.getElementsByTagName("input");
+		var aStrong = obj.getElementsByTagName("strong")[0];
+		var aEm = obj.getElementsByTagName("em")[0];
+		var aSpan = obj.getElementsByTagName("span")[0];
+		
+		var num1 = Number( aStrong.innerHTML );		//件数
+		var num2 = parseFloat( aEm.innerHTML );		//单价
+		
+		//减
+		aInput[0].onclick = function(){
+			num1--;
+			if(num1<0){
+				num1 = 0;
+			}
+			fn();
+		}
+		//加
+		aInput[1].onclick = function(){
+			num1++;
+			fn();
+		}
+		
+	
+		function fn(){
+			aStrong.innerHTML = num1;				//当前商品的件数
+			aSpan.innerHTML = num1*num2 + "元";		//当前商品的总价格
+			
+			arr1[n] = num1;			//商品件数数组
+			arr2[n] = num1*num2;	//总花费数组
+			
+			//如果当前件数不为0，就把商品单价添加进数组。否则就把当前的这个为0
+			if( arr1[n] != 0 ){
+				arr3[n] = num2;
+			}else{
+				arr3[n] = 0;
+			}
+			
+			var s1 = 0;		//商品合计件
+			var s2 = 0;		//总花费
+			for( var i=0;i<arr1.length;i++ ){
+				s1 += arr1[i];
+				s2 += arr2[i];
+			}
+			
+			//比较单价数组中的值。得出最高的哪个。即买了的商品的最高单价
+			var m = arr3[0];
+			var l = 0;		//这个下标，用在选择缩略图哪里。
+			for( var i=1;i<arr3.length;i++ ){
+				if( m<arr3[i] ){
+					m = arr3[i];
+					l = i;
+				}
+			}			
+			
+			oP.innerHTML = '商品合计共：'+ s1 +'件，共花费了：'+ s2 +'元<br />其中最贵的商品单价是：'+ m +'元';
+			
+			//当最高价哪里显示为0，图片也就不必要显示了。
+			if( m == 0 ){
+				oImg.src = "";
+				oImg.style.display = "none";
+			}else{
+				oImg.src = aImg[l].src;
+				oImg.style.display = "block";
+			}
+		}
+	
+		
+	}
+}
+
+</script>
+</head>
+
+<body>
+
+<ul id="list">
+
+    <li>
+    	<img src="img/1.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>12.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/2.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>10.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/3.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>8.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/4.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>8元</em>
+        小计：<span>0元</span>
+    </li>
+    
+    <li>
+    	<img src="img/5.jpg" width="50" height="50" />
+        <input type="button" value="-" />
+        <strong>0</strong>
+        <input type="button" value="+" />
+        单价：<em>14.5元</em>
+        小计：<span>0元</span>
+    </li>
+    
+</ul>
+
+<p id="p1">
+    商品合计共：0件，共花费了：0元<br />
+    其中最贵的商品单价是：0元
+</p>
+<img style="display:none;" id="tupian" width="50" height="50" />
+
+</body>
+</html>

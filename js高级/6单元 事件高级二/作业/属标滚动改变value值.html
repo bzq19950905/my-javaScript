@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+window.onload = function(){
+	var aInput = document.getElementsByTagName("input");
+	for( var i=0;i<aInput.length;i++ ){
+		modified( aInput[i] );
+	}
+}
+
+function modified(obj){
+	
+	//ie/chrome用此滚动事件方法
+	obj.onmousewheel = fn;
+	//火狐用此滚动事件方法，而且必须要用绑定事件方法。另外，因为非标准的IE没有这个方法，所以这里要判断，有不有这个事件
+	if( obj.addEventListener ){
+		obj.addEventListener("DOMMouseScroll",fn,false);
+	}
+	
+	function fn(ev){
+		var val = obj.value;		//得到input它原来的值
+		var ev = ev || event;
+		var b = true;
+	
+		//如果是ie/chrome，就用ev.wheelDelta，向上是120，向下是-120。  
+		//否则就是火狐，用ev.detail，向上是-3，向下是3
+		if( ev.wheelDelta ){
+			b = ev.wheelDelta > 0 ? true:false;
+		}else{
+			b = ev.detail < 0 ? true:false;
+		}
+		
+		if( b ){
+			val++;
+		}else{
+			val--;
+			if( val<0 ){
+				val = 0;
+			}
+		}
+		obj.value = val;
+		
+		//阻止浏览器默认行为，此方法阻止由addEventListener绑定的事件。注意它和下面是两种阻止默认事件的方法。区别是它们绑定事件的方法不一样。
+		if(ev.preventDefault){
+			ev.preventDefault();
+		};
+		return false;//阻止浏览器默认行为，此方法只能阻止由	obj.on事件名称=fn 所触发的默认行为
+	}
+	
+	
+}
+
+
+
+</script>
+
+</head>
+
+<body style="height:2000px;">
+<div style="margin: 100px;">
+    <input type="text" value="0" />
+    <input type="text" value="0" />
+    <input type="text" value="0" />
+    <input type="text" value="0" />
+</div>    
+</body>
+</html>

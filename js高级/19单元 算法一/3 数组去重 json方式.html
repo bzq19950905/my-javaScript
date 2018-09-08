@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+var a = [5,8,9,3,4,5,8,9,3,4];
+alert( removeRepeat(a) );
+
+function removeRepeat(arr){
+	var result = [];
+	var obj = {};
+	for( var i=0;i<arr.length;i++ ){
+		if( !obj[ arr[i] ] ){
+			result.push( arr[i] );
+			obj[ arr[i] ] = 1;
+		}
+	}
+	return result;
+}
+
+/*
+原理说明：当for循环时，第一次if里，obj[ arr[i] ]是没有这个属性的，哪么取反，就能走进if里，给数组添加这个值，并且给json添加上这个属性。下一次因为有这个属性了，就走不进这里面了。
+*/
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

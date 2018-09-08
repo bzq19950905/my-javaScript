@@ -1,0 +1,123 @@
+-<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>数学对象</title>
+	<style>
+		.s{
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 40px;
+			display: inline-block;
+			background: red;
+			color: white;
+			font-size: 24px;
+		}
+		.s:nth-child(7){
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<span class="s"></span>
+	<script>
+		// console.log(Math);
+
+
+		// 向上取整
+		// console.log(Math.ceil(-3.9999999999999999999));  // -3
+		// console.log(Math.ceil("3.4"));
+		// console.log(Math.ceil(null));
+		// console.log(Math.ceil("fdsa"));
+
+		// 向下取整
+		// console.log(Math.floor(3.9999999999999999));
+		// console.log(Math.floor(3.99999999999999));
+
+
+		// console.log(0.1 + 0.2);
+
+		// 四舍五入取整
+		// console.log(Math.round(3.4));
+
+
+		// 最大值
+		// console.log(Math.max(1,2,3,4,5,null+6));
+		// var arr = [1,2,3,4,5,6];
+		// console.log(Math.max.apply(null,arr));
+		// call(1,2)
+
+
+		// 最小值
+		// console.log(Math.min("",5,6,7,8,1));
+
+		// 随机数：random
+		// Math.random()  0 - 1   可以包含0，不包含1
+		// for(var i=0;i<100;i++){
+		// 	console.log(Math.random());
+		// }
+
+
+		// 0 - 20 随机整数 闭区间
+		// Math.floor(Math.random()*21)
+
+
+		// 10 - 30 随机整数  闭区间 min - max
+		// Math.floor(Math.random()*21) + 10;
+		// Math.floor(Math.random()*(30 - 20 + 1)) + 10;
+		// Math.floor(Math.random()*(max - min + 1)) + min;
+
+		// 33 - 100
+		// for(var i=0;i<100;i++){
+		// 	console.log(Math.floor(Math.random()*68) + 33 );
+		// }
+
+
+
+		// 6个红球（1 - 33）去重 升序拍列  1个蓝球（1 - 16）
+
+
+		// var count = 0;
+		var balls = [];  // 0
+		// 首先得到6个红球
+		while(balls.length < 6){
+			// 得到随机数
+			var red = Math.floor(Math.random()*33) + 1;
+			// 去重
+			if(balls.indexOf(red) == -1){
+				balls.push(red);
+			}
+			// count++;
+		}
+		// console.log(balls,count);
+		for(var i=0;i<balls.length;i++){
+			for(var j=i+1;j<balls.length;j++){
+				if(balls[i] > balls[j]){
+					var temp = balls[i];
+					balls[i] = balls[j];
+					balls[j] = temp;
+				}
+			}
+		}
+
+		var blue = Math.floor(Math.random()*16) + 1;
+		balls.push(blue);
+
+		var sps = document.getElementsByTagName("span");
+
+		for(var i=0;i<sps.length;i++){
+			sps[i].innerHTML = balls[i];
+		}
+
+		// 绝对值
+	</script>
+</body>
+</html>

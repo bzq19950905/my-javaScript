@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById("ul1");
+	var aLi = oUl.getElementsByTagName("li");
+	var oInput = document.getElementById("input1");
+	var n = 4;
+	
+	//常规方法。新添加的li没有之前的事件。
+	/*
+	for( var i=0;i<aLi.length;i++ ){
+		aLi[i].onmouseover = function(){
+			this.style.background = "#f00";
+		}
+		aLi[i].onmouseout = function(){
+			this.style.background = "";
+		}
+	}
+	*/
+	
+	//事件委托方法：这里委托给ul		事件委托法。新添加的li有之前的事件。
+	oUl.onmouseover = function(ev){
+		var ev = ev || event;
+		var target = ev.target || ev.srcElement;
+		if( target.nodeName.toLowerCase() == "li" ){
+			target.style.background = "#f00";
+		}
+	}
+	oUl.onmouseout = function(ev){
+		var ev = ev || event;
+		var target = ev.target || ev.srcElement;
+		if( target.nodeName.toLowerCase() == "li" ){
+			target.style.background = "";
+		}
+	}
+	
+	
+	//添加li
+	oInput.onclick = function(){
+		n++;
+		var oLi = document.createElement("li");
+		oLi.innerHTML = n*111;
+		oUl.appendChild( oLi );
+	}
+	
+}
+</script>
+
+</head>
+
+<body>
+<input type="button" value="添加" id="input1" />
+<ul id="ul1">
+	<li>111</li>
+	<li>222</li>
+	<li>333</li>
+	<li>444</li>
+</ul>
+
+</body>
+</html>

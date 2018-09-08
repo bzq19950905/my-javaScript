@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function (){
+				var oUl = document.getElementsByTagName('ul')[0];
+				var aLi = oUl.getElementsByTagName('li');
+				
+				// 函数传参
+				for (var i=0; i<aLi.length; i++) {
+					jisuan(aLi[i]);
+				}
+				
+				function jisuan(obj){
+					var aBtn = obj.getElementsByTagName('button');
+					var oB = obj.getElementsByTagName('b')[0];
+					var oEm = obj.getElementsByTagName('em')[0];
+					var oStrong = obj.getElementsByTagName('strong')[0];
+					var num = oB.innerHTML;
+					var price = oEm.innerHTML;
+					
+					// 减减
+					aBtn[0].onclick = function (){
+						num --;
+						if (num <= 0) {
+							num = 0;
+						}
+						fn();
+					}
+					
+					// 加加
+					aBtn[1].onclick = function (){
+						num ++;
+						fn();
+					}
+					
+					function fn(){
+						oB.innerHTML = num;
+						oStrong.innerHTML = price * num;
+					}
+				}
+				
+				
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<button>-</button>
+				<b>0</b>
+				<button>+</button>
+				单价：
+				<em>12.5</em>
+				元&nbsp;&nbsp;
+				小计：
+				<strong>0</strong>
+				元
+			</li>
+			<li>
+				<button>-</button>
+				<b>0</b>
+				<button>+</button>
+				单价：
+				<em>10</em>
+				元&nbsp;&nbsp;
+				小计：
+				<strong>0</strong>
+				元
+			</li>
+			<li>
+				<button>-</button>
+				<b>0</b>
+				<button>+</button>
+				单价：
+				<em>16.5</em>
+				元&nbsp;&nbsp;
+				小计：
+				<strong>0</strong>
+				元
+			</li>
+			<li>
+				<button>-</button>
+				<b>0</b>
+				<button>+</button>
+				单价：
+				<em>9.5</em>
+				元&nbsp;&nbsp;
+				小计：
+				<strong>0</strong>
+				元
+			</li>
+		</ul>
+	</body>
+</html>

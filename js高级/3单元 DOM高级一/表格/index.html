@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.ccc{
+				background: #ccc;
+			}
+			.fff{
+				background: #fff;
+			}
+			.red {
+				background: #f00;
+			}
+			.off{
+				background: #0ff;
+			}
+		</style>
+		<script src="js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var oTable = document.getElementById('tableBox');
+				var oInput = oTable.getElementsByTagName('input')[0];
+				oTable.tHead.style.background = '#ccc';
+				oTable.tHead.rows[0].cells[0].style.background = '#666';
+
+				var oTbody = document.getElementById('tbodyBox');
+				var aTr = oTbody.getElementsByTagName('tr');
+				var aInput = oTbody.getElementsByTagName('input');
+				for(var i = 0; i < aTr.length; i++) {
+					if(i % 2) {
+						addClass(aTr[i], 'ccc');
+					} else {
+						addClass(aTr[i], 'fff');
+					}
+				}
+
+				for(var i = 0; i < aTr.length; i++) {
+					aTr[i].onmouseover = function() {
+						addClass(this, 'red');
+					}
+					aTr[i].onmouseout = function (){
+						removeClass(this, 'red');
+					}
+					aTr[i].onclick = function (){
+						if(hasClass(this, 'off') === -1){
+							for(var i = 0; i < aTr.length; i++) {
+								removeClass(aTr[i], 'off');
+							}
+							addClass(this, 'off');
+						}else{
+							for(var i = 0; i < aTr.length; i++) {
+								removeClass(aTr[i], 'off');
+							}
+						}
+						
+					}
+					
+				}
+				
+				// 全选
+				oInput.onclick = function (){
+					for(var i=0;i<aInput.length;i++){
+						aInput[i].checked = this.checked;
+					}
+				}
+				
+				// 单选
+				
+				for(var i=0; i<aInput.length;i++){
+					aInput[i].onclick = function (){
+						var num = 0;
+						for(var i=0;i<aInput.length;i++){
+							if(aInput[i].checked){
+								num ++;
+							}
+						}
+						if(num === aInput.length){
+							oInput.checked = true;
+						}else{
+							oInput.checked = false;
+						}
+					}
+				}
+				
+			}
+		</script>
+	</head>
+
+	<body>
+		<table id="tableBox" width="50%" border="1">
+
+			<thead>
+				<tr>
+					<th><input type="checkbox" /></th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>专业</th>
+				</tr>
+			</thead>
+
+			<tbody id="tbodyBox">
+				<tr>
+					<th><input type="checkbox" /></th>
+					<td>王多多</td>
+					<td>22</td>
+					<td>自动化专业</td>
+				</tr>
+				<tr>
+					<th><input type="checkbox" /></th>
+					<td>王多多</td>
+					<td>22</td>
+					<td>自动化专业</td>
+				</tr>
+				<tr>
+					<th><input type="checkbox" /></th>
+					<td>王多多</td>
+					<td>22</td>
+					<td>自动化专业</td>
+				</tr>
+				<tr>
+					<th><input type="checkbox" /></th>
+					<td>王多多</td>
+					<td>22</td>
+					<td>自动化专业</td>
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</body>
+
+</html>

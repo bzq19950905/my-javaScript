@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<script src="json2.js"></script>
+<script>
+window.onload = function(){
+
+	var a = {
+		name:"hello"
+	};
+	var str = JSON.stringify(a);	//将它转换成一个字符串
+	var b = JSON.parse(str);		//再将字符串再转成一个json再赋值给b。
+	b.name = "hi";
+	alert(a.name);
+	alert(b.name);
+	//这样a和b就没有关系了，并复制了一个a
+
+}
+</script>
+</head>
+
+<body>
+
+用json2.js兼容IE6、7
+
+</body>
+</html>
